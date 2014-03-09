@@ -10,7 +10,7 @@
 require(__DIR__ . '/BaseYii.php');
 
 /**
- * Yii is a helper class serving common framework functionalities.
+ * Yii是一个服务于此框架功能的辅助类.
  *
  * It extends from [[\yii\BaseYii]] which provides the actual implementation.
  * By writing your own Yii class, you can customize some functionalities of [[\yii\BaseYii]].
