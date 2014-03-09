@@ -8,7 +8,7 @@
 namespace yii\base;
 
 /**
- * Exception represents a generic exception for all purposes.
+ * Exception 表示出于所有目的的一般异常。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -16,7 +16,7 @@ namespace yii\base;
 class Exception extends \Exception
 {
 	/**
-	 * @return string the user-friendly name of this exception
+	 * @return string 这个异常友好的名称
 	 */
 	public function getName()
 	{
