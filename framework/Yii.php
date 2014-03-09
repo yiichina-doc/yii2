@@ -10,10 +10,10 @@
 require(__DIR__ . '/BaseYii.php');
 
 /**
- * Yii是一个服务于此框架功能的辅助类.
+ * Yii是一个服务于整个框架的辅助类。
  *
- * It extends from [[\yii\BaseYii]] which provides the actual implementation.
- * By writing your own Yii class, you can customize some functionalities of [[\yii\BaseYii]].
+ * 它扩展自 [[\yii\BaseYii]] ,它提供了实际的实现。
+ * 通过编写自己的Yii类，你可以自定义 [[\yii\BaseYii]] 的一些功能。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
