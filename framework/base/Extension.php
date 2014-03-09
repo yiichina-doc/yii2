@@ -8,11 +8,10 @@
 namespace yii\base;
 
 /**
- * Extension is the base class that may be extended by individual extensions.
+ * Extension 是可以由单个扩展延伸的基类。
  *
- * Extension serves as the bootstrap class for extensions. When an extension
- * is installed via composer, the [[init()]] method of its Extension class (if any)
- * will be invoked during the application initialization stage.
+ * Extension 提供了 bootstrap 类的扩展。
+ * 当一个扩展通过composer安装后，此扩展类的 [[init()]] 方法 (如果有的话) 将在应用程序初始化阶段被调用。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -20,8 +19,8 @@ namespace yii\base;
 class Extension
 {
 	/**
-	 * Initializes the extension.
-	 * This method is invoked at the end of [[Application::init()]].
+	 * 初始化扩展。
+	 * 这个方法在 [[Application::init()]] 结束时调用。
 	 */
 	public static function init()
 	{
