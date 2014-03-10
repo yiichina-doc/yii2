@@ -8,12 +8,12 @@
 namespace yii\caching;
 
 /**
- * ApcCache provides APC caching in terms of an application component.
+ * ApcCache 为应用程序组件提供APC缓存.
  *
- * To use this application component, the [APC PHP extension](http://www.php.net/apc) must be loaded.
- * In order to enable APC for CLI you should add "apc.enable_cli = 1" to your php.ini.
+ * 要使用这个应用程序组件，PHP的APC扩展必须开启 [APC PHP extension](http://www.php.net/apc).
+ * 使用APC 的 CLI 需要在php.ini中添加 "apc.enable_cli = 1".
  *
- * See [[Cache]] for common cache operations that ApcCache supports.
+ * 查看 [[Cache]]操作手册以了解CApcCache支持的常用缓存操作.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -21,14 +21,12 @@ namespace yii\caching;
 class ApcCache extends Cache
 {
 	/**
-	 * Checks whether a specified key exists in the cache.
-	 * This can be faster than getting the value from the cache if the data is big.
-	 * Note that this method does not check whether the dependency associated
-	 * with the cached data, if there is any, has changed. So a call to [[get]]
-	 * may return false while exists returns true.
-	 * @param mixed $key a key identifying the cached value. This can be a simple string or
-	 * a complex data structure consisting of factors representing the key.
-	 * @return boolean true if a value exists in cache, false if the value is not in the cache or expired.
+	 * 检查一个键在缓存中是否已经存在.
+	 * 当缓存中数据特别在时此操作要快与获取.
+	 * 此方法不会检查依赖关系 
+	 * 缓存的数据发生改变时，get返回false，exits返回true.
+	 * @param mixed $key 缓存中值的键. 可以是一个简单的字符串也可以是一个键值的数据结构
+	 * @return boolean 存在于缓存中时返回true，如果该值不存在或者已过期则返回false.
 	 */
 	public function exists($key)
 	{
@@ -37,10 +35,10 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Retrieves a value from cache with a specified key.
-	 * This is the implementation of the method declared in the parent class.
-	 * @param string $key a unique key identifying the cached value
-	 * @return string|boolean the value stored in cache, false if the value is not in the cache or expired.
+	 * 从缓存中检索一个特定键的值.
+	 * T这是在父类中定义方法的具体实现.
+	 * @param string $key 要检索的键
+	 * @return string|boolean 缓存中存储的值，如果该值不存在或者已过期则返回false.
 	 */
 	protected function getValue($key)
 	{
@@ -48,9 +46,9 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Retrieves multiple values from cache with the specified keys.
-	 * @param array $keys a list of keys identifying the cached values
-	 * @return array a list of cached values indexed by the keys
+	 * 从缓存中检索一组特定键的值.
+	 * @param array $keys 要检索的键值列表
+	 * @return array 检索到的值
 	 */
 	protected function getValues($keys)
 	{
@@ -58,13 +56,13 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Stores a value identified by a key in cache.
-	 * This is the implementation of the method declared in the parent class.
+	 * 往缓存中存储一个用键名区分的值.
+	 * 这是在父类中定义方法的具体实现.
 	 *
-	 * @param string $key the key identifying the value to be cached
-	 * @param string $value the value to be cached
-	 * @param integer $expire the number of seconds in which the cached value will expire. 0 means never expire.
-	 * @return boolean true if the value is successfully stored into cache, false otherwise
+	 * @param string $key 用以甄别缓存值的键名
+	 * @param string $value 要缓存的值.
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return boolean 缓存成功返回true，失败返回false
 	 */
 	protected function setValue($key, $value, $expire)
 	{
@@ -72,10 +70,10 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Stores multiple key-value pairs in cache.
-	 * @param array $data array where key corresponds to cache key while value
-	 * @param integer $expire the number of seconds in which the cached values will expire. 0 means never expire.
-	 * @return array array of failed keys
+	 * 往缓存中存储一组用键名区分的值.
+	 * @param array $data 数组中的键值与缓存中对应
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return array 返回缓存失败的键
 	 */
 	protected function setValues($data, $expire)
 	{
@@ -83,12 +81,12 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Stores a value identified by a key into cache if the cache does not contain this key.
-	 * This is the implementation of the method declared in the parent class.
-	 * @param string $key the key identifying the value to be cached
-	 * @param string $value the value to be cached
-	 * @param integer $expire the number of seconds in which the cached value will expire. 0 means never expire.
-	 * @return boolean true if the value is successfully stored into cache, false otherwise
+	 * 当添加的值的键在缓存中不存在时，进行缓存.
+	 * 这是在父类中定义方法的具体实现.
+	 * @param string $key 当键通过检查时进行缓存
+	 * @param string $value 要缓存的值
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return boolean 缓存成功返回true，失败返回false
 	 */
 	protected function addValue($key, $value, $expire)
 	{
@@ -96,10 +94,10 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Adds multiple key-value pairs to cache.
-	 * @param array $data array where key corresponds to cache key while value is the value stored
-	 * @param integer $expire the number of seconds in which the cached values will expire. 0 means never expire.
-	 * @return array array of failed keys
+	 * 添加多个键值到缓存.
+	 * @param array $data 数组中的键值也将是其值在缓存中的键值
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return array 返回缓存失败的键
 	 */
 	protected function addValues($data, $expire)
 	{
@@ -107,10 +105,10 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Deletes a value with the specified key from cache
-	 * This is the implementation of the method declared in the parent class.
-	 * @param string $key the key of the value to be deleted
-	 * @return boolean if no error happens during deletion
+	 * 从缓存中删除指定的键名的值
+	 * 这是在父类中定义方法的具体实现.
+	 * @param string $key 要删除值的键名
+	 * @return boolean 当删除期间没有错误发生
 	 */
 	protected function deleteValue($key)
 	{
@@ -118,9 +116,9 @@ class ApcCache extends Cache
 	}
 
 	/**
-	 * Deletes all values from cache.
-	 * This is the implementation of the method declared in the parent class.
-	 * @return boolean whether the flush operation was successful.
+	 * 删除所有缓存值.
+	 * 这是在父类中定义方法的具体实现.
+	 * @return boolean 如果清空操作成功执行.
 	 */
 	protected function flushValues()
 	{
