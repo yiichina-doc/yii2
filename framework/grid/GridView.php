@@ -3,6 +3,7 @@
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
+ * @translate francis.tm <francis.tm@me.com>
  */
 
 namespace yii\grid;
@@ -16,9 +17,9 @@ use yii\helpers\Json;
 use yii\widgets\BaseListView;
 
 /**
- * The GridView widget is used to display data in a grid.
+ * GridView 挂件是用来显示数据的一个表格。
  *
- * It provides features like sorting, paging and also filtering the data.
+ * 他提供了类似排序、分页还有过滤等功能。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -30,75 +31,72 @@ class GridView extends BaseListView
 	const FILTER_POS_BODY = 'body';
 
 	/**
-	 * @var string the default data column class if the class name is not explicitly specified when configuring a data column.
-	 * Defaults to 'yii\grid\DataColumn'.
+   * @var string 当没有明确的配置数据类名称时，默认类名。
+   * 默认为 `yii\grid\DataColumn`。
 	 */
 	public $dataColumnClass;
 	/**
-	 * @var string the caption of the grid table
+   * @var string 表头的标题
 	 * @see captionOptions
 	 */
 	public $caption;
 	/**
-	 * @var array the HTML attributes for the caption element
+   * @var array 表头的HTML标签属性
 	 * @see caption
 	 */
 	public $captionOptions = [];
 	/**
-	 * @var array the HTML attributes for the grid table element
+	 * @var array 表内容Table标签的HTML属性
 	 */
 	public $tableOptions = ['class' => 'table table-striped table-bordered'];
 	/**
-	 * @var array the HTML attributes for the container tag of the grid view.
-	 * The "tag" element specifies the tag name of the container element and defaults to "div".
+   * @var array 表容器的HTML标签属性
+   * 标签元素定义了容器标签的名称，默认为"div"。
 	 */
 	public $options = ['class' => 'grid-view'];
 	/**
-	 * @var array the HTML attributes for the table header row
+   * @var array 表头这一行的HTML标签属性
 	 */
 	public $headerRowOptions = [];
 	/**
-	 * @var array the HTML attributes for the table footer row
+   * @var array 表尾这一行的HTML标签属性
 	 */
 	public $footerRowOptions = [];
 	/**
-	 * @var array|Closure the HTML attributes for the table body rows. This can be either an array
-	 * specifying the common HTML attributes for all body rows, or an anonymous function that
-	 * returns an array of the HTML attributes. The anonymous function will be called once for every
-	 * data model returned by [[dataProvider]]. It should have the following signature:
+   * @var array|Closure 表主体中的行所用的HTML标签属性。这个可以是一个数组，定义了所有数据行的
+   * 公共HTML标签属性；也可以是一个匿名函数，来返回一个包含HTML标签属性的数组。匿名函数会在每一个
+   * 由 [[dataProvider]]] 提供的数据模型的地方被调用。他必须有一下特征：
 	 *
 	 * ```php
 	 * function ($model, $key, $index, $grid)
 	 * ```
 	 *
-	 * - `$model`: the current data model being rendered
-	 * - `$key`: the key value associated with the current data model
-	 * - `$index`: the zero-based index of the data model in the model array returned by [[dataProvider]]
-	 * - `$grid`: the GridView object
+	 * - `$model`: 当前正在渲染的模型
+	 * - `$key`: 当前模型所需渲染的键值
+	 * - `$index`: 零起始的索引，当前模型在由 [[dataProvider]] 所返回的数组中的索引。
+	 * - `$grid`: GridView 对象
 	 */
 	public $rowOptions = [];
 	/**
-	 * @var Closure an anonymous function that is called once BEFORE rendering each data model.
-	 * It should have the similar signature as [[rowOptions]]. The return result of the function
-	 * will be rendered directly.
+   * @var Closure 一个匿名函数，会在渲染每一个数据模型前调用。
+   * 它的特征和 [[rowOptions]] 相似。函数的返回结果将会直接被渲染。
 	 */
 	public $beforeRow;
 	/**
-	 * @var Closure an anonymous function that is called once AFTER rendering each data model.
-	 * It should have the similar signature as [[rowOptions]]. The return result of the function
-	 * will be rendered directly.
+   * @var Closure 一个匿名函数，会在渲染每一个数据模型后调用。
+   * 它的特征和 [[rowOptions]] 相似。函数的返回结果将会直接被渲染。
 	 */
 	public $afterRow;
 	/**
-	 * @var boolean whether to show the header section of the grid table.
+   * @var boolean 是否显示表头。
 	 */
 	public $showHeader = true;
 	/**
-	 * @var boolean whether to show the footer section of the grid table.
+   * @var boolean 是否显示表尾。
 	 */
 	public $showFooter = false;
 	/**
-	 * @var boolean whether to show the grid view if [[dataProvider]] returns no data.
+   * @var boolean 当 [[dataProvider]] 中无数据时，是否显示表格。
 	 */
 	public $showOnEmpty = true;
 	/**
