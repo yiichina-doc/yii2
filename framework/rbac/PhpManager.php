@@ -35,8 +35,8 @@ class PhpManager extends Manager
 	 * @var string 包含授权项目数据的PHP脚本的路径.
 	 * 这可以是一个文件路径或文件路径别名.
 	 * 确保文件可写，授权需要修改该文件.
-	 * @见 loadFromFile()
-	 * @见 saveToFile()
+	 * @see loadFromFile()
+	 * @see saveToFile()
 	 */
 	public $authFile = '@app/data/rbac.php';
 
@@ -64,7 +64,7 @@ class PhpManager extends Manager
 	 * @param array $params 键(名称)-值对，可以通过业务规则关联
 	 * 将任务和角色分配给用户. 参数'userId'被添加到数组里
 	 * 这个数组将包含`$userId`的值
-	 * @return boolean whether 用户是否有权使用该操作.
+	 * @return boolean 用户是否有权使用该操作.
 	 */
 	public function checkAccess($userId, $itemName, $params = [])
 	{
@@ -531,7 +531,7 @@ class PhpManager extends Manager
 	 * 加载项目授权数据从php脚本文件.
 	 * @param string $file 文件路径.
 	 * @return array 授权项目数据
-	 * @见 saveToFile()
+	 * @see saveToFile()
 	 */
 	protected function loadFromFile($file)
 	{
@@ -546,7 +546,7 @@ class PhpManager extends Manager
 	 * 保存项目授权数据到php脚本文件.
 	 * @param array $data 授权项目数据
 	 * @param string $file 文件路径.
-	 * @见 loadFromFile()
+	 * @see loadFromFile()
 	 */
 	protected function saveToFile($data, $file)
 	{
