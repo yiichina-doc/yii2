@@ -8,7 +8,7 @@
 namespace yii\base;
 
 /**
- * InvalidRouteException represents an exception caused by an invalid route.
+ * InvalidRouteException 表示由一个无效的路径导致的异常
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -16,7 +16,7 @@ namespace yii\base;
 class InvalidRouteException extends UserException
 {
 	/**
-	 * @return string the user-friendly name of this exception
+	 * @return string 这个异常友好的名称
 	 */
 	public function getName()
 	{
