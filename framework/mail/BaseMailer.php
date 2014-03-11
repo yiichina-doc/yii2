@@ -1,9 +1,13 @@
 <?php
 /**
  * @link http://www.yiiframework.com/
+ * @yiiframework官方网址
  * @copyright Copyright (c) 2008 Yii Software LLC
+ *@版权所有版权所有（c）2008乙软件有限责任公司
  * @license http://www.yiiframework.com/license/
+ *@许可证http://www.yiiframework.com/license/
  */
+
 
 namespace yii\mail;
 
@@ -16,52 +20,68 @@ use yii\base\MailEvent;
 
 /**
  * BaseMailer serves as a base class that implements the basic functions required by [[MailerInterface]].
- *
+ * BaseMailer作为实现由[[MailerInterface]所需的基本功能的基类。
  * Concrete child classes should may focus on implementing the [[sendMessage()]] method.
- *
+ * 子类可以单独用于实现[[sendMessage（）]方法
  * @see BaseMessage
- *
+ * 可以参考 BaseMessage 类
  * @property View $view View instance. Note that the type of this property differs in getter and setter. See
  * [[getView()]] and [[setView()]] for details.
- *
+ * $view 可以用于属性视图实例化。请注意，此属性的类型与getter和setter不同。看[[getView（）]]和[[的setView（）]]了解详情。
  * @author Paul Klimov <klimov.paul@gmail.com>
+ * 作者保罗·克里莫夫<klimov.paul@gmail.com>
  * @since 2.0
+ * 2.0版本起
  */
 abstract class BaseMailer extends Component implements MailerInterface, ViewContextInterface
 {
 	/**
 	 * @event \yii\base\MailEvent an event raised right before send.
+	 * 事件 \yii\base\MailEvent 之前发送
 	 * You may set [[\yii\base\MailEvent::isValid]] to be false to cancel the send.
+	 * 你可以设置 [[\yii\base\MailEvent::isValid]] 为 false 取消发送
 	 */
 	const EVENT_BEFORE_SEND = 'beforeSend';
 	/**
 	 * @event \yii\base\MailEvent an event raised right after send.
+	 * 事件 \yii\base\MailEvent 之后发送
 	 */
 	const EVENT_AFTER_SEND = 'afterSend';
 	/**
 	 * @var string directory containing view files for this email messages.
+	 * @在这个电子邮件信息中 字符串目录 包含视图文件
 	 * This can be specified as an absolute path or path alias.
+	 * 可以被指定为绝对路径或路径别名。
 	 */
 	public $viewPath = '@app/mail';
 	/**
 	 * @var string|boolean HTML layout view name. This is the layout used to render HTML mail body.
 	 * The property can take the following values:
-	 *
+	 * 这是 HTML 布局视图的名称 这是一个用来显示HTML邮件正文的布局。
+	 * 该属性可以取以下值：
 	 * - a relative view name: a view file relative to [[viewPath]], e.g., 'layouts/html'.
+	 * 相对视图名称：视图文件相对于[[viewPath]，比如，'layouts/ html'也是一个。
 	 * - a path alias: an absolute view file path specified as a path alias, e.g., '@app/mail/html'.
+	 * 一个路径别名：指定一个路径别名，比如，'@app/mail/html'也是一个绝对的视图文件的路径。
 	 * - a boolean false: the layout is disabled.
+	 * 一个布尔值false：布局被禁用。
 	 */
 	public $htmlLayout = 'layouts/html';
 	/**
 	 * @var string|boolean text layout view name. This is the layout used to render TEXT mail body.
 	 * Please refer to [[htmlLayout]] for possible values that this property can take.
+	 * @字符串|布尔 文本布局视图名称。这是用于呈现文本邮件正文的布局。
+	 *请参阅[[htmlLayout]对于这个属性可以采取可能的值。
 	 */
 	public $textLayout = 'layouts/text';
 	/**
 	 * @var array the configuration that should be applied to any newly created
 	 * email message instance by [[createMessage()]] or [[compose()]]. Any valid property defined
 	 * by [[MessageInterface]] can be configured, such as `from`, `to`, `subject`, `textBody`, `htmlBody`, etc.
-	 *
+	 * @array配置，应适用于该配置任何新创建
+	 * 由[[CreateMessage（）]]或[[compose（）]]电子邮件消息实例。定义的任何有效的属性
+	 * 由[[MessageInterface]可配置，如`from`, `to`, `subject`, `textBody`, `htmlBody`等
+	 * 
 	 * For example:
 	 *
 	 * ~~~
