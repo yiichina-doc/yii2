@@ -11,10 +11,10 @@ use Yii;
 use yii\base\Object;
 
 /**
- * Assignment represents an assignment of a role to a user.
- * It includes additional assignment information such as [[bizRule]] and [[data]].
- * Do not create a Assignment instance using the 'new' operator.
- * Instead, call [[Manager::assign()]].
+ * Assignment 用户角色分配.
+ * 它包括额外的分配信息[[bizRule]] 和 [[data]] 等.
+ * 不需要用new来创建一个Assignment实例.
+ * 而是调用 [[Manager::assign()]].
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
