@@ -12,10 +12,10 @@ use yii\db\Connection;
 use yii\base\InvalidConfigException;
 
 /**
- * DbTarget stores log messages in a database table.
+ * DbTarget在一个数据库的表中存储日志信息.
  *
- * By default, DbTarget stores the log messages in a DB table named 'tbl_log'. This table
- * must be pre-created. The table name can be changed by setting [[logTable]].
+ * 默认情况下, DbTarget 存储在一个名为 'tbl_log'的数据库表中的日志消息中. 此表
+ * 必须预先创建. 表名可以通过设置 [[logTable]]更改.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -23,14 +23,14 @@ use yii\base\InvalidConfigException;
 class DbTarget extends Target
 {
 	/**
-	 * @var Connection|string the DB connection object or the application component ID of the DB connection.
-	 * After the DbTarget object is created, if you want to change this property, you should only assign it
-	 * with a DB connection object.
+	 * @var Connection|string 数据库连接对象或数据库连接的应用程序组件的ID.
+	 * 创建DbTarget对象之后, 如果你想改变这个属性, 你应该使用一个数据库链接对象
+	 * 来分配它.
 	 */
 	public $db = 'db';
 	/**
-	 * @var string name of the DB table to store cache content.
-	 * The table should be pre-created as follows:
+	 * @var string 数据库表的名称来存储缓存内容.
+	 * 该表应按照如下方式预先创建:
 	 *
 	 * ~~~
 	 * CREATE TABLE tbl_log (
@@ -44,20 +44,20 @@ class DbTarget extends Target
 	 * )
 	 * ~~~
 	 *
-	 * Note that the 'id' column must be created as an auto-incremental column.
-	 * The above SQL uses the MySQL syntax. If you are using other DBMS, you need
-	 * to adjust it accordingly. For example, in PostgreSQL, it should be `id SERIAL PRIMARY KEY`.
+	 * 请注意，'id' 列必须创建为auto-incremental.
+	 * 以上的 SQL 使用的是 MySQL 语法. 如果你使用的是其他数据库管理系统, 需要
+	 * 相应地作调整. 例如, 在 PostgreSQL中, id 应该是 serial 类型的主键.
 	 *
-	 * The indexes declared above are not required. They are mainly used to improve the performance
-	 * of some queries about message levels and categories. Depending on your actual needs, you may
-	 * want to create additional indexes (e.g. index on `log_time`).
+	 * 上述所声明的不需要索引. 它们主要用于改善有关
+	 * 消息级别和类别的一些查询的性能. 根据您的实际需求, 可能
+	 * 需要创建额外的索引 (e.g. index on `log_time`).
 	 */
 	public $logTable = '{{%log}}';
 
 	/**
-	 * Initializes the DbTarget component.
-	 * This method will initialize the [[db]] property to make sure it refers to a valid DB connection.
-	 * @throws InvalidConfigException if [[db]] is invalid.
+	 * 初始化DbTarget组件.
+	 * 初始化 [[db]] 组件，确保它是一个有效的数据库连接.
+	 * @throws InvalidConfigException 如果 [[db]] 是无效的.
 	 */
 	public function init()
 	{
@@ -71,7 +71,7 @@ class DbTarget extends Target
 	}
 
 	/**
-	 * Stores log messages to DB.
+	 * 将日志信息存储到数据库.
 	 */
 	public function export()
 	{

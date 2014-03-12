@@ -178,7 +178,7 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Filters the given messages according to their categories and levels.
+	 * 根据自己的类别和级别过滤给定的消息.
 	 * @param array $messages messages to be filtered
 	 * @param integer $levels the message levels to filter by. This is a bitmap of
 	 * level values. Value 0 means allowing all levels.
@@ -220,10 +220,10 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Formats a log message.
-	 * The message structure follows that in [[Logger::messages]].
-	 * @param array $message the log message to be formatted.
-	 * @return string the formatted message
+	 * 格式化日志消息.
+	 * 该消息结构在[[Logger::messages]]中.
+	 * @param array $message 日志消息进行格式化.
+	 * @return string 格式化的消息
 	 */
 	public function formatMessage($message)
 	{

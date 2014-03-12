@@ -11,11 +11,11 @@ use Yii;
 use yii\base\Component;
 
 /**
- * Logger records logged messages in memory and sends them to different targets as needed.
+ * 将信息记录在存储器中并根据需要将它们发送到不同的目标.
  *
- * Logger is registered as a core application component and can be accessed using `Yii::$app->log`.
- * You can call the method [[log()]] to record a single log message. For convenience, a set of shortcut
- * methods are provided for logging messages of various severity levels via the [[Yii]] class:
+ * Logger is registered as a core application component，可以使用`Yii::$app->log`调用.
+ * 通过[[log()]]方法记录一个日志消息. 为了方便,
+ * [[Yii]] 类 提供的一系列有关于 错误日志的方法:
  *
  * - [[Yii::trace()]]
  * - [[Yii::error()]]
@@ -24,10 +24,10 @@ use yii\base\Component;
  * - [[Yii::beginProfile()]]
  * - [[Yii::endProfile()]]
  *
- * When enough messages are accumulated in the logger, or when the current request finishes,
- * the logged messages will be sent to different [[targets]], such as log files, emails.
+ * 当足够的消息被累积在记录器, 或当当前请求完成,
+ * 记录的消息将被发送到不同的[[targets]], 例如日志文件, 电子邮件.
  *
- * You may configure the targets in application configuration, like the following:
+ * 您可以通过应用程序配置配置目标, 类似以下:
  *
  * ~~~
  * [
@@ -52,22 +52,22 @@ use yii\base\Component;
  * ]
  * ~~~
  *
- * Each log target can have a name and can be referenced via the [[targets]] property
- * as follows:
+ * 每个日志对象可以有一个名称，可以通过[[targets]]属性引用
+ * 如下:
  *
  * ~~~
  * Yii::$app->log->targets['file']->enabled = false;
  * ~~~
  *
- * When the application ends or [[flushInterval]] is reached, Logger will call [[flush()]]
- * to send logged messages to different log targets, such as file, email, Web.
+ * 当应用程序结束或[[flushInterval]]到达, 记录器将调用[[flush()]]
+ * 发送记录的消息到不同的日志目标, 例如文件, email, Web.
  *
- * @property array $dbProfiling The first element indicates the number of SQL statements executed, and the
- * second element the total time spent in SQL execution. This property is read-only.
- * @property float $elapsedTime The total elapsed time in seconds for current request. This property is
- * read-only.
- * @property array $profiling The profiling results. Each element is an array consisting of these elements:
- * `info`, `category`, `timestamp`, `trace`, `level`, `duration`. This property is read-only.
+ * @property array $dbProfiling 第一个元素指示执行的SQL语句的数量, 
+ * 第二个元素的总时间花费在SQL执行. 这个属性是只读的.
+ * @property float $elapsedTime 总时间，当前请求以秒为单位. 
+ * 这个属性是只读的.
+ * @property array $profiling 分析该结果. Each element is an array consisting of these elements:
+ * `info`, `category`, `timestamp`, `trace`, `level`, `duration`. 此属性是只读的.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -75,43 +75,43 @@ use yii\base\Component;
 class Logger extends Component
 {
 	/**
-	 * Error message level. An error message is one that indicates the abnormal termination of the
-	 * application and may require developer's handling.
+	 * 错误消息级别. 应用程序异常终止的错误消息
+	 * 并且可能需要开发者的处理.
 	 */
 	const LEVEL_ERROR = 0x01;
 	/**
-	 * Warning message level. A warning message is one that indicates some abnormal happens but
-	 * the application is able to continue to run. Developers should pay attention to this message.
+	 * 警告消息级别. 不正常的情况发生的警告消息
+	 * 但应用程序能够继续运行. 开发人员应该注意这消息.
 	 */
 	const LEVEL_WARNING = 0x02;
 	/**
-	 * Informational message level. An informational message is one that includes certain information
+	 * 参考消息级别. An informational message is one that includes certain information
 	 * for developers to review.
 	 */
 	const LEVEL_INFO = 0x04;
 	/**
-	 * Tracing message level. An tracing message is one that reveals the code execution flow.
+	 * 跟踪消息级别. 踪消息揭示了代码执行流程.
 	 */
 	const LEVEL_TRACE = 0x08;
 	/**
-	 * Profiling message level. This indicates the message is for profiling purpose.
+	 * 分析消息级别. This indicates the message is for profiling purpose.
 	 */
 	const LEVEL_PROFILE = 0x40;
 	/**
-	 * Profiling message level. This indicates the message is for profiling purpose. It marks the
-	 * beginning of a profiling block.
+	 * 分析消息级别. This indicates the message is for profiling purpose. 它标志着
+	 * 一个剖析块的开始.
 	 */
 	const LEVEL_PROFILE_BEGIN = 0x50;
 	/**
-	 * Profiling message level. This indicates the message is for profiling purpose. It marks the
-	 * end of a profiling block.
+	 * 分析消息级别. This indicates the message is for profiling purpose. 它标志着
+	 * 一个剖析块的结束.
 	 */
 	const LEVEL_PROFILE_END = 0x60;
 
 
 	/**
-	 * @var array logged messages. This property is managed by [[log()]] and [[flush()]].
-	 * Each log message is of the following structure:
+	 * @var array 记录的消息. 此属性通过[[log()]] 和 [[flush()]]管理.
+	 * 每个日志信息按照以下结构:
 	 *
 	 * ~~~
 	 * [
@@ -125,12 +125,12 @@ class Logger extends Component
 	 */
 	public $messages = [];
 	/**
-	 * @var array debug data. This property stores various types of debug data reported at
-	 * different instrument places.
+	 * @var array 调试数据. 此属性用于存储各种类型的调试数据,报告在
+	 * 不同的地方.
 	 */
 	public $data = [];
 	/**
-	 * @var array|Target[] the log targets. Each array element represents a single [[Target|log target]] instance
+	 * @var array|Target[] 日志目标. Each array element represents a single [[Target|log target]] instance
 	 * or the configuration for creating the log target instance.
 	 */
 	public $targets = [];
@@ -169,14 +169,14 @@ class Logger extends Component
 	}
 
 	/**
-	 * Logs a message with the given type and category.
-	 * If [[traceLevel]] is greater than 0, additional call stack information about
+	 * 记录具有给定类型和类别的消息.
+	 * 如果[[traceLevel]]大于0, additional call stack information about
 	 * the application code will be logged as well.
 	 * @param string $message the message to be logged.
 	 * @param integer $level the level of the message. This must be one of the following:
 	 * `Logger::LEVEL_ERROR`, `Logger::LEVEL_WARNING`, `Logger::LEVEL_INFO`, `Logger::LEVEL_TRACE`,
 	 * `Logger::LEVEL_PROFILE_BEGIN`, `Logger::LEVEL_PROFILE_END`.
-	 * @param string $category the category of the message.
+	 * @param string $category 该消息的类.
 	 */
 	public function log($message, $level, $category = 'application')
 	{
@@ -203,8 +203,8 @@ class Logger extends Component
 	}
 
 	/**
-	 * Flushes log messages from memory to targets.
-	 * @param boolean $final whether this is a final call during a request.
+	 * 从内存到目标刷新日志信息.
+	 * @param boolean $final 是否是一个请求期间的最后调用.
 	 */
 	public function flush($final = false)
 	{
@@ -218,11 +218,11 @@ class Logger extends Component
 	}
 
 	/**
-	 * Returns the total elapsed time since the start of the current request.
-	 * This method calculates the difference between now and the timestamp
-	 * defined by constant `YII_BEGIN_TIME` which is evaluated at the beginning
-	 * of [[\yii\BaseYii]] class file.
-	 * @return float the total elapsed time in seconds for current request.
+	 * 返回自当前请求的开始的总运行时间.
+	 * 这种方法计算，现在和在文件[[\yii\BaseYii]]开始处
+	 * 被`YII_BEGIN_TIME`定义的时间戳 
+	 * 之间的不同.
+	 * @return float 总的运行时间，以秒为单位.
 	 */
 	public function getElapsedTime()
 	{
@@ -230,13 +230,13 @@ class Logger extends Component
 	}
 
 	/**
-	 * Returns the profiling results.
+	 * 返回的分析结果.
 	 *
-	 * By default, all profiling results will be returned. You may provide
-	 * `$categories` and `$excludeCategories` as parameters to retrieve the
-	 * results that you are interested in.
+	 * 默认所有的分析结果将被返回. 可以使用
+	 * `$categories` and `$excludeCategories` 作为参数来检索
+	 * 所感兴趣的结果.
 	 *
-	 * @param array $categories list of categories that you are interested in.
+	 * @param array $categories 你有兴趣的类别列表.
 	 * You can use an asterisk at the end of a category to do a prefix match.
 	 * For example, 'yii\db\*' will match categories starting with 'yii\db\',
 	 * such as 'yii\db\Connection'.
@@ -281,11 +281,11 @@ class Logger extends Component
 	}
 
 	/**
-	 * Returns the statistical results of DB queries.
-	 * The results returned include the number of SQL statements executed and
-	 * the total time spent.
-	 * @return array the first element indicates the number of SQL statements executed,
-	 * and the second element the total time spent in SQL execution.
+	 * 返回数据库查询的统计结果.
+	 * 返回的结果包括执行的SQL语句的数量和
+	 * 花费的总时间.
+	 * @return array 第一个元素表示执行的SQL语句的数量,
+	 * 第二个元素是SQL执行花费的总时间.
 	 */
 	public function getDbProfiling()
 	{
@@ -299,8 +299,8 @@ class Logger extends Component
 	}
 
 	/**
-	 * Calculates the elapsed time for the given log messages.
-	 * @param array $messages the log messages obtained from profiling
+	 * 计算给定的日志消息所用的时间.
+	 * @param array $messages 从分析中获得的日志信息
 	 * @return array timings. Each element is an array consisting of these elements:
 	 * `info`, `category`, `timestamp`, `trace`, `level`, `duration`.
 	 */
@@ -335,9 +335,9 @@ class Logger extends Component
 
 
 	/**
-	 * Returns the text display of the specified level.
-	 * @param integer $level the message level, e.g. [[LEVEL_ERROR]], [[LEVEL_WARNING]].
-	 * @return string the text display of the level
+	 * 返回指定级别以文本显示.
+	 * @param integer $level 消息级别, 例如. [[LEVEL_ERROR]], [[LEVEL_WARNING]].
+	 * @return string 该级别的文本显示
 	 */
 	public static function getLevelName($level)
 	{
