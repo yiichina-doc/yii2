@@ -8,7 +8,7 @@
 namespace yii\base;
 
 /**
- * Behavior is the base class for all behavior classes.
+ * Behavior 是所有行为类的基类。
  *
  * A behavior can be used to enhance the functionality of an existing component without modifying its code.
  * In particular, it can "inject" its own methods and properties into the component
@@ -21,7 +21,7 @@ namespace yii\base;
 class Behavior extends \yii\base\Object
 {
 	/**
-	 * @var Component the owner of this behavior
+	 * @var Component 这个行为的所有者
 	 */
 	public $owner;
 
@@ -59,10 +59,10 @@ class Behavior extends \yii\base\Object
 	}
 
 	/**
-	 * Attaches the behavior object to the component.
+	 * 向组件中附加行为对象
 	 * The default implementation will set the [[owner]] property
 	 * and attach event handlers as declared in [[events]].
-	 * Make sure you call the parent implementation if you override this method.
+	 * 如果你重写此方法，请确保您调用父类的实现。
 	 * @param Component $owner the component that this behavior is to be attached to.
 	 */
 	public function attach($owner)
@@ -74,10 +74,10 @@ class Behavior extends \yii\base\Object
 	}
 
 	/**
-	 * Detaches the behavior object from the component.
+	 * 从组件中分离行为对象。
 	 * The default implementation will unset the [[owner]] property
 	 * and detach event handlers declared in [[events]].
-	 * Make sure you call the parent implementation if you override this method.
+	 * 如果你重写此方法，请确保您调用父类的实现。
 	 */
 	public function detach()
 	{

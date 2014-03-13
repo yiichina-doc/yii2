@@ -1,27 +1,27 @@
-Logging
+日志
 =======
 
 Yii provides flexible and extensible logger that is able to handle messages according to serverity level or their type.
 You may filter messages by multiple criteria and forward them to files, email, debugger etc.
 
-Logging basics
+日志基础知识
 --------------
 
-Basic logging is as simple as calling one method:
+基本的日志记录非常简单，只需调用一个方法：
 
 ```php
 \Yii::info('Hello, I am a test log message');
 ```
 
-### Message category
+### 消息类别
 
 Additionally to the message itself message category could be specified in order to allow filtering such messages and
 handing these differently. Message category is passed as a second argument of logging methods and is `application` by
 default.
 
-### Severity levels
+### 严重级别
 
-There are multiple severity levels and corresponding methods available:
+有多种严重级别，并提供相应的方法：
 
 - [[Yii::trace]] used maily for development purpose to indicate workflow of some code. Note that it only works in
   development mode when `YII_DEBUG` is set to `true`.
@@ -29,7 +29,7 @@ There are multiple severity levels and corresponding methods available:
 - [[Yii::warning]] used when an error occured but execution can be continued.
 - [[Yii::info]] used to keep record of important events such as administrator logins.
 
-Log targets
+日志对象
 -----------
 
 When one of the logging methods is called, message is passed to [[yii\log\Logger]] component also accessible as
@@ -76,7 +76,7 @@ When the application ends or [[yii\log\Logger::flushInterval|flushInterval]] is 
 [[yii\log\Logger::flush()|flush()]] to send logged messages to different log targets, such as file, email, web.
 
 
-Profiling
+解析
 ---------
 
 Performance profiling is a special type of message logging that can be used to measure the time needed for the
@@ -104,4 +104,4 @@ Note, code blocks need to be nested properly such as
 \Yii::endProfile('block1');
 ```
 
-Profiling results [could be displayed in debugger](module-debug.md).
+分析结果 [could be displayed in debugger](module-debug.md).

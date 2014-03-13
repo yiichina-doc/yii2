@@ -1,13 +1,13 @@
-Console applications
+控制台应用程序
 ====================
 
 Yii has full featured support of console. Console application structure in Yii is very similar to web application. It
 consists of one or more [[yii\console\Controller]] (often referred to as commands). Each has one or more actions.
 
-Usage
+用法
 -----
 
-You can execute controller action using the following syntax:
+您可以使用下面的语法来执行控制动作：
 
 ```
 yii <route> [--option1=value1 --option2=value2 ... argument1 argument2 ...]
@@ -61,7 +61,7 @@ This script is a part of your application so you're free to adjust it. The `YII_
 not want to see stack trace on error and want to improve overall performance. In both basic and advanced application
 templates it is enabled to provide more developer-friendly environment.
 
-Configuration
+配置
 -------------
 
 As can be seen in the code above, console application uses its own config files named `console.php`. In this file,
@@ -81,10 +81,10 @@ yii <route> --appconfig=path/to/config.php ...
 ```
 
 
-Creating your own console commands
+创建您自己的控制台命令
 ----------------------------------
 
-### Console Controller and Action
+### 控制台控制器和动作
 
 A console command is defined as a controller class extending from [[yii\console\Controller]]. In the controller class,
 you define one or several actions that correspond to the sub-commands of the command. Within each action, you write code
@@ -95,7 +95,7 @@ the route `migrate/create` specifies the sub-command corresponding to the
 [[yii\console\controllers\MigrateController::actionCreate()|MigrateController::actionCreate()]] action method.
 If a route does not contain an action ID, the default action will be executed.
 
-### Options
+### 选项
 
 By overriding the [[yii\console\Controller::globalOptions()]] method, you can specify options that are available
 to a console command. The method should return a list of public property names of the controller class.
@@ -105,7 +105,7 @@ This will assign `OptionValue` to the `OptionName` property of the controller cl
 If the default value of an option is of array type, then if you set this option while running the command,
 the option value will be converted into an array by splitting the input string by commas.
 
-### Arguments
+### 参数
 
 Besides options, a command can also receive arguments. The arguments will be passed as the parameters to the action
 method corresponding to the requested sub-command. The first argument corresponds to the first parameter, the second
@@ -115,7 +115,7 @@ may take the declared default values, or if they do not have default value the c
 You may use `array` type hint to indicate that an argument should be treated as an array. The array will be generated
 by splitting the input string by commas.
 
-The follow examples show how to declare arguments:
+后续的示例显示了如何声明参数：
 
 ```php
 class ExampleController extends \yii\console\Controller
@@ -134,7 +134,7 @@ class ExampleController extends \yii\console\Controller
 ```
 
 
-### Exit Code
+### 退出代码
 
 Using exit codes is the best practice of console application development. If a command returns `0` it means
 everything is OK. If it is a number greater than zero, we have an error and the number returned is the error

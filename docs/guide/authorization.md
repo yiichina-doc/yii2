@@ -1,10 +1,10 @@
-Authorization
+授权
 =============
 
 Authorization is the process of verifying that user has enough permissions to do something. Yii provides several methods
 of controlling it.
 
-Access control basics
+访问控制基础
 ---------------------
 
 Basic access control is very simple to implement using [[yii\web\AccessControl]]:
@@ -68,7 +68,7 @@ class SiteController extends Controller
 					],
 ```
 
-And the action:
+动作：
 
 ```php
 	// ...
@@ -81,13 +81,13 @@ And the action:
 
 Sometimes you want a custom action to be taken when access is denied. In this case you can specify `denyCallback`.
 
-Role based access control (RBAC)
+基于角色的访问控制 (RBAC)
 --------------------------------
 
 Role based access control is very flexible approach to controlling access that is a perfect match for complex systems
 where permissions are customizable.
 
-### Using file-based config for RBAC
+### 使用基于文件的配置的RBAC
 
 In order to start using it some extra steps are required. First of all we need to configure `authManager` application
 component in application config file (`web.php` or `main.php` depending on template you've used):
@@ -121,7 +121,7 @@ class PhpManager extends \yii\rbac\PhpManager
 }
 ```
 
-Then create permissions hierarchy in `@app/data/rbac.php`:
+然后在 `@app/data/rbac.php` 创建权限层次结构：
 
 ```php
 <?php
@@ -189,7 +189,7 @@ return [
 ];
 ```
 
-Now you can specify roles from RBAC in controller's access control configuration:
+现在，您可以从RBAC在控制器的访问控制配置中指定角色：
 
 ```php
 public function behaviors()
@@ -211,7 +211,7 @@ public function behaviors()
 
 Another way is to call [[yii\web\User::checkAccess()]] where appropriate.
 
-### Using DB-based storage for RBAC
+### 使用DB为基础的存储RBAC
 
 Storing RBAC hierarchy in database is less efficient performancewise but is much more flexible. It is easier to create
 a good management UI for it so in case you need permissions structure that is managed by end user DB is your choice.
@@ -231,14 +231,14 @@ depending on template you've used):
 
 TBD
 
-### How it works
+### 它是如何工作的
 
 TBD: write about how it works with pictures :)
 
-### Avoiding too much RBAC
+### 避免过多的RBAC
 
-In order to keep auth hierarchy simple and efficient you should avoid creating and using too much nodes. Most of the time
-simple checks could be used instead. For example such code that uses RBAC:
+为了保证身份验证的层次结构简单而高效，你应该避免创建和使用过多的节点。
+大多数时候，以用简单的检查可来代替。对于使用RBAC例如这样的代码：
 
 ```php
 public function editArticle($id)
@@ -254,7 +254,7 @@ public function editArticle($id)
 }
 ```
 
-can be replaced with simpler code that doesn't use RBAC:
+可以换成不使用RBAC简单的代码：
 
 ```php
 public function editArticle($id)

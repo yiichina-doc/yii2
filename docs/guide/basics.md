@@ -1,8 +1,8 @@
-Basic concepts of Yii
+Yii的基本概念
 =====================
 
 
-Component and Object
+组件和对象
 --------------------
 
 Classes of the Yii framework usually extend from one of the two base classes [[yii\base\Object]] and [[yii\base\Component]].
@@ -16,7 +16,7 @@ The [[yii\base\Component|Component]] class extends from [[yii\base\Object|Object
 [[yii\base\Component|Component]] is used for application components and other classes that implement higher logic.
 
 
-Object Configuration
+配置对象
 --------------------
 
 The [[yii\base\Object|Object]] class introduces a uniform way of configuring objects. Any descendant class
@@ -59,7 +59,7 @@ $object = Yii::createObject([
 ```
 
 
-Path Aliases
+路径别名
 ------------
 
 Yii 2.0 expands the usage of path aliases to both file/directory paths and URLs. An alias
@@ -76,7 +76,7 @@ such as Zend Framework, you may define a path alias `@Zend` which refers to its 
 directory and Yii will be able to autoload any class in this library.
 
 
-Autoloading
+自动加载
 -----------
 
 All classes, interfaces and traits are loaded automatically at the moment they are used. There's no need to use
@@ -97,17 +97,17 @@ Yii::setAlias('@shared', realpath('~/src/shared'));
 
 Additional autoloaders may be registered using standard PHP `spl_autoload_register`.
 
-Helper classes
+Helper类
 --------------
 
-Helper class typically contains static methods only and used as follows:
+Helper类通常只能包含静态方法，使用方法如下：
 
 ```php
 use \yii\helpers\Html;
 echo Html::encode('Test > test');
 ```
 
-There are several classes provided by framework:
+由框架提供了几个类：
 
 - ArrayHelper
 - Console

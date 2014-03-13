@@ -1,4 +1,4 @@
-Events
+事件
 ======
 
 Event is a way to "inject" custom code into existing code at certain places. For example, a comment object can trigger
@@ -7,7 +7,7 @@ is triggered (i.e. comment will be added), our custom code will be executed.
 
 Events are very useful both to make your components flexible and to hook into framework and extensions workflow.
 
-Triggering events
+触发事件
 -----------------
 
 Any component can trigger events using `trigger` method:
@@ -38,7 +38,7 @@ class Mailer extends Component
 }
 ```
 
-Attaching event handlers
+附加事件处理程序
 ------------------------
 
 One or multiple PHP callbacks, called *event handlers*, can be attached to an event. When an event is raised, the event

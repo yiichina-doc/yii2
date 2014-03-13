@@ -1,4 +1,4 @@
-Database Migration
+数据库迁移
 ==================
 
 Like source code, the structure of a database evolves as a database-driven application is developed and maintained. For example, during development, a new table may be added; Or, after the application goes live, it may be discovered that an additional index is required. It is important to keep track of these structural database changes (called **migration**), just as changes to the source code is tracked using version control. If the source code and the database become out of sync, bugs will occur, or the whole application might break. For this reason, Yii provides a database migration
@@ -20,7 +20,7 @@ Yii supports database migration via the `yii migrate` command line tool. This to
 Creating Migrations
 -------------------
 
-To create a new migration, run the following command:
+要创建一个新的迁移，请运行以下命令：
 
 ```
 yii migrate/create <name>

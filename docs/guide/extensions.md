@@ -1,8 +1,8 @@
-Extending Yii
+扩展Yii
 =============
 The Yii framework was designed to be easily extendable. Additional features can be added to your project and then reused, either by yourself on other projects or by sharing your work as a formal Yii extension.
 
-Code style
+代码风格
 ----------
 
 To be consistent with core Yii conventions, your extensions ought to adhere to certain coding styles:

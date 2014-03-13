@@ -1,71 +1,70 @@
-Advanced application template
+高级应用程序模板
 =============================
 
 This template is for large projects developed in teams where backend is divided from frontend, application is deployed
 to multiple servers etc. This application template also goes a bit further regarding features and provides essential
 database, signup and password restore out of the box.
 
-Installation
+安装
 ------------
 
-### Install via Composer
+### 通过Composer安装
 
-If you do not have [Composer](http://getcomposer.org/), you may download it from
-[http://getcomposer.org/](http://getcomposer.org/) or run the following command on Linux/Unix/MacOS:
+如果你没有安装 [Composer](http://getcomposer.org/)， 你可以从
+[http://getcomposer.org/](http://getcomposer.org/) 下载或者在 Linux/Unix/MacOS 上运行如下命令：
 
 ~~~
 curl -s http://getcomposer.org/installer | php
 ~~~
 
-You can then install the application using the following command:
+然后，您可以使用下面的命令来安装该应用程序：
 
 ~~~
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-advanced /path/to/yii-application
 ~~~
 
-Getting started
+入门
 ---------------
 
-After you install the application, you have to conduct the following steps to initialize
-the installed application. You only need to do these once for all.
+在安装应用程序时，您必须进行以下步骤来初始化安装的应用程序。所有这些你只需要做一次。
 
-1. Execute the `init` command and select `dev` as environment.
+1. 执行 `init` 命令并选择 `dev` 做为环境。
    ```
    php /path/to/yii-application/init
    ```
 2. Create a new database and adjust the `components.db` configuration in `common/config/main-local.php` accordingly.
-3. Apply migrations with console command `yii migrate`.
-4. Set document roots of your Web server:
+3. 适用迁移的控制台命令 `yii migrate`。
+4. 设置你的Web服务器文档根目录：
 
 - for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
 - for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
 
-Directory structure
+目录结构
 -------------------
 
-The root directory contains the following subdirectories:
+根目录包含以下子目录：
 
-- `backend` - backend web application.
-- `common` - files common to all applications.
-- `console` - console application.
-- `environments` - environment configs.
-- `frontend` - frontend web application.
+- `backend` - 后端Web应用程序。
+- `common` - 适用于所有应用程序文件。
+- `console` - 控制台应用程序。
+- `environments` - 环境的配置。
+- `frontend` - 前端Web应用程序。
 
-Root directory contains a set of files.
+根目录中包含的一系列文件。
 
 - `.gitignore` contains a list of directories ignored by git version system. If you need something never get to your source
   code repository, add it there.
 - `composer.json` - Composer config described in detail below.
 - `init` - initialization script described in "Composer config described in detail below".
-- `init.bat` - same for Windows.
+- `init.bat` - 同样适用于Windows。
 - `LICENSE.md` - license info. Put your project license there. Especially when opensourcing.
 - `README.md` - basic info about installing template. Consider replacing it with information about your project and its
   installation.
 - `requirements.php` - Yii requirements checker.
 - `yii` - console application bootstrap.
-- `yii.bat` - same for Windows.
+- `yii.bat` - 同样适用于Windows。
 
-Applications
+应用
 ------------
 
 There are three applications in advanced template: frontend, backend and console. Frontend is typically what is presented
@@ -79,7 +78,7 @@ webserver to.
 
 Each application has its own namespace and alias corresponding to its name. Same applies to common directory.
 
-Configuration and environments
+配置和环境
 ------------------------------
 
 There are multiple problems with straightforward approach to configuration:
@@ -111,13 +110,13 @@ Parameters are read in the following order:
 - `frontend/config/params.php`
 - `frontend/config/params-local.php`
 
-The later config file overrides the former.
+后者配置文件覆盖了前者。
 
-Here's the full scheme:
+下面是完整的方案：
 
-![Advanced application configs](images/advanced-app-configs.png)
+![高级应用程序的配置](images/advanced-app-configs.png)
 
-Configuring Composer
+配置Composer
 --------------------
 
 After application template is installed it's a good idea to adjust default `composer.json` that can be found in the root
@@ -176,7 +175,7 @@ All these packages are coming from [packagist.org](https://packagist.org/) so fe
 After your `composer.json` is changed you can run `php composer.phar update --prefer-dist`, wait till packages are downloaded and
 installed and then just use them. Autoloading of classes will be handled automatically.
 
-Creating links from backend to frontend
+从后端创建前端的链接
 ---------------------------------------
 
 Often it's required to create links from backend application to frontend application. Since frontend application may

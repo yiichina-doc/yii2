@@ -1,4 +1,4 @@
-Behaviors
+行为
 =========
 
 A behavior (also knows as *mixin*) can be used to enhance the functionality of an existing component without modifying the component's

@@ -1,4 +1,4 @@
-Error Handling
+错误处理
 ==============
 
 Error handling in Yii is different than handling errors in plain PHP. First of all, Yii will convert all non-fatal errors

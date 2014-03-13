@@ -1,4 +1,4 @@
-Configuration
+配置
 =============
 
 Yii applications rely upon components to perform most of the common tasks, such as connecting to a database, routing browser
@@ -13,7 +13,7 @@ Configuring options in the bootstrap file
 For each application in Yii there is at least one bootstrap file: a PHP script through which all requests are handled. For web applications, the bootstrap file is  typically `index.php`; for
 console applications, the bootstrap file is `yii`. Both bootstrap files perform nearly the same job:
 
-1. Setting common constants.
+1. 设置公共常量。
 2. Including the Yii framework itself.
 3. Including [Composer autoloader](http://getcomposer.org/doc/01-basic-usage.md#autoloading).
 4. Reading the configuration file into `$config`.
@@ -34,7 +34,7 @@ define('YII_DEBUG', true); // Development only
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 ```
 
-Configuring the application instance
+配置应用程序实例
 ------------------------------------
 
 An application instance is configured when it's created in the bootstrap file. The configuration is typically
@@ -60,7 +60,7 @@ Note that you can configure not only public class properties, but any property a
   since the class has a corresponding setter named `setRuntimePath`, `runtimePath` becomes configurable.
   The ability to configure properties via setters is available to any class that extends from [[yii\base\Object]], which is nearly every class in the Yii framework.
 
-Configuring application components
+配置应用程序组件
 ----------------------------------
 
 The majority of the Yii functionality comes from application components. These components are attached to the application instance via the instance's `components` property:
@@ -98,7 +98,7 @@ to get a list of component IDs and corresponding classes.
 
 Note that Yii is smart enough to only configure the component when it's actually being used: for example, if you configure the `cache` component in your configuration file but never use the `cache` component in your code, no instance of that component will be created and no time is wasted configuring it.
 
-Setting component defaults classwide
+设置组件的默认值classwide
 ------------------------------------
 
 For each component you can specifiy classwide defaults. For example, if you want to change the class used for all `LinkPager`
