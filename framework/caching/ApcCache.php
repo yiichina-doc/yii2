@@ -95,7 +95,7 @@ class ApcCache extends Cache
 
 	/**
 	 * 添加多个键值到缓存.
-	 * @param array $data 数组中的键值也将是其值在缓存中的键值
+	 * @param array $data 数组中的键值也将是其值在缓存中对应的键值
 	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
 	 * @return array 返回缓存失败的键
 	 */

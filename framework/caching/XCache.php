@@ -35,7 +35,7 @@ class XCache extends Cache
 	}
 
 	/**
-	 * 获取指定的键的值.
+	 * 从缓存中获取指定的键的值.
 	 * 这是在父类中定义的方法的具体实现.
 	 * @param string $key 一个缓存中唯一的键名
 	 * @return string|boolean 缓存中存储的值，如果该值不存在或者已过期则返回false.	
