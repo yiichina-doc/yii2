@@ -1,11 +1,11 @@
-URL Management
+URL管理
 ==============
 
 The concept of URL management in Yii is fairly simple. URL management is based on the premise that the application uses
 internal routes and parameters everywhere. The framework itself will then translate routes into URLs, and vice versa, according to the URL manager's configuration. This approach allows you to change site-wide URLs merely by
 editing a single configuration file, without ever touching the application code.
 
-Internal routes
+内部路由
 ---------------
 
 When implementing an application using Yii, you'll deal with internal routes, often referred to as routes and parameters.
@@ -15,7 +15,7 @@ second example, `user` is the controller ID and `create` is the action ID. If th
 internal route is prefixed with the module ID. For example `blog/post/index` for a blog module (with `post` being the
 controller ID and `index` being the action ID).
 
-Creating URLs
+创建URL
 -------------
 
 The most important rule for creating URLs in your site is to always do so using the URL manager. The URL manager is a built-in application component named `urlManager`. This component is accessible from both web and console applications via
@@ -30,7 +30,7 @@ The `createAbsoluteUrl` method creates an URL prefixed with the proper protocol 
 is used when you need to create URLs for external resources, such as connecting to third party services, sending email,
 generating RSS feeds etc.
 
-Some examples:
+一些例子：
 
 ```php
 echo \Yii::$app->urlManager->createUrl(['site/page', 'id' => 'about']);
@@ -66,7 +66,7 @@ echo $this->createurl(['/date-time/fast-forward', 'id' => 105]); // url for acti
 > **Tip**: In order to generate URL with a hashtag, for example `/index.php?r=site/page&id=100#title`, you need to
   specify the parameter named `#` using `$this->createUrl(['post/read', 'id' => 100, '#' => 'title'])`.
 
-Customizing URLs
+自定义URL
 ----------------
 
 By default, Yii uses a query string format for URLs, such as `/index.php?r=news/view&id=100`. In order to make URLs
@@ -91,7 +91,7 @@ return [
 Note that this configuration will only work if the web server has been properly configured for Yii, see
 [installation](installation.md#recommended-apache-configuration).
 
-### Named parameters
+### 命名参数
 
 A rule can be associated with a few `GET` parameters. These `GET` parameters appear in the rule's pattern as special tokens in the following format:
 
@@ -130,7 +130,7 @@ If the `GET` parameters passed to `createUrl` are more than those required by a 
 As we mentioned earlier, the other purpose of URL rules is to parse the requesting URLs. Naturally, this is an inverse process of URL creation. For example, when a user requests for `/index.php/post/100`, the second rule in the above example will apply, which resolves in the route `post/read` and the `GET` parameter `['id' => 100]` (accessible via
 `Yii::$app->request->getQueryParam('id')`).
 
-### Parameterizing Routes
+### 参数化路由
 
 We may reference named parameters in the route part of a rule. This allows a rule to be applied to multiple routes based
 on matching criteria. It may also help reduce the number of rules needed for an application, and thus improve the overall
@@ -151,7 +151,7 @@ In the above example, we use two named parameters in the route part of the rules
 Using the above rules, the URL `/index.php/post/123/create` will be parsed as the route `post/create` with `GET` parameter
 `id=123`. Given the route `comment/list` and `GET` parameter `page=2`, we can create a URL `/index.php/comments?page=2`.
 
-### Parameterizing  hostnames
+### 参数化主机名
 
 It is also possible to include hostnames in the rules for parsing and creating URLs. One may extract part of the hostname
 to be a `GET` parameter. This is especially useful for handling subdomains. For example, the URL
@@ -198,7 +198,7 @@ TBD:
   - request: [[yii\web\Request::$parsers]], [[yii\web\JsonParser]]
 
 
-URL parsing
+URL解析
 -----------
 
 Complimentary to creating URLs Yii also handles transforming custom URLs back into internal routes and parameters.
@@ -219,7 +219,7 @@ return [
 ];
 ```
 
-Creating your own rule classes
+创建您自己的规则类
 ------------------------------
 
 [[yii\web\UrlRule]] class is used for both parsing URL into parameters and creating URL based on parameters. Despite
