@@ -12,13 +12,13 @@ use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
 
 /**
- * FileTarget ��һ���ļ��м�¼��־��Ϣ.
+ * FileTarget 在一个文件中记录日志消息.
  *
- * ��־�ļ���ͨ��ָ�� [[logFile]]. �����־�ļ��Ĵ�С����
- * [[maxFileSize]] (ǧ�ֽ�), ��ִ����ת����, 
- * ʹ�ú�׺��'.1'��������ǰ��־�ļ�. �������е���־�ļ�
- * ����һ������ƶ�, i.e., '.2' to '.3', '.1' to '.2', �ȵ�.
- * [[maxLogFiles]] ������� ָ���˱������ļ���.
+ * 日志文件是通过指定 [[logFile]]. 如果日志文件的大小超过
+ * [[maxFileSize]] (千字节), 将执行轮转操作, 
+ * 使用后缀名'.1'重命名当前日志文件. 所有现有的日志文件
+ * 是由一处向后移动, i.e., '.2' to '.3', '.1' to '.2', 等等.
+ * [[maxLogFiles]] 这个属性 指定了保留的文件数.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -26,36 +26,36 @@ use yii\helpers\FileHelper;
 class FileTarget extends Target
 {
 	/**
-	 * @var string ��־�ļ���·����·������. ���δ����, Ĭ��ʹ�� "@runtime/logs/app.log" �ļ���.
-	 * ��������ڣ����Զ�����һ��������־�ļ���Ŀ¼.
+	 * @var string 日志文件的路径或路径别名. 如果未设置, 默认使用 "@runtime/logs/app.log" 文件名.
+	 * 如果不存在，将自动创建一个包含日志文件的目录.
 	 */
 	public $logFile;
 	/**
-	 * @var integer �����־�ļ���С, ��ǧ�ֽ�. Ĭ������Ϊ10240, �� 10MB.
+	 * @var integer 最大日志文件大小, 以千字节. 默认设置为10240, 即 10MB.
 	 */
 	public $maxFileSize = 10240; // in KB
 	/**
-	 * @var integer ��ת��־�ļ���.Ĭ������Ϊ5.
+	 * @var integer 轮转日志文件数.默认设置为5.
 	 */
 	public $maxLogFiles = 5;
 	/**
-	 * @var integer ���´�������־�ļ�����Ȩ��.
-	 * ���ֵ����PHP��chmod()����ʹ��. û��umask��ʹ��.
-	 * ��δ����, ��Ȩ�޽��ɵ�ǰ��������.
+	 * @var integer 对新创建的日志文件设置权限.
+	 * 这个值将被PHP的chmod()函数使用. 没有umask被使用.
+	 * 若未设置, 此权限将由当前环境而定.
 	 */
 	public $fileMode;
 	/**
-	 * @var integer ���´�����Ŀ¼����Ȩ��.
-	 * ���ֵ����PHP��chmod()����ʹ��. û��umask��ʹ��.
-	 * Ĭ������Ϊ0775, ����ζ�Ÿ�Ŀ¼�������߻����ǿɶ���д��,
-	 * ���������û�ֻ��.
+	 * @var integer 对新创建的目录设置权限.
+	 * 这个值将被PHP的chmod()函数使用. 没有umask被使用.
+	 * 默认设置为0775, 这意味着该目录对所有者或组是可读可写的,
+	 * 但对其它用户只读.
 	 */
 	public $dirMode = 0775;
 
 
 	/**
-	 * ��ʼ��·��.
-	 * ����Ա����·��֮�󣬴˷���������.
+	 * 初始化路径.
+	 * 管理员创建路径之后，此方法被调用.
 	 */
 	public function init()
 	{
@@ -78,8 +78,8 @@ class FileTarget extends Target
 	}
 
 	/**
-	 * д��־��Ϣ���ļ�.
-	 * @throws InvalidConfigException ����޷��򿪲�д����־�ļ�
+	 * 写日志信息到文件.
+	 * @throws InvalidConfigException 如果无法打开并写入日志文件
 	 */
 	public function export()
 	{
@@ -104,7 +104,7 @@ class FileTarget extends Target
 	}
 
 	/**
-	 * ��ת��־�ļ�.
+	 * 轮转日志文件.
 	 */
 	protected function rotateFiles()
 	{

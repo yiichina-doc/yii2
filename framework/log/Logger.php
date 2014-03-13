@@ -11,11 +11,11 @@ use Yii;
 use yii\base\Component;
 
 /**
- * ½«ĞÅÏ¢¼ÇÂ¼ÔÚ´æ´¢Æ÷ÖĞ²¢¸ù¾İĞèÒª½«ËüÃÇ·¢ËÍµ½²»Í¬µÄÄ¿±ê.
+ * å°†ä¿¡æ¯è®°å½•åœ¨Loggerä¸­å¹¶æ ¹æ®éœ€è¦å°†å®ƒä»¬å‘é€åˆ°ä¸åŒçš„ç›®æ ‡ã€‚
  *
- * Logger is registered as a core application component£¬¿ÉÒÔÊ¹ÓÃ`Yii::$app->log`µ÷ÓÃ.
- * Í¨¹ı[[log()]]·½·¨¼ÇÂ¼Ò»¸öÈÕÖ¾ÏûÏ¢. ÎªÁË·½±ã,
- * [[Yii]] Àà Ìá¹©µÄÒ»ÏµÁĞÓĞ¹ØÓÚ ´íÎóÈÕÖ¾µÄ·½·¨:
+ * Logger ä½œä¸ºä¸€ä¸ªæ ¸å¿ƒåº”ç”¨ç¨‹åºç»„ä»¶è¢«æ·»åŠ äº†ï¼Œå¯ä»¥ä½¿ç”¨`Yii::$app->log`è°ƒç”¨ã€‚
+ * é€šè¿‡[[log()]]æ–¹æ³•è®°å½•ä¸€ä¸ªæ—¥å¿—æ¶ˆæ¯ã€‚ ä¸ºäº†æ–¹ä¾¿ï¼Œ
+ * [[Yii]] ç±» æä¾›çš„ä¸€ç³»åˆ—æœ‰å…³äº é”™è¯¯æ—¥å¿—çš„æ–¹æ³•:
  *
  * - [[Yii::trace()]]
  * - [[Yii::error()]]
@@ -24,10 +24,10 @@ use yii\base\Component;
  * - [[Yii::beginProfile()]]
  * - [[Yii::endProfile()]]
  *
- * µ±×ã¹»µÄÏûÏ¢±»ÀÛ»ıÔÚ¼ÇÂ¼Æ÷, »òµ±µ±Ç°ÇëÇóÍê³É,
- * ¼ÇÂ¼µÄÏûÏ¢½«±»·¢ËÍµ½²»Í¬µÄ[[targets]], ÀıÈçÈÕÖ¾ÎÄ¼ş, µç×ÓÓÊ¼ş.
+ * å½“è¶³å¤Ÿçš„æ¶ˆæ¯è¢«ç´¯ç§¯åœ¨Loggerä¸­ï¼Œ æˆ–å½“å½“å‰è¯·æ±‚å®Œæˆï¼Œ
+ * è®°å½•çš„æ¶ˆæ¯å°†è¢«å‘é€åˆ°ä¸åŒçš„[[targets]], ä¾‹å¦‚æ—¥å¿—æ–‡ä»¶ï¼Œç”µå­é‚®ä»¶ã€‚
  *
- * Äú¿ÉÒÔÍ¨¹ıÓ¦ÓÃ³ÌĞòÅäÖÃÅäÖÃÄ¿±ê, ÀàËÆÒÔÏÂ:
+ * æ‚¨å¯ä»¥é€šè¿‡åº”ç”¨ç¨‹åºé…ç½®é…ç½®ç›®æ ‡, ç±»ä¼¼ä»¥ä¸‹:
  *
  * ~~~
  * [
@@ -52,22 +52,22 @@ use yii\base\Component;
  * ]
  * ~~~
  *
- * Ã¿¸öÈÕÖ¾¶ÔÏó¿ÉÒÔÓĞÒ»¸öÃû³Æ£¬¿ÉÒÔÍ¨¹ı[[targets]]ÊôĞÔÒıÓÃ
- * ÈçÏÂ:
+ * æ¯ä¸ªæ—¥å¿—å¯¹è±¡å¯ä»¥æœ‰ä¸€ä¸ªåç§°ï¼Œå¯ä»¥é€šè¿‡[[targets]]å±æ€§å¼•ç”¨
+ * å¦‚ä¸‹:
  *
  * ~~~
  * Yii::$app->log->targets['file']->enabled = false;
  * ~~~
  *
- * µ±Ó¦ÓÃ³ÌĞò½áÊø»ò[[flushInterval]]µ½´ï, ¼ÇÂ¼Æ÷½«µ÷ÓÃ[[flush()]]
- * ·¢ËÍ¼ÇÂ¼µÄÏûÏ¢µ½²»Í¬µÄÈÕÖ¾Ä¿±ê, ÀıÈçÎÄ¼ş, email, Web.
+ * å½“åº”ç”¨ç¨‹åºç»“æŸæˆ–[[flushInterval]]åˆ°è¾¾ï¼Œ Loggerå°†è°ƒç”¨[[flush()]]
+ * å‘é€è®°å½•çš„æ¶ˆæ¯åˆ°ä¸åŒçš„æ—¥å¿—ç›®æ ‡, ä¾‹å¦‚æ–‡ä»¶ï¼Œ emailï¼Œ Webã€‚
  *
- * @property array $dbProfiling µÚÒ»¸öÔªËØÖ¸Ê¾Ö´ĞĞµÄSQLÓï¾äµÄÊıÁ¿, 
- * µÚ¶ş¸öÔªËØµÄ×ÜÊ±¼ä»¨·ÑÔÚSQLÖ´ĞĞ. Õâ¸öÊôĞÔÊÇÖ»¶ÁµÄ.
- * @property float $elapsedTime ×ÜÊ±¼ä£¬µ±Ç°ÇëÇóÒÔÃëÎªµ¥Î». 
- * Õâ¸öÊôĞÔÊÇÖ»¶ÁµÄ.
- * @property array $profiling ·ÖÎö¸Ã½á¹û. Each element is an array consisting of these elements:
- * `info`, `category`, `timestamp`, `trace`, `level`, `duration`. ´ËÊôĞÔÊÇÖ»¶ÁµÄ.
+ * @property array $dbProfiling ç¬¬ä¸€ä¸ªå…ƒç´ æŒ‡ç¤ºæ‰§è¡Œçš„SQLè¯­å¥çš„æ•°é‡ï¼Œ 
+ * ç¬¬äºŒä¸ªå…ƒç´ çš„æ€»æ—¶é—´èŠ±è´¹åœ¨SQLæ‰§è¡Œã€‚ è¿™ä¸ªå±æ€§æ˜¯åªè¯»çš„ã€‚
+ * @property float $elapsedTime æ€»æ—¶é—´ï¼Œå½“å‰è¯·æ±‚ä»¥ç§’ä¸ºå•ä½ã€‚
+ * è¿™ä¸ªå±æ€§æ˜¯åªè¯»çš„ã€‚
+ * @property array $profiling åˆ†æè¯¥ç»“æœã€‚æ¯ä¸ªå…ƒç´ æ˜¯ç”±è¿™äº›å…ƒç´ ç»„æˆçš„æ•°ç»„:
+ * `info`, `category`, `timestamp`, `trace`, `level`, `duration`. æ­¤å±æ€§æ˜¯åªè¯»çš„ã€‚
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -75,43 +75,43 @@ use yii\base\Component;
 class Logger extends Component
 {
 	/**
-	 * ´íÎóÏûÏ¢¼¶±ğ. Ó¦ÓÃ³ÌĞòÒì³£ÖÕÖ¹µÄ´íÎóÏûÏ¢
-	 * ²¢ÇÒ¿ÉÄÜĞèÒª¿ª·¢ÕßµÄ´¦Àí.
+	 * é”™è¯¯æ¶ˆæ¯çº§åˆ«ã€‚ åº”ç”¨ç¨‹åºå¼‚å¸¸ç»ˆæ­¢çš„é”™è¯¯æ¶ˆæ¯
+	 * å¹¶ä¸”å¯èƒ½éœ€è¦å¼€å‘è€…çš„å¤„ç†ã€‚
 	 */
 	const LEVEL_ERROR = 0x01;
 	/**
-	 * ¾¯¸æÏûÏ¢¼¶±ğ. ²»Õı³£µÄÇé¿ö·¢ÉúµÄ¾¯¸æÏûÏ¢
-	 * µ«Ó¦ÓÃ³ÌĞòÄÜ¹»¼ÌĞøÔËĞĞ. ¿ª·¢ÈËÔ±Ó¦¸Ã×¢ÒâÕâÏûÏ¢.
+	 * è­¦å‘Šæ¶ˆæ¯çº§åˆ«ï¼Œä¸æ­£å¸¸çš„æƒ…å†µå‘ç”Ÿçš„è­¦å‘Šæ¶ˆæ¯
+	 * ä½†åº”ç”¨ç¨‹åºèƒ½å¤Ÿç»§ç»­è¿è¡Œï¼Œ å¼€å‘äººå‘˜åº”è¯¥æ³¨æ„è¿™æ¶ˆæ¯ã€‚
 	 */
 	const LEVEL_WARNING = 0x02;
 	/**
-	 * ²Î¿¼ÏûÏ¢¼¶±ğ. An informational message is one that includes certain information
-	 * for developers to review.
+	 * å‚è€ƒæ¶ˆæ¯çº§åˆ«ï¼Œ ä¿¡æ¯æ€§æ¶ˆæ¯åŒ…å«è‹¥å¹²èµ„æ–™
+	 * ä»¥ä¾›å¼€å‘äººå‘˜å®¡æŸ¥ã€‚
 	 */
 	const LEVEL_INFO = 0x04;
 	/**
-	 * ¸ú×ÙÏûÏ¢¼¶±ğ. ×ÙÏûÏ¢½ÒÊ¾ÁË´úÂëÖ´ĞĞÁ÷³Ì.
+	 * è·Ÿè¸ªæ¶ˆæ¯çº§åˆ«ï¼Œ è¸ªæ¶ˆæ¯æ­ç¤ºäº†ä»£ç æ‰§è¡Œæµç¨‹ã€‚
 	 */
 	const LEVEL_TRACE = 0x08;
 	/**
-	 * ·ÖÎöÏûÏ¢¼¶±ğ. This indicates the message is for profiling purpose.
+	 * åˆ†ææ¶ˆæ¯çº§åˆ«ï¼Œè¯¥æ¶ˆæ¯çš„ä½œç”¨æ˜¯æ˜¯åˆ†æã€‚
 	 */
 	const LEVEL_PROFILE = 0x40;
 	/**
-	 * ·ÖÎöÏûÏ¢¼¶±ğ. This indicates the message is for profiling purpose. Ëü±êÖ¾×Å
-	 * Ò»¸öÆÊÎö¿éµÄ¿ªÊ¼.
+	 * åˆ†ææ¶ˆæ¯çº§åˆ«ï¼Œ è¯¥æ¶ˆæ¯çš„ä½œç”¨æ˜¯æ˜¯åˆ†æï¼Œå®ƒæ ‡å¿—ç€
+	 * ä¸€ä¸ªå‰–æå—çš„å¼€å§‹ã€‚
 	 */
 	const LEVEL_PROFILE_BEGIN = 0x50;
 	/**
-	 * ·ÖÎöÏûÏ¢¼¶±ğ. This indicates the message is for profiling purpose. Ëü±êÖ¾×Å
-	 * Ò»¸öÆÊÎö¿éµÄ½áÊø.
+	 * åˆ†ææ¶ˆæ¯çº§åˆ«ï¼Œ è¯¥æ¶ˆæ¯çš„ä½œç”¨æ˜¯æ˜¯åˆ†æï¼Œ å®ƒæ ‡å¿—ç€
+	 * ä¸€ä¸ªå‰–æå—çš„ç»“æŸã€‚
 	 */
 	const LEVEL_PROFILE_END = 0x60;
 
 
 	/**
-	 * @var array ¼ÇÂ¼µÄÏûÏ¢. ´ËÊôĞÔÍ¨¹ı[[log()]] ºÍ [[flush()]]¹ÜÀí.
-	 * Ã¿¸öÈÕÖ¾ĞÅÏ¢°´ÕÕÒÔÏÂ½á¹¹:
+	 * @var array è®°å½•çš„æ¶ˆæ¯ï¼Œ æ­¤å±æ€§é€šè¿‡[[log()]] å’Œ [[flush()]]ç®¡ç†ã€‚
+	 * æ¯ä¸ªæ—¥å¿—ä¿¡æ¯æŒ‰ç…§ä»¥ä¸‹ç»“æ„:
 	 *
 	 * ~~~
 	 * [
@@ -125,34 +125,35 @@ class Logger extends Component
 	 */
 	public $messages = [];
 	/**
-	 * @var array µ÷ÊÔÊı¾İ. ´ËÊôĞÔÓÃÓÚ´æ´¢¸÷ÖÖÀàĞÍµÄµ÷ÊÔÊı¾İ,±¨¸æÔÚ
-	 * ²»Í¬µÄµØ·½.
+	 * @var array è°ƒè¯•æ•°æ®ï¼Œ æ­¤å±æ€§ç”¨äºå­˜å‚¨å„ç§ç±»å‹çš„è°ƒè¯•æ•°æ®ï¼ŒæŠ¥å‘Šåœ¨
+	 * ä¸åŒçš„åœ°æ–¹ã€‚
 	 */
 	public $data = [];
 	/**
-	 * @var array|Target[] ÈÕÖ¾Ä¿±ê. Each array element represents a single [[Target|log target]] instance
-	 * or the configuration for creating the log target instance.
+	 * @var array|Target[] æ—¥å¿—ç›®æ ‡ï¼Œ æ¯ä¸ªæ•°ç»„å…ƒç´ ä»£è¡¨ä¸€ä¸ªå•ä¸€çš„[[Target|log target]]
+	 * æ—¥å¿—å¯¹è±¡å®ä¾‹æˆ–é…ç½®åˆ›å»ºæ—¥å¿—ç›®æ ‡å®ä¾‹
+.
 	 */
 	public $targets = [];
 	/**
-	 * @var integer how many messages should be logged before they are flushed from memory and sent to targets.
-	 * Defaults to 1000, meaning the [[flush]] method will be invoked once every 1000 messages logged.
-	 * Set this property to be 0 if you don't want to flush messages until the application terminates.
-	 * This property mainly affects how much memory will be taken by the logged messages.
-	 * A smaller value means less memory, but will increase the execution time due to the overhead of [[flush()]].
+	 * @var integer ä»å†…å­˜ä¸­åˆ·æ–°å¹¶å‘é€åˆ°ç›®æ ‡ä¹‹å‰åº”è¯¥è®°å½•çš„æ¶ˆæ¯æ•°ã€‚
+	 * é»˜è®¤è®¾ç½®ä¸º1000ï¼Œæ„æ€æ˜¯æ¯1000æ¡çŸ­ä¿¡è®°å½•ï¼Œ[[flush]]æ–¹æ³•å°†è¢«è°ƒç”¨ä¸€æ¬¡ã€‚
+	 * å¦‚æœç›´åˆ°åº”ç”¨ç¨‹åºç»ˆæ­¢ä¸æƒ³åˆ·æ–°æ¶ˆæ¯ï¼Œå°†æ­¤å±æ€§è®¾ç½®ä¸º0ã€‚
+	 * è¿™ä¸ªå±æ€§ä¸»è¦æ˜¯ï¼Œæœ‰å¤šå°‘å†…å­˜è¢«è®°å½•çš„æ¶ˆæ¯å½±å“ã€‚
+	 * å€¼è¶Šå°æ„å‘³ç€å†…å­˜è¶Šå°‘ï¼Œä½†ä¼šå¢åŠ æ‰§è¡Œæ—¶é—´ï¼Œç”±äº[[flush()]]å‡½æ•°çš„æ¶ˆè€—ã€‚
 	 */
 	public $flushInterval = 1000;
 	/**
-	 * @var integer how much call stack information (file name and line number) should be logged for each message.
-	 * If it is greater than 0, at most that number of call stacks will be logged. Note that only application
-	 * call stacks are counted.
+	 * @var integer è°ƒç”¨å †æ ˆä¿¡æ¯æ•°é‡(æ–‡ä»¶åå’Œè¡Œå·)åº”è®°å½•åœ¨æ¯æ¡æ¶ˆæ¯ä¸­ã€‚
+	 * å¦‚æœå®ƒæ˜¯å¤§äº0çš„ï¼Œ è¿™ä¸ªæ•°å­—çš„è°ƒç”¨å †æ ˆä¼šè¢«è®°å½•ã€‚è¯·æ³¨æ„
+	 * åªæœ‰åº”ç”¨ç¨‹åºè°ƒç”¨å †æ ˆæ‰è¿›è¡Œè®¡æ•°ã€‚
 	 *
-	 * If not set, it will default to 3 when `YII_ENV` is set as "dev", and 0 otherwise.
+	 * è‹¥æœªè®¾ç½®ï¼Œå½“`YII_ENV`è®¾ç½®ä¸º"dev"çš„æ—¶å€™ï¼Œå®ƒç¼ºçœæ˜¯3ï¼Œå¦åˆ™ ç¼ºçœæ˜¯0ã€‚
 	 */
 	public $traceLevel;
 
 	/**
-	 * Initializes the logger by registering [[flush()]] as a shutdown function.
+	 * é€šè¿‡æ³¨å†Œ[[flush()]]ä¸ºå…³é—­æ—¶è¿è¡Œçš„å‡½æ•°æ¥åˆå§‹åŒ–loggerã€‚
 	 */
 	public function init()
 	{
@@ -169,14 +170,14 @@ class Logger extends Component
 	}
 
 	/**
-	 * ¼ÇÂ¼¾ßÓĞ¸ø¶¨ÀàĞÍºÍÀà±ğµÄÏûÏ¢.
-	 * Èç¹û[[traceLevel]]´óÓÚ0, additional call stack information about
-	 * the application code will be logged as well.
-	 * @param string $message the message to be logged.
-	 * @param integer $level the level of the message. This must be one of the following:
-	 * `Logger::LEVEL_ERROR`, `Logger::LEVEL_WARNING`, `Logger::LEVEL_INFO`, `Logger::LEVEL_TRACE`,
-	 * `Logger::LEVEL_PROFILE_BEGIN`, `Logger::LEVEL_PROFILE_END`.
-	 * @param string $category ¸ÃÏûÏ¢µÄÀà.
+	 * è®°å½•å…·æœ‰ç»™å®šç±»å‹å’Œç±»åˆ«çš„æ¶ˆæ¯ã€‚
+	 * å¦‚æœ[[traceLevel]]å¤§äº0ï¼Œè¯¥åº”ç”¨ä»£ç 
+	 * çš„é¢å¤–çš„å †æ ˆè°ƒç”¨ä¿¡æ¯å°†åŒæ ·è¢«è®°å½•ã€‚
+	 * @param string $message æ¶ˆæ¯è¢«è®°å½•ã€‚
+	 * @param integer $level è¯¥æ¶ˆæ¯çš„çº§åˆ«ã€‚ å¿…é¡»æ˜¯ä¸‹åˆ—ä¹‹ä¸€:
+	 * `Logger::LEVEL_ERROR`, `Logger::LEVEL_WARNING`, `Logger::LEVEL_INFO`, `Logger::LEVEL_TRACE`ï¼Œ
+	 * `Logger::LEVEL_PROFILE_BEGIN`, `Logger::LEVEL_PROFILE_END`ã€‚
+	 * @param string $category è¯¥æ¶ˆæ¯çš„ç±»ã€‚
 	 */
 	public function log($message, $level, $category = 'application')
 	{
@@ -203,8 +204,8 @@ class Logger extends Component
 	}
 
 	/**
-	 * ´ÓÄÚ´æµ½Ä¿±êË¢ĞÂÈÕÖ¾ĞÅÏ¢.
-	 * @param boolean $final ÊÇ·ñÊÇÒ»¸öÇëÇóÆÚ¼äµÄ×îºóµ÷ÓÃ.
+	 * ä»å†…å­˜åˆ°ç›®æ ‡åˆ·æ–°æ—¥å¿—ä¿¡æ¯ã€‚
+	 * @param boolean $final æ˜¯å¦æ˜¯ä¸€ä¸ªè¯·æ±‚æœŸé—´çš„æœ€åè°ƒç”¨ã€‚
 	 */
 	public function flush($final = false)
 	{
@@ -218,11 +219,11 @@ class Logger extends Component
 	}
 
 	/**
-	 * ·µ»Ø×Ôµ±Ç°ÇëÇóµÄ¿ªÊ¼µÄ×ÜÔËĞĞÊ±¼ä.
-	 * ÕâÖÖ·½·¨¼ÆËã£¬ÏÖÔÚºÍÔÚÎÄ¼ş[[\yii\BaseYii]]¿ªÊ¼´¦
-	 * ±»`YII_BEGIN_TIME`¶¨ÒåµÄÊ±¼ä´Á 
-	 * Ö®¼äµÄ²»Í¬.
-	 * @return float ×ÜµÄÔËĞĞÊ±¼ä£¬ÒÔÃëÎªµ¥Î».
+	 * è¿”å›è‡ªå½“å‰è¯·æ±‚çš„å¼€å§‹çš„æ€»è¿è¡Œæ—¶é—´ã€‚
+	 * è¿™ç§æ–¹æ³•è®¡ç®—ï¼Œç°åœ¨å’Œåœ¨æ–‡ä»¶[[\yii\BaseYii]]å¼€å§‹å¤„
+	 * è¢«`YII_BEGIN_TIME`å®šä¹‰çš„æ—¶é—´æˆ³ 
+	 * ä¹‹é—´çš„ä¸åŒã€‚
+	 * @return float æ€»çš„è¿è¡Œæ—¶é—´ï¼Œä»¥ç§’ä¸ºå•ä½ã€‚
 	 */
 	public function getElapsedTime()
 	{
@@ -230,18 +231,18 @@ class Logger extends Component
 	}
 
 	/**
-	 * ·µ»ØµÄ·ÖÎö½á¹û.
+	 * è¿”å›çš„åˆ†æç»“æœã€‚
 	 *
-	 * Ä¬ÈÏËùÓĞµÄ·ÖÎö½á¹û½«±»·µ»Ø. ¿ÉÒÔÊ¹ÓÃ
-	 * `$categories` and `$excludeCategories` ×÷Îª²ÎÊıÀ´¼ìË÷
-	 * Ëù¸ĞĞËÈ¤µÄ½á¹û.
+	 * é»˜è®¤æ‰€æœ‰çš„åˆ†æç»“æœå°†è¢«è¿”å›ã€‚å¯ä»¥ä½¿ç”¨
+	 * `$categories` and `$excludeCategories` ä½œä¸ºå‚æ•°æ¥æ£€ç´¢
+	 * æ‰€æ„Ÿå…´è¶£çš„ç»“æœã€‚
 	 *
-	 * @param array $categories ÄãÓĞĞËÈ¤µÄÀà±ğÁĞ±í.
-	 * You can use an asterisk at the end of a category to do a prefix match.
-	 * For example, 'yii\db\*' will match categories starting with 'yii\db\',
-	 * such as 'yii\db\Connection'.
-	 * @param array $excludeCategories list of categories that you want to exclude
-	 * @return array the profiling results. Each element is an array consisting of these elements:
+	 * @param array $categories ä½ æœ‰å…´è¶£çš„ç±»åˆ«åˆ—è¡¨ã€‚
+	 * ä½ å¯ä»¥åœ¨åˆ†ç±»çš„ç»“å°¾å¤„ä½¿ç”¨*ä½œä¸ºé€šé…ç¬¦æ¥åšå‰ç¼€åŒ¹é…ã€‚
+	 * ä¾‹å¦‚ï¼Œ 'yii\db\*' å°†åŒ¹é…ä»¥ 'yii\db\' å¼€å¤´çš„åˆ†ç±»ï¼Œ
+	 * æ¯”å¦‚'yii\db\Connection'ã€‚
+	 * @param array $excludeCategories è¦æ’é™¤çš„ç±»åˆ«åˆ—è¡¨
+	 * @return array è¯„æµ‹ç»“æœã€‚ æ¯ä¸ªå…ƒç´ æ˜¯ç”±è¿™äº›å…ƒç´ ç»„æˆçš„æ•°ç»„:
 	 * `info`, `category`, `timestamp`, `trace`, `level`, `duration`.
 	 */
 	public function getProfiling($categories = [], $excludeCategories = [])
@@ -281,11 +282,11 @@ class Logger extends Component
 	}
 
 	/**
-	 * ·µ»ØÊı¾İ¿â²éÑ¯µÄÍ³¼Æ½á¹û.
-	 * ·µ»ØµÄ½á¹û°üÀ¨Ö´ĞĞµÄSQLÓï¾äµÄÊıÁ¿ºÍ
-	 * »¨·ÑµÄ×ÜÊ±¼ä.
-	 * @return array µÚÒ»¸öÔªËØ±íÊ¾Ö´ĞĞµÄSQLÓï¾äµÄÊıÁ¿,
-	 * µÚ¶ş¸öÔªËØÊÇSQLÖ´ĞĞ»¨·ÑµÄ×ÜÊ±¼ä.
+	 * è¿”å›æ•°æ®åº“æŸ¥è¯¢çš„ç»Ÿè®¡ç»“æœã€‚
+	 * è¿”å›çš„ç»“æœåŒ…æ‹¬æ‰§è¡Œçš„SQLè¯­å¥çš„æ•°é‡å’Œ
+	 * èŠ±è´¹çš„æ€»æ—¶é—´ã€‚
+	 * @return array ç¬¬ä¸€ä¸ªå…ƒç´ è¡¨ç¤ºæ‰§è¡Œçš„SQLè¯­å¥çš„æ•°é‡ï¼Œ
+	 * ç¬¬äºŒä¸ªå…ƒç´ æ˜¯SQLæ‰§è¡ŒèŠ±è´¹çš„æ€»æ—¶é—´ã€‚
 	 */
 	public function getDbProfiling()
 	{
@@ -299,10 +300,10 @@ class Logger extends Component
 	}
 
 	/**
-	 * ¼ÆËã¸ø¶¨µÄÈÕÖ¾ÏûÏ¢ËùÓÃµÄÊ±¼ä.
-	 * @param array $messages ´Ó·ÖÎöÖĞ»ñµÃµÄÈÕÖ¾ĞÅÏ¢
-	 * @return array timings. Each element is an array consisting of these elements:
-	 * `info`, `category`, `timestamp`, `trace`, `level`, `duration`.
+	 * è®¡ç®—ç»™å®šçš„æ—¥å¿—æ¶ˆæ¯æ‰€ç”¨çš„æ—¶é—´ã€‚
+	 * @param array $messages ä»åˆ†æä¸­è·å¾—çš„æ—¥å¿—ä¿¡æ¯
+	 * @return array timingsã€‚ æ¯ä¸ªå…ƒç´ æ˜¯ç”±è¿™äº›å…ƒç´ ç»„æˆçš„æ•°ç»„:
+	 * `info`, `category`, `timestamp`, `trace`, `level`, `duration`ã€‚
 	 */
 	public function calculateTimings($messages)
 	{
@@ -335,9 +336,9 @@ class Logger extends Component
 
 
 	/**
-	 * ·µ»ØÖ¸¶¨¼¶±ğÒÔÎÄ±¾ÏÔÊ¾.
-	 * @param integer $level ÏûÏ¢¼¶±ğ, ÀıÈç. [[LEVEL_ERROR]], [[LEVEL_WARNING]].
-	 * @return string ¸Ã¼¶±ğµÄÎÄ±¾ÏÔÊ¾
+	 * è¿”å›æŒ‡å®šçº§åˆ«ä»¥æ–‡æœ¬æ˜¾ç¤ºã€‚
+	 * @param integer $level æ¶ˆæ¯çº§åˆ«ï¼Œä¾‹å¦‚ [[LEVEL_ERROR]], [[LEVEL_WARNING]]ã€‚
+	 * @return string è¯¥çº§åˆ«çš„æ–‡æœ¬æ˜¾ç¤º
 	 */
 	public static function getLevelName($level)
 	{
