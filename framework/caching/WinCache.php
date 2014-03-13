@@ -8,10 +8,10 @@
 namespace yii\caching;
 
 /**
- * WinCache provides Windows Cache caching in terms of an application component.
+ * WinCache 提供 Windows Cache的应用组件.
  *
- * To use this application component, the [WinCache PHP extension](http://www.iis.net/expand/wincacheforphp)
- * must be loaded. Also note that "wincache.ucenabled" should be set to "On" in your php.ini file.
+ * 使用这个应用, 必须加载 [WinCache PHP extension](http://www.iis.net/expand/wincacheforphp).
+ * 并用要注意的是你PHP.INI的 "wincache.ucenabled" 要设置为 "On".
  *
  * See [[Cache]] manual for common cache operations that are supported by WinCache.
  *
@@ -56,13 +56,13 @@ class WinCache extends Cache
 	}
 
 	/**
-	 * Stores a value identified by a key in cache.
-	 * This is the implementation of the method declared in the parent class.
+	 * 要设置一个键新值，会先检查此键是否在缓存中存在.
+	 * 这是在父类中定义方法的具体实现.
 	 *
-	 * @param string $key the key identifying the value to be cached
-	 * @param string $value the value to be cached
-	 * @param integer $expire the number of seconds in which the cached value will expire. 0 means never expire.
-	 * @return boolean true if the value is successfully stored into cache, false otherwise
+	 * @param string $key 要检查此键是否存在
+	 * @param string $value 要缓存的值
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return boolean 设置成功返回true,失败返回false
 	 */
 	protected function setValue($key, $value, $expire)
 	{
@@ -70,10 +70,10 @@ class WinCache extends Cache
 	}
 
 	/**
-	 * Stores multiple key-value pairs in cache.
-	 * @param array $data array where key corresponds to cache key while value is the value stored
-	 * @param integer $expire the number of seconds in which the cached values will expire. 0 means never expire.
-	 * @return array array of failed keys
+	 * 给多个键设置新值.
+	 * @param array $data 要设置键与值的列表，键与缓存中对应
+	 * @param integer $expire 缓存过期时间，以秒为单位. 0 代表永不过期.
+	 * @return array 返回设置失败的键列表
 	 */
 	protected function setValues($data, $expire)
 	{
