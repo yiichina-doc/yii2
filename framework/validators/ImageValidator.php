@@ -14,7 +14,7 @@ use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 
 /**
- * ImageValidator verifies if an attribute is receiving a valid image.
+ * ImageValidator 验证是否一个属性接收一个有效的image。
  *
  * @author Taras Gudz <gudz.taras@gmail.com>
  * @since 2.0
@@ -22,90 +22,90 @@ use yii\helpers\FileHelper;
 class ImageValidator extends FileValidator
 {
 	/**
-	 * @var string the error message used when the uploaded file is not an image.
-	 * You may use the following tokens in the message:
+	 * @var string 当上传的文件不是一个image时的错误信息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
 	 */
 	public $notImage;
 	/**
-	 * @var integer the minimum width in pixels.
-	 * Defaults to null, meaning no limit.
+	 * @var integer 以像素为单位的最小宽度。
+	 * 默认为 null, 意味着无限制。
 	 * @see underWidth
 	 */
 	public $minWidth;
 	/**
-	 * @var integer the maximum width in pixels.
-	 * Defaults to null, meaning no limit.
+	 * @var integer 以像素为单位的最大宽度。
+	 * 默认为 null, 意味着无限制.
 	 * @see overWidth
 	 */
 	public $maxWidth;
 	/**
-	 * @var integer the minimum height in pixels.
-	 * Defaults to null, meaning no limit.
+	 * @var integer 以像素为单位的最小高度。
+	 * 默认为 null, 意味着无限制.
 	 * @see underHeight
 	 */
 	public $minHeight;
 	/**
-	 * @var integer the maximum width in pixels.
-	 * Defaults to null, meaning no limit.
+	 * @var integer 以像素为单位的最大高度。
+	 * 默认为 null, 意味着无限制。
 	 * @see overWidth
 	 */
 	public $maxHeight;
 	/**
-	 * @var array|string a list of file mime types that are allowed to be uploaded.
-	 * This can be either an array or a string consisting of file mime types
-	 * separated by space or comma (e.g. "image/jpeg, image/png").
-	 * Mime type names are case-insensitive. Defaults to null, meaning all mime types
-	 * are allowed.
+	 * @var array|string 被允许上载文件的mime类型的列表。
+	 * 可以是一个数组或包含由空格或逗号分隔的mime文件
+	 * 类型的字符串 (例如 "image/jpeg, image/png")。
+	 * Mime类型名称是区分大小写。 默认为 null, 意味着所有的
+	 * 类型是允许的。
 	 * @see wrongMimeType
 	 */
 	public $mimeTypes;
 	/**
-	 * @var string the error message used when the image is under [[minWidth]].
-	 * You may use the following tokens in the message:
+	 * @var string 当image的最小宽度在[[minWidth]]以下时的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the value of [[minWidth]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {limit}: [[minWidth]]值
 	 */
 	public $underWidth;
 	/**
-	 * @var string the error message used when the image is over [[maxWidth]].
-	 * You may use the following tokens in the message:
+	 * @var string 当image的最大宽度在[[maxWidth]]以上时的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the value of [[maxWidth]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {limit}: [[maxWidth]]值
 	 */
 	public $overWidth;
 	/**
-	 * @var string the error message used when the image is under [[minHeight]].
-	 * You may use the following tokens in the message:
+	 * @var string 当image的最小高度在[[minHeight]]以下时的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the value of [[minHeight]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {limit}:[[minHeight]]值
 	 */
 	public $underHeight;
 	/**
-	 * @var string the error message used when the image is over [[maxHeight]].
-	 * You may use the following tokens in the message:
+	 * @var string 当image的最大高度在[[maxHeight]]以上时的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the value of [[maxHeight]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {limit}:[[maxHeight]]值
 	 */
 	public $overHeight;
 	/**
-	 * @var string the error message used when the file has an mime type
-	 * that is not listed in [[mimeTypes]].
-	 * You may use the following tokens in the message:
+	 * @var string [[mimeTypes]]中列出的类型中
+	 * 没有mime类的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {mimeTypes}: the value of [[mimeTypes]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {mimeTypes}: [[mimeTypes]]值
 	 */
 	public $wrongMimeType;
 
@@ -149,10 +149,10 @@ class ImageValidator extends FileValidator
 	}
 	
 	/**
-	 * Validates an image file.
-	 * @param UploadedFile $image uploaded file passed to check against a set of rules
-	 * @return array|null the error message and the parameters to be inserted into the error message.
-	 * Null should be returned if the data is valid.
+	 * 验证图像文件。
+	 * @param UploadedFile $image 上传的文件通过了一套规则的检查
+	 * @return array|null 参数被插入到错误消息中。
+	 * 如果该数据是有效的则应返回Null。
 	 */
 	protected function validateImage($image)
 	{

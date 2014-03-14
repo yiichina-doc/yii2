@@ -11,7 +11,7 @@ use Yii;
 use DateTime;
 
 /**
- * DateValidator verifies if the attribute represents a date, time or datetime in a proper format.
+ * DateValidator 验证如果此属性表示适当格式的date, time or datetime。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -19,15 +19,15 @@ use DateTime;
 class DateValidator extends Validator
 {
 	/**
-	 * @var string the date format that the value being validated should follow.
-	 * Please refer to <http://www.php.net/manual/en/datetime.createfromformat.php> on
-	 * supported formats.
+	 * @var string 日期格式的值应遵循被验证过的。
+	 * 请参阅<http://www.php.net/manual/en/datetime.createfromformat.php>
+	 * 中支持的格式。
 	 */
 	public $format = 'Y-m-d';
 	/**
-	 * @var string the name of the attribute to receive the parsing result.
-	 * When this property is not null and the validation is successful, the named attribute will
-	 * receive the parsing result.
+	 * @var string 得到的解析结果的属性。
+	 * 当该属性不为null并且验证成功，已命名的属性
+	 * 将获得解析结果。
 	 */
 	public $timestampAttribute;
 

@@ -8,16 +8,16 @@
 namespace yii\validators;
 
 /**
- * InlineValidator represents a validator which is defined as a method in the object being validated.
+ * InlineValidator 表示一个验证器 它被定义为待验证的对象中的一个方法。
  *
- * The validation method must have the following signature:
+ * 验证方法必须按照以下规则:
  *
  * ~~~
  * function foo($attribute, $params)
  * ~~~
  *
- * where `$attribute` refers to the name of the attribute being validated, while `$params`
- * is an array representing the additional parameters supplied in the validation rule.
+ * `$attribute` 表示需要验证的属性名，`$params`
+ * 是一个表示验证规则支持的附加参数的数组。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -34,7 +34,7 @@ class InlineValidator extends Validator
 	 */
 	public $method;
 	/**
-	 * @var array additional parameters that are passed to the validation method
+	 * @var array 该方法的其他参数被传递给验证方法
 	 */
 	public $params;
 	/**
@@ -48,9 +48,9 @@ class InlineValidator extends Validator
 	 * }
 	 * ~~~
 	 *
-	 * where `$attribute` refers to the attribute name to be validated.
+	 * `$attribute`指的是验证过的属性名称。
 	 *
-	 * Please refer to [[clientValidateAttribute()]] for details on how to return client validation code.
+	 * 请参阅[[clientValidateAttribute()]]了解如何返回客户端验证代码的详细信息。
 	 */
 	public $clientValidate;
 

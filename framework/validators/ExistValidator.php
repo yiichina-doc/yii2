@@ -11,15 +11,15 @@ use Yii;
 use yii\base\InvalidConfigException;
 
 /**
- * ExistValidator validates that the attribute value exists in a table.
+ * ExistValidator 验证该属性值在表中是否存在。
  *
- * ExistValidator checks if the value being validated can be found in the table column specified by
- * the ActiveRecord class [[targetClass]] and the attribute [[targetAttribute]].
+ * ExistValidator 检查 被校验的值是否存在于
+ * ActiveRecord类[[targetClass]]和[[targetAttribute]]属性指定的那个表和列中。
  *
- * This validator is often used to verify that a foreign key contains a value
- * that can be found in the foreign table.
+ * 此验证程序通常用来验证一个包含一个值的外键
+ * 可以在外部表中找到。
  *
- * The followings are examples of validation rules using this validator:
+ * 以下是使用此验证程序的验证规则的例子:
  *
  * ```php
  * // a1 needs to exist
@@ -40,25 +40,25 @@ use yii\base\InvalidConfigException;
 class ExistValidator extends Validator
 {
 	/**
-	 * @var string the name of the ActiveRecord class that should be used to validate the existence
-	 * of the current attribute value. It not set, it will use the ActiveRecord class of the attribute being validated.
+	 * @var string 用来验证当前属性值是否存在的
+	 * ActiveRecord类的名字。若未设置，将作用被验证过的ActiveRecord类的属性。
 	 * @see targetAttribute
 	 */
 	public $targetClass;
 	/**
-	 * @var string|array the name of the ActiveRecord attribute that should be used to
-	 * validate the existence of the current attribute value. If not set, it will use the name
-	 * of the attribute currently being validated. You may use an array to validate the existence
-	 * of multiple columns at the same time. The array values are the attributes that will be
-	 * used to validate the existence, while the array keys are the attributes whose values are to be validated.
-	 * If the key and the value are the same, you can just specify the value.
+	 * @var string|array ActiveRecord的属性的名称是否存在
+	 * 于当前属性的值中。 若未设置，将使用
+	 * 当前正在验证的属性名称。 可以使用数组来验证
+	 * 多列同时存在的问题。 数组值的属性
+	 * 用于验证是否存在，数组keys是被验证过的属性值。
+	 * 如果该key和value是相同的，你可以指定值。
 	 */
 	public $targetAttribute;
 	/**
-	 * @var string|array|\Closure additional filter to be applied to the DB query used to check the existence of the attribute value.
-	 * This can be a string or an array representing the additional query condition (refer to [[\yii\db\Query::where()]]
-	 * on the format of query condition), or an anonymous function with the signature `function ($query)`, where `$query`
-	 * is the [[\yii\db\Query|Query]] object that you can modify in the function.
+	 * @var string|array|\Closure 应用到DB查询的其他过滤器用来检查属性值是否存在。
+	 * 可以是一个字符串或表示附加查询条件的数组 (参考[[\yii\db\Query::where()]]
+	 * 的查询条件的格式)，或者是一个有 `function ($query)`签名的匿名函数，其中`$query`
+	 * 是你可以在函数中修改的[[\yii\db\Query|Query]]对象。
 	 */
 	public $filter;
 
@@ -126,10 +126,10 @@ class ExistValidator extends Validator
 	}
 
 	/**
-	 * Creates a query instance with the given condition.
-	 * @param string $targetClass the target AR class
-	 * @param mixed $condition query condition
-	 * @return \yii\db\ActiveQueryInterface the query instance
+	 * 用给定的条件创建一个查询实例。
+	 * @param string $targetClass 目标AR类
+	 * @param mixed $condition 查询条件
+	 * @return \yii\db\ActiveQueryInterface 查询实例
 	 */
 	protected function createQuery($targetClass, $condition)
 	{
