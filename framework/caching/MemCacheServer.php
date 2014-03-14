@@ -8,7 +8,7 @@
 namespace yii\caching;
 
 /**
- * MemCacheServer represents the configuration data for a single memcache or memcached server.
+ * MemCacheServer作为memcache或者memcached server的配置.
  *
  * See [PHP manual](http://www.php.net/manual/en/function.Memcache-addServer.php) for detailed explanation
  * of each configuration property.
@@ -19,40 +19,40 @@ namespace yii\caching;
 class MemCacheServer extends \yii\base\Object
 {
 	/**
-	 * @var string memcache server hostname or IP address
+	 * @var string 缓存服务器的主机名或IP地址
 	 */
 	public $host;
 	/**
-	 * @var integer memcache server port
+	 * @var integer 缓存服务器的端口
 	 */
 	public $port = 11211;
 	/**
-	 * @var integer probability of using this server among all servers.
+	 * @var integer 在所有服务器中使用这台服务器概率.
 	 */
 	public $weight = 1;
 	/**
-	 * @var boolean whether to use a persistent connection. This is used by memcache only.
+	 * @var boolean 是否使用长连接. 只在memcache使用.
 	 */
 	public $persistent = true;
 	/**
-	 * @var integer timeout in milliseconds which will be used for connecting to the server.
-	 * This is used by memcache only. For old versions of memcache that only support specifying
-	 * timeout in seconds this will be rounded up to full seconds.
+	 * @var integer 服务连接以毫秒为单位.
+	 * 如果使用memcache,这个参数只对持指定的旧版本的memcache有效
+	 * 以秒为单位时将参数将被进位成秒
 	 */
 	public $timeout = 1000;
 	/**
-	 * @var integer how often a failed server will be retried (in seconds). This is used by memcache only.
+	 * @var integer 重连失败服务器的频率（以秒为单位）. 只在memcache使用.
 	 */
 	public $retryInterval = 15;
 	/**
-	 * @var boolean if the server should be flagged as online upon a failure. This is used by memcache only.
+	 * @var boolean 线上服务发生错误时进行标记. 只在memcache使用.
 	 */
 	public $status = true;
 	/**
 	 * @var \Closure this callback function will run upon encountering an error.
-	 * The callback is run before fail over is attempted. The function takes two parameters,
-	 * the [[host]] and the [[port]] of the failed server.
-	 * This is used by memcache only.
+	 * 这个回调方法执行前会进行故障处理的尝试. 这个方法接收两个参数,
+	 * host[[host]]和端口[[port]]配置错误.
+	 * 只在memcache使用.
 	 */
 	public $failureCallback;
 }
