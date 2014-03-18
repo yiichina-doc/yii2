@@ -11,12 +11,12 @@ use Yii;
 use yii\db\ActiveRecordInterface;
 
 /**
- * UniqueValidator validates that the attribute value is unique in the specified database table.
+ * UniqueValidator 验证该属性值在指定的数据库表是唯一的。
  *
- * UniqueValidator checks if the value being validated is unique in the table column specified by
- * the ActiveRecord class [[targetClass]] and the attribute [[targetAttribute]].
+ * UniqueValidator 检查被校验的值在ActiveRecord类[[targetClass]]和[[targetAttribute]]
+ * 属性指定的表和字段中是唯一的。
  *
- * The followings are examples of validation rules using this validator:
+ * 以下是使用此验证程序的验证规则的例子：
  *
  * ```php
  * // a1 needs to be unique

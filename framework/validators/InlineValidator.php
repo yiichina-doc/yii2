@@ -25,8 +25,8 @@ namespace yii\validators;
 class InlineValidator extends Validator
 {
 	/**
-	 * @var string|\Closure an anonymous function or the name of a model class method that will be
-	 * called to perform the actual validation. The signature of the method should be like the following:
+	 * @var string|\Closure 匿名函数或一个模型类方法，
+	 * 被调用来执行实际的验证。 该方法的结构如下:
 	 *
 	 * ~~~
 	 * function foo($attribute, $params)
@@ -38,8 +38,8 @@ class InlineValidator extends Validator
 	 */
 	public $params;
 	/**
-	 * @var string|\Closure an anonymous function or the name of a model class method that returns the client validation code.
-	 * The signature of the method should be like the following:
+	 * @var string|\Closure 匿名函数或一个模型类方法，它返回客户端验证代码名称。
+	 * 该方法的结构如下:
 	 *
 	 * ~~~
 	 * function foo($attribute, $params)

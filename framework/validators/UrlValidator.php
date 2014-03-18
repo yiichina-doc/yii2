@@ -15,7 +15,7 @@ use yii\helpers\Json;
 /**
  * UrlValidator 验证该属性值是一个有效的http 或 https URL。
  *
- * Note that this validator only checks if the URL scheme and host part are correct.
+ * 需要注意的是这个验证只检查URL方案和host part是否是正确的。
  * 它不检查URL的其余部分。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -35,16 +35,16 @@ class UrlValidator extends Validator
 	 **/
 	public $validSchemes = ['http', 'https'];
 	/**
-	 * @var string 默认的URI scheme. If the input doesn't contain the scheme part, the default
-	 * scheme will be prepended to it (thus changing the input). Defaults to null, meaning a URL must
-	 * contain the scheme part.
+	 * @var string 默认的URI方案。如果输入不包含该计划的一部分, 默认方案
+	 * 将被附加到它（从而改变了输入）。默认为null，意味着一个URL
+	 * 必须包含方案的一部分。
 	 **/
 	public $defaultScheme;
 	/**
-	 * @var boolean whether validation process should take into account IDN (internationalized
-	 * domain names). Defaults to false meaning that validation of URLs containing IDN will always
-	 * fail. Note that in order to use IDN validation you have to install and enable `intl` PHP
-	 * extension, otherwise an exception would be thrown.
+	 * @var boolean 验证过程是否应考虑到IDN （国际化
+	 * 域名）。 默认为false意味着URLs中包含IDN的验证总是
+	 * 失败。 请注意，为了使用国际化域名验证，你必须安装并启用`intl` PHP
+	 * 扩展，否则会抛出一个异常。
 	 */
 	public $enableIDN = false;
 

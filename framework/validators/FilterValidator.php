@@ -10,20 +10,20 @@ namespace yii\validators;
 use yii\base\InvalidConfigException;
 
 /**
- * FilterValidator converts the attribute value according to a filter.
+ * FilterValidator 根据filter的属性转换。
  *
- * FilterValidator is actually not a validator but a data processor.
- * It invokes the specified filter callback to process the attribute value
- * and save the processed value back to the attribute. The filter must be
- * a valid PHP callback with the following signature:
+ * FilterValidator 不是验证器，但数据处理器。
+ * 它调用指定的filter回调函数来处理属性值，
+ * 并保存处理后的值到属性。 该filter必须是一个有效的PHP回调
+ * 根据以下结构:
  *
  * ~~~
  * function foo($value) {...return $newValue; }
  * ~~~
  *
- * Many PHP functions qualify this signature (e.g. `trim()`).
+ * 许多PHP函数符合这个结构 (例如 `trim()`)。
  *
- * To specify the filter, set [[filter]] property to be the callback.
+ * 要指定filter，设置[[filter]]属性为callback。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -31,8 +31,8 @@ use yii\base\InvalidConfigException;
 class FilterValidator extends Validator
 {
 	/**
-	 * @var callable the filter. This can be a global function name, anonymous function, etc.
-	 * The function signature must be as follows,
+	 * @var callable the filter. 以是一个全局函数名称， 匿名函数， 等等。
+	 * 函数结构必须按如下方式，
 	 *
 	 * ~~~
 	 * function foo($value) {...return $newValue; }
@@ -40,8 +40,8 @@ class FilterValidator extends Validator
 	 */
 	public $filter;
 	/**
-	 * @var boolean this property is overwritten to be false so that this validator will
-	 * be applied when the value being validated is empty.
+	 * @var boolean 此属性值为假，当值被验证为空时
+	 * 此验证器将被应用。
 	 */
 	public $skipOnEmpty = false;
 
