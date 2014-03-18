@@ -102,8 +102,8 @@ class PhpManager extends Manager
 	 * @param string $itemName 父项名
 	 * @param string $childName 子项名
 	 * @return boolean 项目是否添加成功
-	 * @如果父项或子项不存在则抛出异常.
-	 * @如果该子项已经存在或者是一个循环，则抛出 InvalidCallException 异常.
+	 * @throws Exception 如果父项或子项不存在则抛出异常.
+	 * @throws InvalidCallException 如果该子项已经存在或者是一个循环，则抛出 InvalidCallException 异常.
 	 */
 	public function addItemChild($itemName, $childName)
 	{
@@ -182,7 +182,7 @@ class PhpManager extends Manager
 	 * 针对这个特定的授权项目。
 	 * @param mixed $data 这项任务相关的附加数据
 	 * @return Assignment 授权信息.
-	 * @如果这个项不存在或者这个项已经分配给这个用户，则抛出 InvalidParamException 异常
+	 * @throws InvalidParamException 如果这个项不存在或者这个项已经分配给这个用户，则抛出 InvalidParamException 异常
 	 */
 	public function assign($userId, $itemName, $bizRule = null, $data = null)
 	{
@@ -313,7 +313,7 @@ class PhpManager extends Manager
 	 * 当调用[[checkAccess()]]时被执行.
 	 * @param mixed $data 与项目相关的附加数据.
 	 * @return Item 授权项目
-	 * @如果项目名已经存在，抛出一个异常(Exception)
+	 * @throws Exception  如果项目名已经存在，抛出一个异常(Exception)
 	 */
 	public function createItem($name, $type, $description = '', $bizRule = null, $data = null)
 	{
@@ -366,7 +366,7 @@ class PhpManager extends Manager
 	 * 保存一个授权项.
 	 * @param Item $item 被保存的授权项.
 	 * @param string $oldName 旧的授权项名. 如果为 null, 这意味着授权项目名称不改变.
-	 * @如果已经有了相同的授权项目名，抛出一个 InvalidParamException 异常
+	 * @throws InvalidParamException 如果已经有了相同的授权项目名，抛出一个 InvalidParamException 异常
 	 */
 	public function saveItem($item, $oldName = null)
 	{
