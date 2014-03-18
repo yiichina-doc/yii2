@@ -18,8 +18,8 @@ use yii\base\NotSupportedException;
  * 来提供执行数据验证的实际逻辑。子类还可以重写[[clientValidateAttribute()]]
  * 以提供客户端验证支持。
  *
- * Validator declares a set of [[builtInValidators|built-in validators] which can
- * be referenced using short names. 列表如下：
+ * Validator 声明一组可以使用短名称的
+ * [[builtInValidators|built-in validators]。 列表如下：
  *
  * - `boolean`: [[BooleanValidator]]
  * - `captcha`: [[\yii\captcha\CaptchaValidator]]
@@ -95,17 +95,17 @@ class Validator extends Component
 	public $message;
 	/**
 	 * @var array|string 此validator可以应用到脚本。例如脚本，
-	 * 请指定它们为一个数组; for single scenario,你可以使用一个字符串或一个数组.
+	 * 请指定它们为一个数组; 对于单个脚本，你可以使用一个字符串或一个数组.
 	 */
 	public $on = [];
 	/**
-	 * @var array|string scenarios that the validator should not be applied to. For multiple scenarios,
-	 * 请指定它们为一个数组; for single scenario, 你可以使用一个字符串或一个数组。
+	 * @var array|string 该验证程序不应该被应用到的脚本。对于多个，
+	 * 请指定它们为一个数组; 对于单个脚本，你可以使用一个字符串或一个数组。
 	 */
 	public $except = [];
 	/**
-	 * @var boolean whether this validation rule should be skipped if the attribute being validated
-	 * already has some validation error according to some previous rules.默认设置为true。
+	 * @var boolean 当这个被校验的特性已经在之前的规则（判断）中发生了错误
+	 * 是否跳过这个验证规则。默认设置为true。
 	 */
 	public $skipOnError = true;
 	/**
@@ -115,9 +115,9 @@ class Validator extends Component
 	public $skipOnEmpty = true;
 	/**
 	 * @var boolean whether 是否启用客户端验证这个validator。
-	 * The actual client-side validation is done via the JavaScript code returned
-	 * by [[clientValidateAttribute()]]. 如果该方法返回null，即使
-	 * 此属性为true，no client-side validation will be done by this validator.
+	 * 实际的客户端验证是通过[[clientValidateAttribute()]]返回的
+	 * JavaScript代码。如果该方法返回null，即使
+	 * 此属性为true，无客户端验证将通过此验证程序来完成。
 	 */
 	public $enableClientValidation = true;
 
@@ -207,7 +207,7 @@ class Validator extends Component
 
 	/**
 	 * 验证给定值。
-	 * You may use this method to validate a value out of the context of a data model.
+	 * 你可以用这个方法来验证脱离一个数据模型的上下文的值。
 	 * @param mixed $value 对数据值进行验证。
 	 * @param string $error 要返回的错误消息，如果验证失败。
 	 * @return boolean 数据是否有效。
@@ -228,7 +228,7 @@ class Validator extends Component
 
 	/**
 	 * 验证值。
-	 * A validator class can implement this method to support data validation out of the context of a data model.
+	 * 一个validator类可以实现此方法来支持脱离数据模型的数据验证。
 	 * @param mixed $value 对数据值进行验证。
 	 * @return array|null 参数被插入时的错误消息。
 	 * 如果该数据是有效的则应返回Null。
@@ -265,15 +265,15 @@ class Validator extends Component
 	}
 
 	/**
-	 * Returns a value indicating whether the validator is active for the given scenario and attribute.
+	 * 返回一个值，表明 这个验证器在给定的场景和特性下 是否有效。
 	 *
 	 * A validator is active if
 	 *
 	 * - the validator's `on` property is empty, or
 	 * - the validator's `on` property contains the specified scenario
 	 *
-	 * @param string $scenario scenario name
-	 * @return boolean whether the validator applies to the specified scenario.
+	 * @param string $scenario 脚本名
+	 * @return boolean validator是否应用到指定的脚本。
 	 */
 	public function isActive($scenario)
 	{
@@ -301,7 +301,7 @@ class Validator extends Component
 	 * 若该值为null被认为是empty，一个空数组，或修整的结果是一个空字符串。
 	 * 请注意，此方法不同于PHP的empty()函数。当值为0时返回false。
 	 * @param mixed $value 要检查的值
-	 * @param boolean $trim whether to perform trimming before checking if the string is empty.默认为false。
+	 * @param boolean $trim 如果字符串为empty是否要执行此操作。默认为false。
 	 * @return boolean 值是否为empty
 	 */
 	public function isEmpty($value, $trim = false)

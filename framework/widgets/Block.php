@@ -16,13 +16,13 @@ use yii\base\Widget;
 class Block extends Widget
 {
 	/**
-	 * @var boolean whether to render the block content in place. Defaults to false,
-	 * meaning the captured block content will not be displayed.
+	 * @var boolean whether to render the block content in place. 默认设置为false，
+	 * 意味着所捕获的内容块将不被显示.
 	 */
 	public $renderInPlace = false;
 
 	/**
-	 * Starts recording a block.
+	 * 开始记录块。
 	 */
 	public function init()
 	{
@@ -31,8 +31,8 @@ class Block extends Widget
 	}
 
 	/**
-	 * Ends recording a block.
-	 * This method stops output buffering and saves the rendering result as a named block in the view.
+	 * 结束记录块。
+	 * 这个方法结束输出缓冲，保存渲染结果到（一个可在）视图中（使用）的命名区块中。
 	 */
 	public function run()
 	{

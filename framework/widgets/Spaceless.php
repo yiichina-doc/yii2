@@ -10,7 +10,7 @@ namespace yii\widgets;
 use yii\base\Widget;
 
 /**
- * Spaceless widget removes whitespace characters between HTML tags. Whitespaces within HTML tags
+ * Spaceless widget基类移除HTML标签之间的空白字符。Whitespaces within HTML tags
  * or in a plain text are always left untouched.
  *
  * Usage example:
@@ -28,7 +28,7 @@ use yii\base\Widget;
  * </body>
  * ```
  *
- * This example will generate the following HTML:
+ * 这个例子将产生如下的HTML：
  *
  * ```html
  * <body>
