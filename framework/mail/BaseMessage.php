@@ -11,10 +11,10 @@ use yii\base\Object;
 use Yii;
 
 /**
- * BaseMessage serves as a base class that implements the [[send()]] method required by [[MessageInterface]].
+ * BaseMessage 作为基类实现 [[MessageInterface]] 提供的 [[send()]] 方法。
  *
- * By default, [[send()]] will use the "mail" application component to send the current message.
- * The "mail" application component should be a mailer instance implementing [[MailerInterface]].
+ * 默认情况下, [[send()]] 将使用 "mail" 应用程序组件发送当前的消息。
+ * "mail" 应用程序组件应该是一个邮件程序实例实施 [[MailerInterface]。
  *
  * @see BaseMailer
  *
@@ -35,13 +35,13 @@ abstract class BaseMessage extends Object implements MessageInterface
 	}
 
 	/**
-	 * PHP magic method that returns the string representation of this object.
-	 * @return string the string representation of this object.
+	 * PHP魔术方法，返回此对象的字符串表示形式。
+	 * @return string 该对象的字符串表示。
 	 */
 	public function __toString()
 	{
-		// __toString cannot throw exception
-		// use trigger_error to bypass this limitation
+		// __toString 不抛出异常
+		// 使用 trigger_error 绕过这个限制
 		try {
 			return $this->toString();
 		} catch (\Exception $e) {
