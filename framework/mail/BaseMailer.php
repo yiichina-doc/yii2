@@ -15,14 +15,13 @@ use yii\web\View;
 use yii\base\MailEvent;
 
 /**
- * BaseMailer serves as a base class that implements the basic functions required by [[MailerInterface]].
+ * BaseMailer作为一个基类,它实现了 [[MailerInterface]] 所要求的基本功能。
  *
- * Concrete child classes should may focus on implementing the [[sendMessage()]] method.
+ * 子类可以实现 [[sendMessage()]] 方法。
  *
  * @see BaseMessage
  *
- * @property View $view View instance. Note that the type of this property differs in getter and setter. See
- * [[getView()]] and [[setView()]] for details.
+ * @property View $view 视图实例。请注意,该属性的类型不同的getter和setter。参见 [[getView()]] 和 [[setView()]] 了解详情。
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
@@ -30,37 +29,36 @@ use yii\base\MailEvent;
 abstract class BaseMailer extends Component implements MailerInterface, ViewContextInterface
 {
 	/**
-	 * @event \yii\base\MailEvent an event raised right before send.
-	 * You may set [[\yii\base\MailEvent::isValid]] to be false to cancel the send.
+	 * @event \yii\base\MailEvent 一个事件之前发送。
+	 * 设置 [[\yii\base\MailEvent::isValid]] 为 false 取消发送。
 	 */
 	const EVENT_BEFORE_SEND = 'beforeSend';
 	/**
-	 * @event \yii\base\MailEvent an event raised right after send.
+	 * @event \yii\base\MailEvent 一个事件后发送。
 	 */
 	const EVENT_AFTER_SEND = 'afterSend';
 	/**
-	 * @var string directory containing view files for this email messages.
-	 * This can be specified as an absolute path or path alias.
+	 * @var string 这个邮件包含视图目录文件。
+	 * 这可以作为一个指定绝对路径或路径别名。
 	 */
 	public $viewPath = '@app/mail';
 	/**
-	 * @var string|boolean HTML layout view name. This is the layout used to render HTML mail body.
-	 * The property can take the following values:
+	 * @var string|boolean HTML布局视图名称。这是布局用于呈现HTML邮件的内容。
+	 * 该属性可以取以下值：
 	 *
-	 * - a relative view name: a view file relative to [[viewPath]], e.g., 'layouts/html'.
-	 * - a path alias: an absolute view file path specified as a path alias, e.g., '@app/mail/html'.
-	 * - a boolean false: the layout is disabled.
+	 * - 相对视图名称: 一个视图文件相对于 [[viewPath]], e.g., 'layouts/html'.
+	 * - 一个路径别名: 一个绝对的视图文件路径指定为路径别名, e.g., '@app/mail/html'.
+	 * - 布尔值 false: 布局被禁用。
 	 */
 	public $htmlLayout = 'layouts/html';
 	/**
-	 * @var string|boolean text layout view name. This is the layout used to render TEXT mail body.
-	 * Please refer to [[htmlLayout]] for possible values that this property can take.
+	 * @var string|boolean 文本布局视图名称。用于呈现文本邮件的内容体。
+	 * 请参阅 [[htmlLayout]] 对于这个属性可以使用的值。
 	 */
 	public $textLayout = 'layouts/text';
 	/**
-	 * @var array the configuration that should be applied to any newly created
-	 * email message instance by [[createMessage()]] or [[compose()]]. Any valid property defined
-	 * by [[MessageInterface]] can be configured, such as `from`, `to`, `subject`, `textBody`, `htmlBody`, etc.
+	 * @var array 配置应该适用于任何新创建的电子邮件消息实例的 [[createMessage()]] 或 [[compose()]]。
+	 * 由 [[MessageInterface]] 定义的任何有效的属性可以被配置，例如 `from`, `to`, `subject`, `textBody`, `htmlBody`, 等等
 	 *
 	 * For example:
 	 *
@@ -74,23 +72,24 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	 */
 	public $messageConfig = [];
 	/**
-	 * @var string the default class name of the new message instances created by [[createMessage()]]
+	 * @var string 新消息实例的默认类名由 [[createMessage()]] 提供
 	 */
 	public $messageClass = 'yii\mail\BaseMessage';
 	/**
-	 * @var boolean whether to save email messages as files under [[fileTransportPath]] instead of sending them
-	 * to the actual recipients. This is usually used during development for debugging purpose.
+	 * @var boolean 是否将邮件以文件形式保存在 [[fileTransportPath]],而不是发送实际的接受者。这通常
+	 * 是在开发过程中用于调试目的。
 	 * @see fileTransportPath
 	 */
 	public $useFileTransport = false;
 	/**
 	 * @var string the directory where the email messages are saved when [[useFileTransport]] is true.
+	 * @var string 当 [[useFileTransport]] 为真，电子邮件保存在目录中。
 	 */
 	public $fileTransportPath = '@runtime/mail';
 	/**
-	 * @var callable a PHP callback that will be called by [[send()]] when [[useFileTransport]] is true.
-	 * The callback should return a file name which will be used to save the email message.
-	 * If not set, the file name will be generated based on the current timestamp.
+	 * @var callable 当 [[useFileTransport]] 为真, [[send()]] 将被PHP回调。
+	 * 回调函数应该返回一个文件名称将用于保存电子邮件消息。
+	 * 如果没有设置, 文件名会生成基于当前时间戳。
 	 *
 	 * The signature of the callback is:
 	 *
@@ -101,14 +100,17 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	public $fileTransportCallback;
 
 	/**
-	 * @var \yii\base\View|array view instance or its array configuration.
+	 * @var \yii\base\View|array 视图实例或其数组配置。
 	 */
 	private $_view = [];
 
 	/**
-	 * @param array|View $view view instance or its array configuration that will be used to
-	 * render message bodies.
-	 * @throws InvalidConfigException on invalid argument.
+	 * @param array|View $view 视图实例或其数组配置,用于呈现消息正文。
+	 * @throws InvalidConfigException 无效的参数。
+	 *
+	 * @param array|View $view 
+	 *
+	 *
 	 */
 	public function setView($view)
 	{
@@ -119,7 +121,7 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * @return View view instance.
+	 * @return View 视图实例。
 	 */
 	public function getView()
 	{
@@ -130,9 +132,9 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Creates view instance from given configuration.
-	 * @param array $config view configuration.
-	 * @return View view instance.
+	 * 从给定的配置创建视图实例。
+	 * @param array $config 视图配置。
+	 * @return View 视图实例。
 	 */
 	protected function createView(array $config)
 	{
@@ -143,24 +145,24 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Creates a new message instance and optionally composes its body content via view rendering.
+	 * 创建一个新的消息实例,并通过视图呈现组成它的身体内容。
+	 * 
+	 * @param string|array $view 视图用于呈现消息体。 这可以是:
 	 *
-	 * @param string|array $view the view to be used for rendering the message body. This can be:
-	 *
-	 * - a string, which represents the view name or path alias for rendering the HTML body of the email.
-	 *   In this case, the text body will be generated by applying `strip_tags()` to the HTML body.
-	 * - an array with 'html' and/or 'text' elements. The 'html' element refers to the view name or path alias
-	 *   for rendering the HTML body, while 'text' element is for rendering the text body. For example,
+	 * - 一个字符串, 代表视图的名称或路径别名呈现HTML的电子邮件。
+	 *   在这种情况下, 将通过应用在HTML内生成文本主体的 `strip_tags()` 。
+	 * - 一个数组的 'html' 和/或 'text' 元素。'html' 元素指的是视图名称或路径别名
+	 *	 呈现html的身体,而 'text' 元素是呈现文本内容。例如,
 	 *   `['html' => 'contact-html', 'text' => 'contact-text']`.
-	 * - null, meaning the message instance will be returned without body content.
+	 * - 空, 这意味着消息实例将返回没有正文内容。
 	 *
-	 * The view to be rendered can be specified in one of the following formats:
+	 * 可以在一个指定的视图呈现下列格式:
 	 *
-	 * - path alias (e.g. "@app/mail/contact");
-	 * - a relative view name (e.g. "contact"): the actual view file will be resolved by [[findViewFile()]]
+	 * - 路径别名 (e.g. "@app/mail/contact");
+	 * - 一个相对视图名称 (e.g. "contact"): 将解决 [[findViewFile()]] 的实际视图文件
 	 *
-	 * @param array $params the parameters (name-value pairs) that will be extracted and made available in the view file.
-	 * @return MessageInterface message instance.
+	 * @param array $params 参数 (name-value pairs) 将在视图中提取并提供文件。
+	 * @return MessageInterface 消息实例。
 	 */
 	public function compose($view = null, array $params = [])
 	{
@@ -190,11 +192,11 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Creates a new message instance.
-	 * The newly created instance will be initialized with the configuration specified by [[messageConfig]].
-	 * If the configuration does not specify a 'class', the [[messageClass]] will be used as the class
-	 * of the new message instance.
-	 * @return MessageInterface message instance.
+	 * 创建一个新的消息实例。
+	 * 由 [[messageConfig]] 新创建的实例将被初始化配置。
+	 * 如果配置不指定一个 'class', [[messageClass]] 将被用作类
+	 * 新消息的实例。
+	 * @return MessageInterface 消息实例。
 	 */
 	protected function createMessage()
 	{
@@ -206,13 +208,13 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Sends the given email message.
-	 * This method will log a message about the email being sent.
-	 * If [[useFileTransport]] is true, it will save the email as a file under [[fileTransportPath]].
-	 * Otherwise, it will call [[sendMessage()]] to send the email to its recipient(s).
-	 * Child classes should implement [[sendMessage()]] with the actual email sending logic.
-	 * @param MessageInterface $message email message instance to be sent
-	 * @return boolean whether the message has been sent successfully
+	 * 发送电子邮件消息。
+	 * 该方法将日志消息发送的电子邮件。
+	 * 如果 [[useFileTransport]] 为真, 它会将邮件保存为一个文件在  [[fileTransportPath]]。
+	 * 否则, 它将调用 [[sendMessage()]] 发送电子邮件收件人(s)。
+	 * 子类应该实现 [[sendMessage()]] 与实际的电子邮件发送逻辑。
+	 * @param MessageInterface $message 要发送电子邮件消息实例
+	 * @return boolean 是否已成功发送的消息
 	 */
 	public function send($message)
 	{
@@ -236,14 +238,13 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Sends multiple messages at once.
+	 * 一次发送多条消息。
 	 *
-	 * The default implementation simply calls [[send()]] multiple times.
-	 * Child classes may override this method to implement more efficient way of
-	 * sending multiple messages.
+	 * 默认实现简单地调用多次 [[send()]]。
+	 * 子类可以重写这个方法来实现更有效的方式发送多条消息。
 	 *
-	 * @param array $messages list of email messages, which should be sent.
-	 * @return integer number of messages that are successfully sent.
+	 * @param array $messages 应该发送的邮件列表。
+	 * @return integer 成功发送的消息数量。
 	 */
 	public function sendMultiple(array $messages)
 	{
@@ -257,12 +258,12 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Renders the specified view with optional parameters and layout.
-	 * The view will be rendered using the [[view]] component.
-	 * @param string $view the view name or the path alias of the view file.
-	 * @param array $params the parameters (name-value pairs) that will be extracted and made available in the view file.
-	 * @param string|boolean $layout layout view name or path alias. If false, no layout will be applied.
-	 * @return string the rendering result.
+	 * 显示指定的视图与可选参数和布局。
+	 * 视图将使用 [[view]] 组件呈现。
+	 * @param string $view 视图的视图名称或路径别名文件。
+	 * @param array $params 参数 (name-value pairs) 将在视图中提取并提供文件。
+	 * @param string|boolean $layout 布局视图名称或路径别名。如果错误,没有布局将被应用。
+	 * @return string 呈现的结果。
 	 */
 	public function render($view, $params = [], $layout = false)
 	{
@@ -275,17 +276,17 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Sends the specified message.
-	 * This method should be implemented by child classes with the actual email sending logic.
-	 * @param MessageInterface $message the message to be sent
-	 * @return boolean whether the message is sent successfully
+	 * 指定发送消息。
+	 * 这种方法应该由子类实现实际的电子邮件发送逻辑。
+	 * @param MessageInterface $message 要发送的消息
+	 * @return boolean 消息是否发送成功
 	 */
 	abstract protected function sendMessage($message);
 
 	/**
 	 * Saves the message as a file under [[fileTransportPath]].
 	 * @param MessageInterface $message
-	 * @return boolean whether the message is saved successfully
+	 * @return boolean 是否保存成功的消息
 	 */
 	protected function saveMessage($message)
 	{
@@ -303,7 +304,7 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * @return string the file name for saving the message when [[useFileTransport]] is true.
+	 * @return string 当 [[useFileTransport]] 为真,文件名保存消息。
 	 */
 	public function generateMessageFileName()
 	{
@@ -312,10 +313,10 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * Finds the view file corresponding to the specified relative view name.
-	 * This method will return the view file by prefixing the view name with [[viewPath]].
-	 * @param string $view a relative view name. The name does NOT start with a slash.
-	 * @return string the view file path. Note that the file may not exist.
+	 * 找到对应的视图文件指定的相对视图名称。
+	 * 此方法返回视图文件,在视图名称前面加上 [[viewPath]]。
+	 * @param string $view 一个相对的视图名称。
+	 * @return string 视图文件路径。请注意,文件可能不存在。
 	 */
 	public function findViewFile($view)
 	{
@@ -323,11 +324,11 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * This method is invoked right before mail send.
-	 * You may override this method to do last-minute preparation for the message.
-	 * If you override this method, please make sure you call the parent implementation first.
+	 * 这个方法被调用之前邮件发送。
+	 * 你可以重写此方法做最后的准备。
+	 * 如果你重写此方法, 请先确保你调用父实现。
 	 * @param MessageInterface $message
-	 * @return boolean whether to continue sending an email.
+	 * @return boolean 是否继续发送电子邮件。
 	 */
 	public function beforeSend($message)
 	{
@@ -337,9 +338,9 @@ abstract class BaseMailer extends Component implements MailerInterface, ViewCont
 	}
 
 	/**
-	 * This method is invoked right after mail was send.
-	 * You may override this method to do some postprocessing or logging based on mail send status.
-	 * If you override this method, please make sure you call the parent implementation first.
+	 * 调用该方法后邮件发送。
+	 * 你可以覆盖这个方法,基于邮件发送状态做一些后处理或日志。
+	 * 如果你重写这个方法, 请先确保你调用父实现。
 	 * @param MessageInterface $message
 	 * @param boolean $isSuccessful
 	 */
