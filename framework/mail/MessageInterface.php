@@ -8,12 +8,12 @@
 namespace yii\mail;
 
 /**
- * MessageInterface is the interface that should be implemented by mail message classes.
+ * MessageInterface是邮件消息的接口。
  *
- * A message represents the settings and content of an email, such as the sender, recipient,
- * subject, body, etc.
+ * 一个消息代表电子邮件的设置和内容, 如发件人, 收件人,
+ * 主题,正文等。
  *
- * Messages are sent by a [[\yii\mail\MailerInterface|mailer]], like the following,
+ * 消息被发送到 [[\yii\mail\MailerInterface|mailer]], 例如下面的,
  *
  * ~~~
  * Yii::$app->mail->compose()
@@ -33,186 +33,186 @@ namespace yii\mail;
 interface MessageInterface
 {
 	/**
-	 * Returns the character set of this message.
-	 * @return string the character set of this message.
+	 * 返回此消息的字符集。
+	 * @return string 此消息的字符集。
 	 */
 	public function getCharset();
 
 	/**
-	 * Sets the character set of this message.
-	 * @param string $charset character set name.
-	 * @return static self reference.
+	 * 设置此消息的字符集。
+	 * @param string $charset 字符集名称。
+	 * @return static 自我参考。
 	 */
 	public function setCharset($charset);
 
 	/**
-	 * Returns the message sender.
-	 * @return string the sender
+	 * 返回消息发送者。
+	 * @return string 发送方
 	 */
 	public function getFrom();
 
 	/**
-	 * Sets the message sender.
-	 * @param string|array $from sender email address.
-	 * You may pass an array of addresses if this message is from multiple people.
-	 * You may also specify sender name in addition to email address using format:
+	 * 设置消息发送者。
+	 * @param string|array $from 发送者电子邮件地址。
+	 * 如果同时发送给多个人,可以用数组存储发送者地址
+	 * 你也可以指定发件人名称除了使用格式的电子邮件地址:
 	 * `[email => name]`.
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function setFrom($from);
 
 	/**
-	 * Returns the message recipient(s).
-	 * @return array the message recipients
+	 * 返回消息的接收者(s)。
+	 * @return array 消息的接收者
 	 */
 	public function getTo();
 
 	/**
-	 * Sets the message recipient(s).
-	 * @param string|array $to receiver email address.
-	 * You may pass an array of addresses if multiple recipients should receive this message.
-	 * You may also specify receiver name in addition to email address using format:
+	 * 设置消息接收者(s)。
+	 * @param string|array $to 接收方的电子邮件地址。
+	 * 如果多个接收者应该收到此消息,你可以通过一个数组的地址。
+	 * 你也可以指定接收方名称除了使用格式的电子邮件地址:
 	 * `[email => name]`.
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function setTo($to);
 
 	/**
-	 * Returns the reply-to address of this message.
-	 * @return string the reply-to address of this message.
+	 * 返回此消息的答复地址。
+	 * @return string 此消息的答复地址。
 	 */
 	public function getReplyTo();
 
 	/**
-	 * Sets the reply-to address of this message.
-	 * @param string|array $replyTo the reply-to address.
-	 * You may pass an array of addresses if this message should be replied to multiple people.
-	 * You may also specify reply-to name in addition to email address using format:
+	 * 此消息的答复地址集。
+	 * @param string|array $replyTo 回复地址。
+	 * 如果这个消息应该回答多个人,你可以通过一个数组的地址。
+	 * 您也可以在除了使用格式电子邮件地址指定答复人名称：
 	 * `[email => name]`.
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function setReplyTo($replyTo);
 
 	/**
-	 * Returns the Cc (additional copy receiver) addresses of this message.
-	 * @return array the Cc (additional copy receiver) addresses of this message.
+	 * 返回副本 (additional copy receiver) 这个消息的地址。
+	 * @return array 此消息的副本 (additional copy receiver) 地址。
 	 */
 	public function getCc();
 
 	/**
-	 * Sets the Cc (additional copy receiver) addresses of this message.
-	 * @param string|array $cc copy receiver email address.
-	 * You may pass an array of addresses if multiple recipients should receive this message.
-	 * You may also specify receiver name in addition to email address using format:
+	 * 设置此消息的副本 (additional copy receiver) 地址。
+	 * @param string|array $cc 复制接收方的电子邮件地址。
+	 * 如果多个接收者应该收到此消息,你可以通过一个数组的地址。
+	 * 你也可以指定接收方名称除了使用格式的电子邮件地址:
 	 * `[email => name]`.
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function setCc($cc);
 
 	/**
-	 * Returns the Bcc (hidden copy receiver) addresses of this message.
-	 * @return array the Bcc (hidden copy receiver) addresses of this message.
+	 * 返回隐藏副本接收 (hidden copy receiver) 这个消息的地址。
+	 * @return array 隐藏副本接收 (hidden copy receiver) 地址的信息。
 	 */
 	public function getBcc();
 
 	/**
-	 * Sets the Bcc (hidden copy receiver) addresses of this message.
-	 * @param string|array $bcc hidden copy receiver email address.
-	 * You may pass an array of addresses if multiple recipients should receive this message.
-	 * You may also specify receiver name in addition to email address using format:
+	 * 隐藏副本接收 (hidden copy receiver) 地址的信息。
+	 * @param string|array $bcc 隐藏复制接收方的电子邮件地址。
+	 * 如果多个接收者应该收到此消息,你可以通过一个数组的地址。
+	 * 你也可以指定接收方名称除了使用格式的电子邮件地址:
 	 * `[email => name]`.
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function setBcc($bcc);
 
 	/**
-	 * Returns the message subject.
-	 * @return string the message subject
+	 * 返回消息的主题。
+	 * @return string 消息主题
 	 */
 	public function getSubject();
 
 	/**
-	 * Sets the message subject.
-	 * @param string $subject message subject
-	 * @return static self reference.
+	 * 设置消息主题
+	 * @param string $subject 消息主题
+	 * @return static 自我参考。
 	 */
 	public function setSubject($subject);
 
 	/**
-	 * Sets message plain text content.
-	 * @param string $text message plain text content.
-	 * @return static self reference.
+	 * 设置消息纯文本内容。
+	 * @param string $text 消息纯文本内容。
+	 * @return static 自我参考。
 	 */
 	public function setTextBody($text);
 
 	/**
-	 * Sets message HTML content.
-	 * @param string $html message HTML content.
-	 * @return static self reference.
+	 * 设置邮件的HTML内容。
+	 * @param string $html 消息的HTML内容。
+	 * @return static 自我参考。
 	 */
 	public function setHtmlBody($html);
 
 	/**
-	 * Attaches existing file to the email message.
-	 * @param string $fileName full file name
-	 * @param array $options options for embed file. Valid options are:
+	 * 发送电子邮件附件
+	 * @param string $fileName 发送附件的名字。
+	 * @param array $options 选择嵌入文件。有效的选项是:
 	 *
-	 * - fileName: name, which should be used to attach file.
-	 * - contentType: attached file MIME type.
+	 * - 文件名: 名字, 应该使用哪一个附加文件。
+	 * - 内容类型: 附加文件的MIME类型。
 	 *
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function attach($fileName, array $options = []);
 
 	/**
-	 * Attach specified content as file for the email message.
-	 * @param string $content attachment file content.
-	 * @param array $options options for embed file. Valid options are:
+	 * 附加内容中指定的电子邮件消息。
+	 * @param string $content 附件文件内容。
+	 * @param array $options 选择嵌入文件。有效的选项是:
 	 *
-	 * - fileName: name, which should be used to attach file.
-	 * - contentType: attached file MIME type.
+	 * - 文件名: 名字, 应该使用哪一个附加文件。
+	 * - 内容类型: 附加文件的MIME类型。
 	 *
-	 * @return static self reference.
+	 * @return static 自我参考。
 	 */
 	public function attachContent($content, array $options = []);
 
 	/**
-	 * Attach a file and return it's CID source.
-	 * This method should be used when embedding images or other data in a message.
-	 * @param string $fileName file name.
-	 * @param array $options options for embed file. Valid options are:
+	 * 附上一个文件并返回它的 CID 来源。
+	 * 这种方法应该使用在消息中嵌入图像或其他数据。
+	 * @param string $fileName 文件名。
+	 * @param array $options 选择嵌入文件。有效的选项是:
 	 *
-	 * - fileName: name, which should be used to attach file.
-	 * - contentType: attached file MIME type.
+	 * - 文件名: 名字, 应该使用哪一个附加文件。
+	 * - 内容类型: 附加文件的MIME类型。
 	 *
-	 * @return string attachment CID.
+	 * @return string 附件 CID。
 	 */
 	public function embed($fileName, array $options = []);
 
 	/**
-	 * Attach a content as file and return it's CID source.
-	 * This method should be used when embedding images or other data in a message.
-	 * @param string $content  attachment file content.
-	 * @param array $options options for embed file. Valid options are:
+	 * 附加一个内容文件并返回它的 CID 来源。
+	 * 这种方法应该使用在消息中嵌入图像或其他数据。
+	 * @param string $content  附件文件内容。
+	 * @param array $options 选择嵌入文件。有效的选项是:
 	 *
-	 * - fileName: name, which should be used to attach file.
-	 * - contentType: attached file MIME type.
+	 * - 文件名: 名字, 应该使用哪一个附加文件。
+	 * - 内容类型: 附加文件的MIME类型。
 	 *
-	 * @return string attachment CID.
+	 * @return string 附件 CID。
 	 */
 	public function embedContent($content, array $options = []);
 
 	/**
-	 * Sends this email message.
-	 * @param MailerInterface $mailer the mailer that should be used to send this message.
-	 * If null, the "mail" application component will be used instead.
-	 * @return boolean whether this message is sent successfully.
+	 * 发送此电子邮件消息。
+	 * @param MailerInterface $mailer 应该被用来发送该消息的邮件。
+	 * 如果为空, "mail" 应用程序组件将被代替使用。
+	 * @return boolean 这个消息是否发送成功。
 	 */
 	public function send(MailerInterface $mailer = null);
 
 	/**
-	 * Returns string representation of this message.
-	 * @return string the string representation of this message.
+	 * 返回此消息的字符串表示。
+	 * @return string 此消息的字符串表示。
 	 */
 	public function toString();
 }
