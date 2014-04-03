@@ -18,36 +18,33 @@ use yii\validators\RequiredValidator;
 use yii\validators\Validator;
 
 /**
- * Model is the base class for data models.
+ * 模型类是数据模型的基类.
  *
- * Model implements the following commonly used features:
+ * 模型实现以下常用功能:
  *
- * - attribute declaration: by default, every public class member is considered as
- *   a model attribute
- * - attribute labels: each attribute may be associated with a label for display purpose
- * - massive attribute assignment
- * - scenario-based validation
+ * - 属性声明: 默认情况下, 每一个公共类成员被认为是一个模型属性
+ * - 属性标签: 每个属性可以被关联到一个标签显示的目的
+ * - 大量的属性赋值
+ * - 基于场景的验证
  *
- * Model also raises the following events when performing data validation:
+ * 当执行数据验证模型还提出了以下事件:
  *
- * - [[EVENT_BEFORE_VALIDATE]]: an event raised at the beginning of [[validate()]]
- * - [[EVENT_AFTER_VALIDATE]]: an event raised at the end of [[validate()]]
+ * - [[EVENT_BEFORE_VALIDATE]]: 在开始时引发的事件 [[validate()]]
+ * - [[EVENT_AFTER_VALIDATE]]: 一个事件引起的 [[validate()]]
  *
- * You may directly use Model to store model data, or extend it with customization.
- * You may also customize Model by attaching [[ModelBehavior|model behaviors]].
+ * 您可以直接使用模型来存储模型数据, 或自定义扩展它.
+ * 你也可以通过附加自定义模型 [[ModelBehavior|model behaviors]].
  *
- * @property \yii\validators\Validator[] $activeValidators The validators applicable to the current
- * [[scenario]]. This property is read-only.
- * @property array $attributes Attribute values (name => value).
- * @property array $errors An array of errors for all attributes. Empty array is returned if no error. The
- * result is a two-dimensional array. See [[getErrors()]] for detailed description. This property is read-only.
- * @property array $firstErrors The first errors. An empty array will be returned if there is no error. This
- * property is read-only.
- * @property ArrayIterator $iterator An iterator for traversing the items in the list. This property is
- * read-only.
- * @property string $scenario The scenario that this model is in. Defaults to [[SCENARIO_DEFAULT]].
- * @property ArrayObject|\yii\validators\Validator[] $validators All the validators declared in the model.
- * This property is read-only.
+ * @property \yii\validators\Validator[] $activeValidators 验证器适用于当前
+ * [[scenario]]. 这个属性是只读的.
+ * @property array $attributes 属性值 (name => value).
+ * @property array $errors 一个数组所有属性的错误. 如果没有错误则返回空数组. 
+ * 结果是一个二维数组. 看 [[getErrors()]] 的详细描述. 这个属性是只读的.
+ * @property array $firstErrors 第一个错误. 如果没有错误,将返回一个空数组. 这个属性是只读的.
+ * @property ArrayIterator $iterator 一个迭代器遍历列表中的项目. 这个属性是只读的.
+ * @property string $scenario 这个模型的场景. 默认为 [[SCENARIO_DEFAULT]].
+ * @property ArrayObject|\yii\validators\Validator[] $validators 模型中声明的所有验证器.
+ * 这个属性是只读的.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -57,39 +54,39 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	use ArrayableTrait;
 
 	/**
-	 * The name of the default scenario.
+	 * 默认场景的名称.
 	 */
 	const SCENARIO_DEFAULT = 'default';
 	/**
-	 * @event ModelEvent an event raised at the beginning of [[validate()]]. You may set
-	 * [[ModelEvent::isValid]] to be false to stop the validation.
+	 * @event ModelEvent 在开始时引发的事件 [[validate()]]. 您可以设定
+	 * [[ModelEvent::isValid]] 为假来停止验证.
 	 */
 	const EVENT_BEFORE_VALIDATE = 'beforeValidate';
 	/**
-	 * @event Event an event raised at the end of [[validate()]]
+	 * @event Event 一个事件引起的 [[validate()]]
 	 */
 	const EVENT_AFTER_VALIDATE = 'afterValidate';
 
 	/**
-	 * @var array validation errors (attribute name => array of errors)
+	 * @var array 验证错误 (属性名称 => 错误)
 	 */
 	private $_errors;
 	/**
-	 * @var ArrayObject list of validators
+	 * @var ArrayObject 验证器列表
 	 */
 	private $_validators;
 	/**
-	 * @var string current scenario
+	 * @var string 当前场景
 	 */
 	private $_scenario = self::SCENARIO_DEFAULT;
 
 	/**
-	 * Returns the validation rules for attributes.
+	 * 返回属性的验证规则.
 	 *
-	 * Validation rules are used by [[validate()]] to check if attribute values are valid.
-	 * Child classes may override this method to declare different validation rules.
+	 * 如果属性值是有效的验证规则使用 [[validate()]].
+	 * 子类可以重写此方法声明不同的验证规则.
 	 *
-	 * Each rule is an array with the following structure:
+	 * 每个规则是一个数组使用以下结构:
 	 *
 	 * ~~~
 	 * [
@@ -102,50 +99,49 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	 *
 	 * where
 	 *
-	 *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass string;
-	 *  - validator type: required, specifies the validator to be used. It can be a built-in validator name,
-	 *    a method name of the model class, an anonymous function, or a validator class name.
-	 *  - on: optional, specifies the [[scenario|scenarios]] array when the validation
-	 *    rule can be applied. If this option is not set, the rule will apply to all scenarios.
-	 *  - additional name-value pairs can be specified to initialize the corresponding validator properties.
-	 *    Please refer to individual validator class API for possible properties.
+	 *  - 属性列表: required, 指定的属性数组来进行验证, 对于单属性可以通过字符串;
+	 *  - 验证器类型: required, 指定使用的验证器. 它可以是一个内置验证器的名字,
+	 *    一个方法模型类的名称, 一个匿名函数, 或验证器类名称.
+	 *  - 在: optional, 指定了 [[scenario|scenarios]] 数组时验证规则可以应用. 
+	 *    如果没有设置这个选项, 规则将适用于所有场景.
+	 *  - 可以指定额外的 名称-值 初始化相应的验证器属性.
+	 *    请参考个人为可能的属性确认器类的API.
 	 *
-	 * A validator can be either an object of a class extending [[Validator]], or a model class method
-	 * (called *inline validator*) that has the following signature:
+	 * 一个验证器可以是一个对象类的扩展 [[Validator]], 或者一个模型类的方法
+	 * (被称为 *内联验证器*) 如下:
 	 *
 	 * ~~~
-	 * // $params refers to validation parameters given in the rule
+	 * // $params refers 验证参数的规则
 	 * function validatorName($attribute, $params)
 	 * ~~~
 	 *
-	 * In the above `$attribute` refers to currently validated attribute name while `$params` contains an array of
-	 * validator configuration options such as `max` in case of `string` validator. Currently validate attribute value
-	 * can be accessed as `$this->[$attribute]`.
+	 * 在上面的 `$attribute` 是指目前验证属性名称而 `$params` 包含一组验证器配置选项
+	 * 如 `max` 的 `string` 验证器. 目前可以访问验证属性值为 `$this->[$attribute]`.
 	 *
-	 * Yii also provides a set of [[Validator::builtInValidators|built-in validators]].
-	 * They each has an alias name which can be used when specifying a validation rule.
+	 * Yii还提供了一组 [[Validator::builtInValidators|built-in validators]].
+	 * 他们每个人都有一个别名,可以指定一个验证规则时使用.
 	 *
-	 * Below are some examples:
+	 * 下面是一些例子:
 	 *
 	 * ~~~
 	 * [
-	 *     // built-in "required" validator
+	 *     // 内置验证器 "required"
 	 *     [['username', 'password'], 'required'],
-	 *     // built-in "string" validator customized with "min" and "max" properties
+	 *     // 内置的 "string" 定制验证器 "min" 和 "max" 的特性
 	 *     ['username', 'string', 'min' => 3, 'max' => 12],
-	 *     // built-in "compare" validator that is used in "register" scenario only
+	 *     // 内置验证器 "compare" 只在 "register" 场景中使用
 	 *     ['password', 'compare', 'compareAttribute' => 'password2', 'on' => 'register'],
-	 *     // an inline validator defined via the "authenticate()" method in the model class
+	 *     // 通过 "authenticate()" 方法在模型类定义内联验证器
 	 *     ['password', 'authenticate', 'on' => 'login'],
-	 *     // a validator of class "DateRangeValidator"
+	 *     // 一个验证器的类 "DateRangeValidator"
 	 *     ['dateRange', 'DateRangeValidator'],
 	 * ];
 	 * ~~~
 	 *
-	 * Note, in order to inherit rules defined in the parent class, a child class needs to
-	 * merge the parent rules with child rules using functions such as `array_merge()`.
+	 * 请注意, 为了继承父类中定义的规则, 子类需要和父类规则合并使用功能
+	 * 如 `array_merge()`.
 	 *
-	 * @return array validation rules
+	 * @return array 验证规则
 	 * @see scenarios()
 	 */
 	public function rules()
@@ -154,9 +150,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns a list of scenarios and the corresponding active attributes.
-	 * An active attribute is one that is subject to validation in the current scenario.
-	 * The returned array should be in the following format:
+	 * 返回一个列表的场景和相应的活动属性.
+	 * 当前场景中验证一个活跃的属性.
+	 * 返回的数组应该按以下格式:
 	 *
 	 * ~~~
 	 * [
@@ -166,16 +162,15 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	 * ]
 	 * ~~~
 	 *
-	 * By default, an active attribute is considered safe and can be massively assigned.
-	 * If an attribute should NOT be massively assigned (thus considered unsafe),
-	 * please prefix the attribute with an exclamation character (e.g. '!rank').
+	 * 默认情况下, 一个积极的属性被认为是安全的可以被大量分配.
+	 * 如果属性不应该被大量分配 (因此认为不安全),
+	 * 请用一个感叹字符描述属性 (e.g. '!rank').
 	 *
-	 * The default implementation of this method will return all scenarios found in the [[rules()]]
-	 * declaration. A special scenario named [[SCENARIO_DEFAULT]] will contain all attributes
-	 * found in the [[rules()]]. Each scenario will be associated with the attributes that
-	 * are being validated by the validation rules that apply to the scenario.
+	 * 该方法默认实现将返回所有场景中发现的 [[rules()]]
+	 * 声明. 一个特殊的场景 [[SCENARIO_DEFAULT]] 将包含所有属性在 [[rules()]].
+	 * 适用于每个场景将与属性相关的验证规则.
 	 *
-	 * @return array a list of scenarios and the corresponding active attributes.
+	 * @return array 一个场景和相应的积极的属性列表.
 	 */
 	public function scenarios()
 	{
@@ -226,17 +221,16 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the form name that this model class should use.
+	 * 使用这个模型类返回表单名称.
 	 *
-	 * The form name is mainly used by [[\yii\web\ActiveForm]] to determine how to name
-	 * the input fields for the attributes in a model. If the form name is "A" and an attribute
-	 * name is "b", then the corresponding input name would be "A[b]". If the form name is
-	 * an empty string, then the input name would be "b".
+	 * 所使用的表单名称主要是 [[\yii\web\ActiveForm]] 来决定如何命名属性模型的输入字段.
+	 * 如果表单的名字是 "A" 和一个属性的名字是 "b",
+	 * 然后相应的输入名称将是 "A[b]". 如果表单的名字是一个空字符串, 然后输入名称将是 "b".
 	 *
-	 * By default, this method returns the model class name (without the namespace part)
-	 * as the form name. You may override it when the model is used in different forms.
+	 * 默认情况下, 该方法返回模型类名称 (没有名称空间的一部分)
+	 * 表单名称. 当模型中使用不同的形式你可以覆盖它.
 	 *
-	 * @return string the form name of this model class.
+	 * @return string 该模型的类名.
 	 */
 	public function formName()
 	{
@@ -245,10 +239,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the list of attribute names.
-	 * By default, this method returns all public non-static properties of the class.
-	 * You may override this method to change the default behavior.
-	 * @return array list of attribute names.
+	 * 返回属性名称的列表.
+	 * 默认情况下, 该方法将返回所有的公共类的非静态属性.
+	 * 你可以覆盖这个方法来改变默认的行为.
+	 * @return array 属性名称列表.
 	 */
 	public function attributes()
 	{
@@ -263,19 +257,18 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the attribute labels.
+	 * 返回属性的标签.
 	 *
-	 * Attribute labels are mainly used for display purpose. For example, given an attribute
-	 * `firstName`, we can declare a label `First Name` which is more user-friendly and can
-	 * be displayed to end users.
+	 * 属性标签主要用于显示目的. 例如, 给定一个属性
+	 * `firstName`, 我们可以声明一个标签 `First Name` 可以更友好的显示给最终用户.
 	 *
-	 * By default an attribute label is generated using [[generateAttributeLabel()]].
-	 * This method allows you to explicitly specify attribute labels.
+	 * 在默认情况下 [[generateAttributeLabel()]] 生成一个属性标签使用.
+	 * 这种方法允许您显式地指定属性标签.
 	 *
-	 * Note, in order to inherit labels defined in the parent class, a child class needs to
-	 * merge the parent labels with child labels using functions such as `array_merge()`.
+	 * 请注意, 为了继承父类中定义的标签, 子类需要合并父与子标签
+	 * 标签使用功能,如 `array_merge()`.
 	 *
-	 * @return array attribute labels (name => label)
+	 * @return array 属性标签 (名字 => 标签)
 	 * @see generateAttributeLabel()
 	 */
 	public function attributeLabels()
@@ -284,27 +277,26 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Performs the data validation.
+	 * 执行数据验证.
 	 *
-	 * This method executes the validation rules applicable to the current [[scenario]].
-	 * The following criteria are used to determine whether a rule is currently applicable:
+	 * 该方法适用于当前执行验证规则 [[scenario]].
+	 * 以下标准用来确定当前是否适用的规则:
 	 *
-	 * - the rule must be associated with the attributes relevant to the current scenario;
-	 * - the rules must be effective for the current scenario.
+	 * - 规则必须与属性相关,并且关联到当前场景;
+	 * - 当前场景的规则必须是有效的.
 	 *
-	 * This method will call [[beforeValidate()]] and [[afterValidate()]] before and
-	 * after the actual validation, respectively. If [[beforeValidate()]] returns false,
-	 * the validation will be cancelled and [[afterValidate()]] will not be called.
+	 * 这个方法将调用 [[beforeValidate()]] 和 [[afterValidate()]] 之前和之
+	 * 后的实际验证, 分别. 如果 [[beforeValidate()]] 返回为假,
+	 * 验证将会取消 [[afterValidate()]] 将不会被调用.
 	 *
-	 * Errors found during the validation can be retrieved via [[getErrors()]],
-	 * [[getFirstErrors()]] and [[getFirstError()]].
+	 * 可以通过检索在验证过程中发现错误 [[getErrors()]],
+	 * [[getFirstErrors()]] 和 [[getFirstError()]].
 	 *
-	 * @param array $attributes list of attributes that should be validated.
-	 * If this parameter is empty, it means any attribute listed in the applicable
-	 * validation rules should be validated.
-	 * @param boolean $clearErrors whether to call [[clearErrors()]] before performing validation
-	 * @return boolean whether the validation is successful without any error.
-	 * @throws InvalidParamException if the current scenario is unknown.
+	 * @param array $attributes 应验证的属性列表.
+	 * 如果这个参数是空的, 它是指在适用的验证规则中列出的所有应验证的属性.
+	 * @param boolean $clearErrors 是否调用 [[clearErrors()]] 前执行验证
+	 * @return boolean 验证是否成功没有任何错误.
+	 * @throws InvalidParamException 如果当前场景是未知的.
 	 */
 	public function validate($attributes = null, $clearErrors = true)
 	{
@@ -331,12 +323,12 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * This method is invoked before validation starts.
-	 * The default implementation raises a `beforeValidate` event.
-	 * You may override this method to do preliminary checks before validation.
-	 * Make sure the parent implementation is invoked so that the event can be raised.
-	 * @return boolean whether the validation should be executed. Defaults to true.
-	 * If false is returned, the validation will stop and the model is considered invalid.
+	 * 验证开始前调用该方法.
+	 * 默认引发一个 `beforeValidate` 事件.
+	 * 你可以覆盖这个方法做初步检查前验证.
+	 * 确保调用父类实现,这样可以更高效.
+	 * @return boolean 验证是否应该被执行. 默认为执行.
+	 * 如果返回错误, 验证将停止模型被认为是无效的.
 	 */
 	public function beforeValidate()
 	{
@@ -346,10 +338,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * This method is invoked after validation ends.
-	 * The default implementation raises an `afterValidate` event.
-	 * You may override this method to do postprocessing after validation.
-	 * Make sure the parent implementation is invoked so that the event can be raised.
+	 * 验证结束后调用该方法.
+	 * 默认引发一个 `afterValidate` 事件.
+	 * 你可以重写此验证方法后进行后处理.
+	 * 确保调用父类实现,这样可以更高效.
 	 */
 	public function afterValidate()
 	{
@@ -357,20 +349,20 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns all the validators declared in [[rules()]].
+	 * 返回所有声明的验证器 [[rules()]].
 	 *
-	 * This method differs from [[getActiveValidators()]] in that the latter
-	 * only returns the validators applicable to the current [[scenario]].
+	 * 这种方法不同于 [[getActiveValidators()]] 后者只返回适用于当前的
+	 * 验证器 [[scenario]].
 	 *
-	 * Because this method returns an ArrayObject object, you may
-	 * manipulate it by inserting or removing validators (useful in model behaviors).
-	 * For example,
+	 * 因为这个方法返回一个 ArrayObject 对象, 你可以通过插入或删除验证器来
+	 * 操纵它 (用于模型的行为).
+	 * 例如,
 	 *
 	 * ~~~
 	 * $model->validators[] = $newValidator;
 	 * ~~~
 	 *
-	 * @return ArrayObject|\yii\validators\Validator[] all the validators declared in the model.
+	 * @return ArrayObject|\yii\validators\Validator[] 模型中声明的所有验证器.
 	 */
 	public function getValidators()
 	{
@@ -381,10 +373,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the validators applicable to the current [[scenario]].
-	 * @param string $attribute the name of the attribute whose applicable validators should be returned.
-	 * If this is null, the validators for ALL attributes in the model will be returned.
-	 * @return \yii\validators\Validator[] the validators applicable to the current [[scenario]].
+	 * 返回适用于当前的验证器 [[scenario]].
+	 * @param string $attribute 应该返回其适用的验证器属性的名称.
+	 * 如果是空的, 将返回模型中所有属性的验证器.
+	 * @return \yii\validators\Validator[] 验证器适用于当前的 [[scenario]].
 	 */
 	public function getActiveValidators($attribute = null)
 	{
@@ -399,10 +391,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Creates validator objects based on the validation rules specified in [[rules()]].
-	 * Unlike [[getValidators()]], each time this method is called, a new list of validators will be returned.
-	 * @return ArrayObject validators
-	 * @throws InvalidConfigException if any validation rule configuration is invalid
+	 * 创建验证器对象中指定的验证规则 [[rules()]].
+	 * 不像 [[getValidators()]], 每次调用此方法, 新确认器会返回的列表.
+	 * @return ArrayObject 验证器
+	 * @throws InvalidConfigException 如果任何验证规则配置是无效的
 	 */
 	public function createValidators()
 	{
@@ -421,12 +413,11 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns a value indicating whether the attribute is required.
-	 * This is determined by checking if the attribute is associated with a
-	 * [[\yii\validators\RequiredValidator|required]] validation rule in the
-	 * current [[scenario]].
-	 * @param string $attribute attribute name
-	 * @return boolean whether the attribute is required
+	 * 返回一个值,提示属性是否是必需的.
+	 * 如果属性是用 [[\yii\validators\RequiredValidator|required]] 相关检查来确定,
+	 * 验证当前的 [[scenario]].
+	 * @param string $attribute 属性名称
+	 * @return boolean 是否需要的属性
 	 */
 	public function isAttributeRequired($attribute)
 	{
@@ -439,9 +430,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns a value indicating whether the attribute is safe for massive assignments.
-	 * @param string $attribute attribute name
-	 * @return boolean whether the attribute is safe for massive assignments
+	 * 返回一个值,该值指示该属性是否安全的大规模作业.
+	 * @param string $attribute 属性名称
+	 * @return boolean 属性是否安全的大规模作业
 	 * @see safeAttributes()
 	 */
 	public function isAttributeSafe($attribute)
@@ -450,9 +441,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns a value indicating whether the attribute is active in the current scenario.
-	 * @param string $attribute attribute name
-	 * @return boolean whether the attribute is active in the current scenario
+	 * 返回一个值,该值指示该属性是否活跃在当前场景.
+	 * @param string $attribute 属性名称
+	 * @return boolean 在当前的场景属性是否活跃
 	 * @see activeAttributes()
 	 */
 	public function isAttributeActive($attribute)
@@ -461,9 +452,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the text label for the specified attribute.
-	 * @param string $attribute the attribute name
-	 * @return string the attribute label
+	 * 返回指定的属性的文本标签.
+	 * @param string $attribute 属性名称
+	 * @return string 属性标签
 	 * @see generateAttributeLabel()
 	 * @see attributeLabels()
 	 */
@@ -474,9 +465,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns a value indicating whether there is any validation error.
-	 * @param string|null $attribute attribute name. Use null to check all attributes.
-	 * @return boolean whether there is any error.
+	 * 返回一个指示是否有任何验证错误的值.
+	 * @param string|null $attribute 属性名字. 使用 null 检查所有属性.
+	 * @return boolean 是否有任何错误.
 	 */
 	public function hasErrors($attribute = null)
 	{
