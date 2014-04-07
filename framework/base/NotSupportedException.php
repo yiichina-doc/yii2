@@ -8,7 +8,7 @@
 namespace yii\base;
 
 /**
- * NotSupportedException represents an exception caused by accessing features that are not supported.
+ * NotSupportedException 表示由访问不支持的功能异常。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -16,7 +16,7 @@ namespace yii\base;
 class NotSupportedException extends Exception
 {
 	/**
-	 * @return string the user-friendly name of this exception
+	 * @return string 这个异常友好的名称
 	 */
 	public function getName()
 	{

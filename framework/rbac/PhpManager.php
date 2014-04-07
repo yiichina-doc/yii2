@@ -13,17 +13,17 @@ use yii\base\InvalidCallException;
 use yii\base\InvalidParamException;
 
 /**
- * PhpManager represents an authorization manager that stores authorization
- * information in terms of a PHP script file.
+ * PhpManager 代表一个授权管理器,存储授权
+ * 在一个PHP脚本文件信息.
  *
- * The authorization data will be saved to and loaded from a file
- * specified by [[authFile]], which defaults to 'protected/data/rbac.php'.
+ * 授权数据将被保存并从文件加载
+ * 指定 [[authFile]],默认为 'protected/data/rbac.php'.
  *
- * PhpManager is mainly suitable for authorization data that is not too big
- * (for example, the authorization data for a personal blog system).
- * Use [[DbManager]] for more complex authorization data.
+ * PhpManager 主要适用于授权数据不太大
+ * (例如，一个人博客系统的授权数据).
+ * 用 [[DbManager]] 处理更复杂的授权数据.
  *
- * @property Item[] $items The authorization items of the specific type. This property is read-only.
+ * @property Item[] $items 特定类型的授权项目。此属性为只读.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
@@ -32,9 +32,9 @@ use yii\base\InvalidParamException;
 class PhpManager extends Manager
 {
 	/**
-	 * @var string the path of the PHP script that contains the authorization data.
-	 * This can be either a file path or a path alias to the file.
-	 * Make sure this file is writable by the Web server process if the authorization needs to be changed online.
+	 * @var string 包含授权项目数据的PHP脚本的路径.
+	 * 这可以是一个文件路径或文件路径别名.
+	 * 确保文件可写，授权需要修改该文件.
 	 * @see loadFromFile()
 	 * @see saveToFile()
 	 */
@@ -45,9 +45,9 @@ class PhpManager extends Manager
 	private $_assignments = []; // userId, itemName => assignment
 
 	/**
-	 * Initializes the application component.
-	 * This method overrides parent implementation by loading the authorization data
-	 * from PHP script.
+	 * 初始化应用程序组件。
+	 * 这个方法覆盖父类
+	 * 实现从PHP脚本加载授权项目数据.
 	 */
 	public function init()
 	{
@@ -57,14 +57,14 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Performs access check for the specified user.
-	 * @param mixed $userId the user ID. This can be either an integer or a string representing
-	 * @param string $itemName the name of the operation that need access check
-	 * the unique identifier of a user. See [[\yii\web\User::id]].
-	 * @param array $params name-value pairs that would be passed to biz rules associated
-	 * with the tasks and roles assigned to the user. A param with name 'userId' is added to
-	 * this array, which holds the value of `$userId`.
-	 * @return boolean whether the operations can be performed by the user.
+	 * 执行指定的用户访问检查.
+	 * @param mixed $userId 用户id. 这可以是一个整数或字符串
+	 * @param string $itemName 需要权限检查的授权项目名
+	 * 一个用户的唯一标识符. 见 [[\yii\web\User::id]].
+	 * @param array $params 键(名称)-值对，可以通过业务规则关联
+	 * 将任务和角色分配给用户. 参数'userId'被添加到数组里
+	 * 这个数组将包含`$userId`的值
+	 * @return boolean 用户是否有权使用该操作.
 	 */
 	public function checkAccess($userId, $itemName, $params = [])
 	{
@@ -98,12 +98,12 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Adds an item as a child of another item.
-	 * @param string $itemName the parent item name
-	 * @param string $childName the child item name
-	 * @return boolean whether the item is added successfully
-	 * @throws Exception if either parent or child doesn't exist.
-	 * @throws InvalidCallException if item already has a child with $itemName or if a loop has been detected.
+	 * 增加一个项(授权项)的子项.
+	 * @param string $itemName 父项名
+	 * @param string $childName 子项名
+	 * @return boolean 项目是否添加成功
+	 * @throws Exception 如果父项或子项不存在则抛出异常.
+	 * @throws InvalidCallException 如果该子项已经存在或者是一个循环，则抛出 InvalidCallException 异常.
 	 */
 	public function addItemChild($itemName, $childName)
 	{
@@ -126,11 +126,11 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Removes a child from its parent.
-	 * Note, the child item is not deleted. Only the parent-child relationship is removed.
-	 * @param string $itemName the parent item name
-	 * @param string $childName the child item name
-	 * @return boolean whether the removal is successful
+	 * 删除一个子项.
+	 * 注意，子项目不被删除。只有父子关系被删除.
+	 * @param string $itemName 父项名
+	 * @param string $childName 子项名
+	 * @return boolean 项目是否删除成功
 	 */
 	public function removeItemChild($itemName, $childName)
 	{
@@ -143,10 +143,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns a value indicating whether a child exists within a parent.
-	 * @param string $itemName the parent item name
-	 * @param string $childName the child item name
-	 * @return boolean whether the child exists
+	 * 判断是否存在某一子项.
+	 * @param string $itemName 父项名
+	 * @param string $childName 子项名
+	 * @return boolean 子项是否存在
 	 */
 	public function hasItemChild($itemName, $childName)
 	{
@@ -154,10 +154,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns the children of the specified item.
-	 * @param mixed $names the parent item name. This can be either a string or an array.
-	 * The latter represents a list of item names.
-	 * @return Item[] all child items of the parent
+	 * 返回指定项目的子项.
+	 * @param mixed $names 父项名. 可以是一个字符串或一个数组.
+	 * 后者是一个列表中的项目名称.
+	 * @return Item[] 所有的子项目
 	 */
 	public function getItemChildren($names)
 	{
@@ -175,14 +175,14 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Assigns an authorization item to a user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @param string $itemName the item name
-	 * @param string $bizRule the business rule to be executed when [[checkAccess()]] is called
-	 * for this particular authorization item.
-	 * @param mixed $data additional data associated with this assignment
-	 * @return Assignment the authorization assignment information.
-	 * @throws InvalidParamException if the item does not exist or if the item has already been assigned to the user
+	 * 给用户授权
+	 * @param mixed $userId 用户id (见 [[\yii\web\User::id]])
+	 * @param string $itemName 项目名
+	 * @param string $bizRule 业务规则当要执行 [[checkAccess()]] 时被调用
+	 * 针对这个特定的授权项目。
+	 * @param mixed $data 这项任务相关的附加数据
+	 * @return Assignment 授权信息.
+	 * @throws InvalidParamException 如果这个项不存在或者这个项已经分配给这个用户，则抛出 InvalidParamException 异常
 	 */
 	public function assign($userId, $itemName, $bizRule = null, $data = null)
 	{
@@ -202,10 +202,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Revokes an authorization assignment from a user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @param string $itemName the item name
-	 * @return boolean whether removal is successful
+	 * 解除用户授权.
+	 * @param mixed $userId 用户 ID (见 [[\yii\web\User::id]])
+	 * @param string $itemName 权限名
+	 * @return boolean 是否解除成功
 	 */
 	public function revoke($userId, $itemName)
 	{
@@ -218,9 +218,9 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Revokes all authorization assignments from a user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @return boolean whether removal is successful
+	 * 解除一个用户的所以权限.
+	 * @param mixed $userId 用户 ID (见 [[\yii\web\User::id]])
+	 * @return boolean 是否解除成功
 	 */
 	public function revokeAll($userId)
 	{
@@ -234,10 +234,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns a value indicating whether the item has been assigned to the user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @param string $itemName the item name
-	 * @return boolean whether the item has been assigned to the user.
+	 * 检查用户是否被授予某个权限.
+	 * @param mixed $userId 用户 ID (见 [[\yii\web\User::id]])
+	 * @param string $itemName 权限名
+	 * @return boolean 某权限是否授予用户.
 	 */
 	public function isAssigned($userId, $itemName)
 	{
@@ -245,11 +245,11 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns the item assignment information.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @param string $itemName the item name
-	 * @return Assignment the item assignment information. Null is returned if
-	 * the item is not assigned to the user.
+	 * 获取用户指定授权项目信息.
+	 * @param mixed $userId 用户 ID (见 [[\yii\web\User::id]])
+	 * @param string $itemName 项目名
+	 * @return Assignment 项目信息. 如果返回null
+	 * 表示没有授权给用户.
 	 */
 	public function getAssignment($userId, $itemName)
 	{
@@ -257,10 +257,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns the item assignments for the specified user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @return Assignment[] the item assignment information for the user. An empty array will be
-	 * returned if there is no item assigned to the user.
+	 * 返回指定的用户的项目信息.
+	 * @param mixed $userId 用户 ID (见 [[\yii\web\User::id]])
+	 * @return Assignment[] 为用户分配的项目信息. 如果返回空
+	 * 说明用户没有项目.
 	 */
 	public function getAssignments($userId)
 	{
@@ -268,12 +268,12 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns the authorization items of the specific type and user.
-	 * @param mixed $userId the user ID. Defaults to null, meaning returning all items even if
-	 * they are not assigned to a user.
-	 * @param integer $type the item type (0: operation, 1: task, 2: role). Defaults to null,
-	 * meaning returning all items regardless of their type.
-	 * @return Item[] the authorization items of the specific type.
+	 * 返回指定的用户和类型的授权项目表.
+	 * @param mixed $userId 用户 ID. 默认为 null，表示返回所以权限项，
+	 * 包括没有授予用户的.
+	 * @param integer $type 权限项类型 (0: 操作, 1: 任务, 2: 角色). 默认为 null,
+	 * 返回所以项，无论什么类型.
+	 * @return Item[] 特定用户特定类型的授权项目.
 	 */
 	public function getItems($userId = null, $type = null)
 	{
@@ -301,19 +301,19 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Creates an authorization item.
-	 * An authorization item represents an action permission (e.g. creating a post).
-	 * It has three types: operation, task and role.
-	 * Authorization items form a hierarchy. Higher level items inheirt permissions representing
-	 * by lower level items.
-	 * @param string $name the item name. This must be a unique identifier.
-	 * @param integer $type the item type (0: operation, 1: task, 2: role).
-	 * @param string $description description of the item
-	 * @param string $bizRule business rule associated with the item. This is a piece of
-	 * PHP code that will be executed when [[checkAccess()]] is called for the item.
-	 * @param mixed $data additional data associated with the item.
-	 * @return Item the authorization item
-	 * @throws Exception if an item with the same name already exists
+	 * 创建一个授权项目.
+	 * 一个授权项目表示一个动作的权限(e.g. creating a post).
+	 * 它有三种类型: 操作, 任务 and 角色.
+	 * 授权项目分级别，高级别的授权项目会代表低级别的
+	 * 
+	 * @param string $name 项目名. 必须是唯一的标示符.
+	 * @param integer $type 项目类型 (0: 操作, 1: 任务, 2: 角色).
+	 * @param string $description 项目描述
+	 * @param string $bizRule 与项目相关的业务规则. 这是一段php代码，
+	 * 当调用[[checkAccess()]]时被执行.
+	 * @param mixed $data 与项目相关的附加数据.
+	 * @return Item 授权项目
+	 * @throws Exception  如果项目名已经存在，抛出一个异常(Exception)
 	 */
 	public function createItem($name, $type, $description = '', $bizRule = null, $data = null)
 	{
@@ -331,9 +331,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Removes the specified authorization item.
-	 * @param string $name the name of the item to be removed
-	 * @return boolean whether the item exists in the storage and has been removed
+	 * 移除指定的授权项目.
+	 * @param string $name 被移除的授权项目名
+	 * @return boolean 授权项目存在并且被删除
+	 * (译者注：不存在返回false，其他都是true)
 	 */
 	public function removeItem($name)
 	{
@@ -352,9 +353,9 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Returns the authorization item with the specified name.
-	 * @param string $name the name of the item
-	 * @return Item the authorization item. Null if the item cannot be found.
+	 * 返回指定名称的授权项目.
+	 * @param string $name 授权项目名
+	 * @return Item 授权项目，如果是null表示没有找到.
 	 */
 	public function getItem($name)
 	{
@@ -362,10 +363,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Saves an authorization item to persistent storage.
-	 * @param Item $item the item to be saved.
-	 * @param string $oldName the old item name. If null, it means the item name is not changed.
-	 * @throws InvalidParamException if an item with the same name already taken
+	 * 保存一个授权项.
+	 * @param Item $item 被保存的授权项.
+	 * @param string $oldName 旧的授权项名. 如果为 null, 这意味着授权项目名称不改变.
+	 * @throws InvalidParamException 如果已经有了相同的授权项目名，抛出一个 InvalidParamException 异常
 	 */
 	public function saveItem($item, $oldName = null)
 	{
@@ -397,17 +398,17 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Saves the changes to an authorization assignment.
-	 * @param Assignment $assignment the assignment that has been changed.
+	 * 保存更改的权限分配.
+	 * @param Assignment $assignment 已经改变的权限分配.
 	 */
 	public function saveAssignment($assignment)
 	{
 	}
 
 	/**
-	 * Saves authorization data into persistent storage.
+	 * 持久化保存授权配置.
 	 * If any change is made to the authorization data, please make
-	 * sure you call this method to save the changed data into persistent storage.
+	 * 如果有任何更改授权数据，请确保此方法调用你保存更改的数据写入持久存储.
 	 */
 	public function save()
 	{
@@ -444,7 +445,7 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Loads authorization data.
+	 * 加载授权数据.
 	 */
 	public function load()
 	{
@@ -486,7 +487,7 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Removes all authorization data.
+	 * 清除所有授权数据.
 	 */
 	public function clearAll()
 	{
@@ -496,7 +497,7 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Removes all authorization assignments.
+	 * 删除所有授权分配.
 	 */
 	public function clearAssignments()
 	{
@@ -504,10 +505,10 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Checks whether there is a loop in the authorization item hierarchy.
-	 * @param string $itemName parent item name
-	 * @param string $childName the name of the child item that is to be added to the hierarchy
-	 * @return boolean whether a loop exists
+	 * 检查是否有授权项目层次循环.
+	 * @param string $itemName 父项目名
+	 * @param string $childName 添加到层次结构的子项目名称
+	 * @return boolean 是否存在循环
 	 */
 	protected function detectLoop($itemName, $childName)
 	{
@@ -527,9 +528,9 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Loads the authorization data from a PHP script file.
-	 * @param string $file the file path.
-	 * @return array the authorization data
+	 * 加载项目授权数据从php脚本文件.
+	 * @param string $file 文件路径.
+	 * @return array 授权项目数据
 	 * @see saveToFile()
 	 */
 	protected function loadFromFile($file)
@@ -542,9 +543,9 @@ class PhpManager extends Manager
 	}
 
 	/**
-	 * Saves the authorization data to a PHP script file.
-	 * @param array $data the authorization data
-	 * @param string $file the file path.
+	 * 保存项目授权数据到php脚本文件.
+	 * @param array $data 授权项目数据
+	 * @param string $file 文件路径.
 	 * @see loadFromFile()
 	 */
 	protected function saveToFile($data, $file)

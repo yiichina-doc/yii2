@@ -12,11 +12,11 @@ use yii\web\JsExpression;
 use yii\helpers\Json;
 
 /**
- * NumberValidator validates that the attribute value is a number.
+ * NumberValidator 验证该属性值是一个数字。
  *
- * The format of the number must match the regular expression specified in [[integerPattern]] or [[numberPattern]].
- * Optionally, you may configure the [[max]] and [[min]] properties to ensure the number
- * is within certain range.
+ * 这个数字的格式必须和[[integerPattern]] 或者 [[numberPattern]]指定的正则表达式匹配。
+ * 可选项，您可以配置[[max]] 和 [[min]]属性
+ * 来确保数在一定范围内。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -24,32 +24,32 @@ use yii\helpers\Json;
 class NumberValidator extends Validator
 {
 	/**
-	 * @var boolean whether the attribute value can only be an integer. Defaults to false.
+	 * @var boolean 属性值是否只可以是整数。默认为false。
 	 */
 	public $integerOnly = false;
 	/**
-	 * @var integer|float upper limit of the number. Defaults to null, meaning no upper limit.
+	 * @var integer|float 上限数。 默认为null，意味着没有上限。
 	 */
 	public $max;
 	/**
-	 * @var integer|float lower limit of the number. Defaults to null, meaning no lower limit.
+	 * @var integer|float 下限数。 默认为null，意味着没有下限。
 	 */
 	public $min;
 	/**
-	 * @var string user-defined error message used when the value is bigger than [[max]].
+	 * @var string 当用户定义的值大于[[max]]时的错误信息。
 	 */
 	public $tooBig;
 	/**
-	 * @var string user-defined error message used when the value is smaller than [[min]].
+	 * @var string 当用户定义的值小于[[min]]时的错误信息。
 	 */
 	public $tooSmall;
 	/**
-	 * @var string the regular expression for matching integers.
+	 * @var string 正则表达式匹配整数。
 	 */
 	public $integerPattern = '/^\s*[+-]?\d+\s*$/';
 	/**
-	 * @var string the regular expression for matching numbers. It defaults to a pattern
-	 * that matches floating numbers with optional exponential part (e.g. -1.23e-10).
+	 * @var string 正则表达式匹配的数字。默认是一个
+	 * 与可选的指数部分匹配浮点数的模式(例如 -1.23e-10)。
 	 */
 	public $numberPattern = '/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/';
 

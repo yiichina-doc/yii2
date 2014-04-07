@@ -1,12 +1,12 @@
-Basic application template
+基本的应用程序模板
 ==========================
 
-The basic Yii application template is a perfect fit for small projects or when you're just learning the framework.
+基本的Yii应用模板是一个非常适合小型项目或当你刚学这个框架。
 
-The basic application template includes four pages: a homepage, an about page, a contact page, and a login page.
+基本的应用模板包括四个页面：首页，关于页面，联系我们页面和一个登录页面。
 The contact page displays a contact form that users can fill in to submit their inquiries to the webmaster. Assuming the site has access to a mail server and that the administrator's email address is entered in the configuration file, the contact form will work. The same goes for the login page, which allows users to be authenticated before accessing privileged content.
 
-Installation
+安装
 ------------
 
 Installation of the framework requires [Composer](http://getcomposer.org/). If you do not have Composer on your system yet, you may download it from
@@ -16,7 +16,7 @@ Installation of the framework requires [Composer](http://getcomposer.org/). If y
 curl -s http://getcomposer.org/installer | php
 ~~~
 
-You can then create a basic Yii application using the following :
+接下来你可以使用下面的命令创建一个基本Yii应用：
 
 ~~~
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic /path/to/yii-application
@@ -24,51 +24,51 @@ php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-
 
 Now set document root directory of your Web server to /path/to/yii-application/web and you should be able to access the application using the URL `http://localhost/`.
 
-Directory structure
+目录结构
 -------------------
 
-The basic application does not divide application directories much. Here's the basic structure:
+基本的应用程序不划分应用程序目录了。这里是的基本结构：
 
-- `assets` - application asset files.
+- `assets` - 应用程序asset文件。
   - `AppAsset.php` - definition of application assets such as CSS, JavaScript etc. Check [Managing assets](assets.md) for
     details.
-- `commands` - console controllers.
-- `config` - configuration.
-- `controllers` - web controllers.
-- `models` - application models.
-- `runtime` - logs, states, file cache.
-- `views` - view templates.
+- `commands` - 控制台控制器。
+- `config` - 配置。
+- `controllers` - web控制器。
+- `models` - 应用模型
+- `runtime` - 日志，状态，文件缓存。
+- `views` - 视图模板。
 - `web` - webroot.
 
-Root directory contains a set of files.
+根目录中包含的一系列文件。
 
 - `.gitignore` contains a list of directories ignored by git version system. If you need something never get to your source
 code repository, add it there.
-- `codeception.yml` - Codeception config.
+- `codeception.yml` - Codeception配置。
 - `composer.json` - Composer config described in detail below.
-- `LICENSE.md` - license info. Put your project license there. Especially when opensourcing.
-- `README.md` - basic info about installing template. Consider replacing it with information about your project and its
+- `LICENSE.md` - 许可信息。Put your project license there. Especially when opensourcing.
+- `README.md` - 有关安装模板的基本信息。Consider replacing it with information about your project and its
   installation.
-- `requirements.php` - Yii requirements checker.
+- `requirements.php` - Yii的要求检查器。
 - `yii` - console application bootstrap.
-- `yii.bat` - same for Windows.
+- `yii.bat` - 同样适用于Windows。
 
 
-### config
+### 配置
 
-This directory contains configuration files:
+该目录包含配置文件：
 
-- `console.php` - console application configuration.
-- `params.php` - common application parameters.
-- `web.php` - web application configuration.
-- `web-test.php` - web application configuration used when running functional tests.
+- `console.php` - 控制台应用程序的配置。
+- `params.php` - 常见的应用程序的参数。
+- `web.php` - Web应用程序配置。
+- `web-test.php` - 运行功能测试时，Web应用程序配置中使用。
 
 All these files are returning arrays used to configure corresponding application properties. Check
 [Configuration](configuration.md) guide section for details.
 
-### views
+### 视图
 
-Views directory contains templates your application is using. In the basic template there are:
+视图目录包含应用程序正在使用的模板。基本的模板有：
 
 ```
 layouts
@@ -88,7 +88,7 @@ Partials are often named starting with underscore.
 
 ### web
 
-Directory is a webroot. Typically a webserver is pointed into it.
+此目录是一个webroot。通常情况下，Web服务器指向到它。
 
 ```
 assets
@@ -105,7 +105,7 @@ to do anything with this directory other than making sure Yii has enough permiss
 `index.php` is the main web application bootstrap and is the central entry point for it. `index-test.php` is the entry
 point for functional testing.
 
-Configuring Composer
+配置Composer
 --------------------
 
 After application template is installed it's a good idea to adjust default `composer.json` that can be found in the root

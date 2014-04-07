@@ -8,9 +8,9 @@
 namespace yii\base;
 
 /**
- * ModelEvent class.
+ * ModelEvent 类。
  *
- * ModelEvent represents the parameter needed by model events.
+ * ModelEvent 表需要通过模型事件的参数。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -18,8 +18,8 @@ namespace yii\base;
 class ModelEvent extends Event
 {
 	/**
-	 * @var boolean whether the model is in valid status. Defaults to true.
-	 * A model is in valid status if it passes validations or certain checks.
+	 * @var boolean 是否该模型是有效的状态。默认为true。
+	 * 模型是在有效的状态，如果它通过验证或某些检查。
 	 */
 	public $isValid = true;
 }

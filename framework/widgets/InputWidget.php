@@ -14,11 +14,11 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 
 /**
- * InputWidget is the base class for widgets that collect user inputs.
+ * InputWidget 收集用户输入的widgets的基类。
  *
- * An input widget can be associated with a data model and an attribute,
- * or a name and a value. If the former, the name and the value will
- * be generated automatically.
+ * 输入widget基类可以与一个数据模型和属性，
+ * 或一个名称一个值相关联。若和属性相关联，名称和值
+ * 将会自动产生。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -26,30 +26,30 @@ use yii\helpers\Html;
 class InputWidget extends Widget
 {
 	/**
-	 * @var Model the data model that this widget is associated with.
+	 * @var Model 此widget基类相关联的数据模型。
 	 */
 	public $model;
 	/**
-	 * @var string the model attribute that this widget is associated with.
+	 * @var string 此widget基类相关联的模型属性。
 	 */
 	public $attribute;
 	/**
-	 * @var string the input name. This must be set if [[model]] and [[attribute]] are not set.
+	 * @var string 输入名称。若[[model]] 和 [[attribute]] 未设置，必须设置此选项。
 	 */
 	public $name;
 	/**
-	 * @var string the input value.
+	 * @var string 输入值。
 	 */
 	public $value;
 	/**
-	 * @var array the HTML attributes for the input tag.
+	 * @var array HTML的input标签属性。
 	 */
 	public $options = [];
 
 
 	/**
-	 * Initializes the widget.
-	 * If you override this method, make sure you call the parent implementation first.
+	 * 初始化widget基类。
+	 * 如果重写此方法，确保首先调用父类实现。
 	 */
 	public function init()
 	{
@@ -63,7 +63,7 @@ class InputWidget extends Widget
 	}
 
 	/**
-	 * @return boolean whether this widget is associated with a data model.
+	 * @return boolean widget基类是否和数据模型有关。
 	 */
 	protected function hasModel()
 	{

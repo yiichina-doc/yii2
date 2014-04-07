@@ -13,7 +13,7 @@ use yii\web\JsExpression;
 use yii\helpers\Json;
 
 /**
- * EmailValidator validates that the attribute value is a valid email address.
+ * EmailValidator 验证该属性值是一个有效的email地址。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -21,32 +21,32 @@ use yii\helpers\Json;
 class EmailValidator extends Validator
 {
 	/**
-	 * @var string the regular expression used to validate the attribute value.
+	 * @var string 用于验证该属性值的正则表达式。
 	 * @see http://www.regular-expressions.info/email.html
 	 */
 	public $pattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
 	/**
-	 * @var string the regular expression used to validate email addresses with the name part.
-	 * This property is used only when [[allowName]] is true.
+	 * @var string 用于验证email地址与名称的正则表达式。
+	 * 此属性仅适用于当[[allowName]]为true时。
 	 * @see allowName
 	 */
 	public $fullPattern = '/^[^@]*<[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?>$/';
 	/**
-	 * @var boolean whether to allow name in the email address (e.g. "John Smith <john.smith@example.com>"). Defaults to false.
+	 * @var boolean 是否允许使用名称做为email地址(例如 "John Smith <john.smith@example.com>")。默认设置为false。
 	 * @see fullPattern
 	 */
 	public $allowName = false;
 	/**
-	 * @var boolean whether to check whether the emails domain exists and has either an A or MX record.
-	 * Be aware of the fact that this check can fail due to temporary DNS problems even if the email address is
-	 * valid and an email would be deliverable. Defaults to false.
+	 * @var boolean 是否检查邮箱的域名是否存在并且有A记录或者MX记录。
+	 * 请注意一个事实，即这种检查可能会失败，即使email地址是有效的， 
+	 * 由于临时的 DNS 问题，email将被发送。 默认设置为false。
 	 */
 	public $checkDNS = false;
 	/**
-	 * @var boolean whether validation process should take into account IDN (internationalized domain
-	 * names). Defaults to false meaning that validation of emails containing IDN will always fail.
-	 * Note that in order to use IDN validation you have to install and enable `intl` PHP extension,
-	 * otherwise an exception would be thrown.
+	 * @var boolean 是否验证过程应考虑到 IDN (国际化
+	 * 域名)。 默认设置为false 意味着包含IDN的emails验证总是失败.
+	 * 请注意为了使用IDN 域名验证，必须安装并启用PHP扩展`intl`，
+	 * 否则将会抛出一个异常。
 	 */
 	public $enableIDN = false;
 

@@ -11,15 +11,15 @@ use Yii;
 use yii\base\Object;
 
 /**
- * Item represents an authorization item.
- * An authorization item can be an operation, a task or a role.
- * They form an authorization hierarchy. Items on higher levels of the hierarchy
- * inherit the permissions represented by items on lower levels.
- * A user may be assigned one or several authorization items (called [[Assignment]] assignments).
- * He can perform an operation only when it is among his assigned items.
+ * Item 代表一个授权项目.
+ * 一个授权项目可以是一个操作、一个任务或角色
+ * 他们形成了一个授权等级. 较高等级的授权项目
+ * 继承较低等级的项目权限.
+ * 用户可以指定一个或多个授权项目 (调用 [[Assignment]] 指定).
+ * 他只可以操作已经指定的授权项目.
  *
- * @property Item[] $children All child items of this item. This property is read-only.
- * @property string $name The item name.
+ * @property Item[] $children 所有这些项目的子项目。此属性为只读.
+ * @property string $name 项目名称.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
@@ -32,23 +32,23 @@ class Item extends Object
 	const TYPE_ROLE = 2;
 
 	/**
-	 * @var Manager the auth manager of this item
+	 * @var Manager 项目管理者
 	 */
 	public $manager;
 	/**
-	 * @var string the item description
+	 * @var string 项目描述
 	 */
 	public $description;
 	/**
-	 * @var string the business rule associated with this item
+	 * @var string 与此项关联的业务规则
 	 */
 	public $bizRule;
 	/**
-	 * @var mixed the additional data associated with this item
+	 * @var mixed 与此项关联的附加数据
 	 */
 	public $data;
 	/**
-	 * @var integer the authorization item type. This could be 0 (operation), 1 (task) or 2 (role).
+	 * @var integer 授权项目类型。这可能是0（操作），1（任务）或2（角色）.
 	 */
 	public $type;
 
@@ -57,12 +57,16 @@ class Item extends Object
 
 
 	/**
-	 * Checks to see if the specified item is within the hierarchy starting from this item.
-	 * This method is expected to be internally used by the actual implementations
-	 * of the [[Manager::checkAccess()]].
-	 * @param string $itemName the name of the item to be checked
-	 * @param array $params the parameters to be passed to business rule evaluation
-	 * @return boolean whether the specified item is within the hierarchy starting from this item.
+	 * 验证一个项目是否存在这个权限结构中
+     * （译者注 原文Checks to see if the specified item is within 
+     * the hierarchy starting from this item）.
+	 * 这是一个内部使用的方法，是通过[[Manager::checkAccess()]]方法实现的
+     * （译者注 原文This method is expected to be internally used 
+     * by the actual implementations of the [[Manager::checkAccess()]]）
+	 * @param string $itemName 被检查的项目名
+	 * @param array $params 判断规则
+     * （译者注 原文the parameters to be passed to business rule evaluation）
+	 * @return boolean 指定的项是否在指定的权限结构中.
 	 */
 	public function checkAccess($itemName, $params = [])
 	{
@@ -81,7 +85,7 @@ class Item extends Object
 	}
 
 	/**
-	 * @return string the item name
+	 * @return string 项目名
 	 */
 	public function getName()
 	{
@@ -89,7 +93,7 @@ class Item extends Object
 	}
 
 	/**
-	 * @param string $value the item name
+	 * @param string $value 项目名
 	 */
 	public function setName($value)
 	{
@@ -100,10 +104,10 @@ class Item extends Object
 	}
 
 	/**
-	 * Adds a child item.
-	 * @param string $name the name of the child item
-	 * @return boolean whether the item is added successfully
-	 * @throws \yii\base\Exception if either parent or child doesn't exist or if a loop has been detected.
+	 * 添加一个子项.
+	 * @param string $name 子项名
+	 * @return boolean 添加是否成功
+	 * @throws \yii\base\Exception 如果子项或父项不存在或存在循环，则抛出\yii\base\Exception异常.
 	 * @see Manager::addItemChild
 	 */
 	public function addChild($name)
@@ -112,10 +116,10 @@ class Item extends Object
 	}
 
 	/**
-	 * Removes a child item.
-	 * Note, the child item is not deleted. Only the parent-child relationship is removed.
-	 * @param string $name the child item name
-	 * @return boolean whether the removal is successful
+	 * 删除一个子项的父子关系.
+	 * 注意，子项目不被删除。只有父子关系被删除.
+	 * @param string $name 子项名
+	 * @return boolean 删除是否成功
 	 * @see Manager::removeItemChild
 	 */
 	public function removeChild($name)
@@ -124,9 +128,9 @@ class Item extends Object
 	}
 
 	/**
-	 * Returns a value indicating whether a child exists
-	 * @param string $name the child item name
-	 * @return boolean whether the child exists
+	 * 检查授权项是否存在指定的子项
+	 * @param string $name 子项名
+	 * @return boolean 是否存在
 	 * @see Manager::hasItemChild
 	 */
 	public function hasChild($name)
@@ -135,8 +139,8 @@ class Item extends Object
 	}
 
 	/**
-	 * Returns the children of this item.
-	 * @return Item[] all child items of this item.
+	 * 返回授权项的子项.
+	 * @return Item[] 授权项的所以子项.
 	 * @see Manager::getItemChildren
 	 */
 	public function getChildren()
@@ -145,13 +149,13 @@ class Item extends Object
 	}
 
 	/**
-	 * Assigns this item to a user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @param string $bizRule the business rule to be executed when [[checkAccess()]] is called
-	 * for this particular authorization item.
-	 * @param mixed $data additional data associated with this assignment
-	 * @return Assignment the authorization assignment information.
-	 * @throws \yii\base\Exception if the item has already been assigned to the user
+	 * 授权一个授权项给用户.
+	 * @param mixed $userId 用户ID (see [[\yii\web\User::id]])
+	 * @param string $bizRule 业务规则，当调用 [[checkAccess()]] 时被使用
+	 * 针对这个特定项目.
+	 * @param mixed $data 这项任务相关的附加数据
+	 * @return Assignment 授权信息.
+	 * @throws \yii\base\Exception 如果这个授权项已经分配给用户抛出一个\yii\base\Exception
 	 * @see Manager::assign
 	 */
 	public function assign($userId, $bizRule = null, $data = null)
@@ -160,9 +164,9 @@ class Item extends Object
 	}
 
 	/**
-	 * Revokes an authorization assignment from a user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @return boolean whether removal is successful
+	 * 解除用户授权.
+	 * @param mixed $userId 用户 ID (see [[\yii\web\User::id]])
+	 * @return boolean 是否成功
 	 * @see Manager::revoke
 	 */
 	public function revoke($userId)
@@ -171,9 +175,9 @@ class Item extends Object
 	}
 
 	/**
-	 * Returns a value indicating whether this item has been assigned to the user.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @return boolean whether the item has been assigned to the user.
+	 * 返回是否将该项授权给该用户.
+	 * @param mixed $userId 用户ID (see [[\yii\web\User::id]])
+	 * @return boolean 项目是否被授权给用户.
 	 * @see Manager::isAssigned
 	 */
 	public function isAssigned($userId)
@@ -182,10 +186,10 @@ class Item extends Object
 	}
 
 	/**
-	 * Returns the item assignment information.
-	 * @param mixed $userId the user ID (see [[\yii\web\User::id]])
-	 * @return Assignment the item assignment information. Null is returned if
-	 * this item is not assigned to the user.
+	 * 返回项目的授权信息.
+	 * @param mixed $userId 用户id (see [[\yii\web\User::id]])
+	 * @return Assignment 授权信息. 如果返回 Null
+	 * 则此项没有授权给用户.
 	 * @see Manager::getAssignment
 	 */
 	public function getAssignment($userId)
@@ -194,7 +198,7 @@ class Item extends Object
 	}
 
 	/**
-	 * Saves an authorization item to persistent storage.
+	 * 保存一个授权项.
 	 */
 	public function save()
 	{

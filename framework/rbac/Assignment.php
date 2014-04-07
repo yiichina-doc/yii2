@@ -11,10 +11,10 @@ use Yii;
 use yii\base\Object;
 
 /**
- * Assignment represents an assignment of a role to a user.
- * It includes additional assignment information such as [[bizRule]] and [[data]].
- * Do not create a Assignment instance using the 'new' operator.
- * Instead, call [[Manager::assign()]].
+ * Assignment 用户角色分配（授权）.
+ * 它包括额外的分配信息[[bizRule]] 和 [[data]] 等.
+ * 不需要用new来创建一个Assignment实例.
+ * 而是调用 [[Manager::assign()]].
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
@@ -23,30 +23,30 @@ use yii\base\Object;
 class Assignment extends Object
 {
 	/**
-	 * @var Manager the auth manager of this item
+	 * @var Manager 授权项的管理者
 	 */
 	public $manager;
 	/**
-	 * @var string the business rule associated with this assignment
+	 * @var string 授权的相关业务规则
 	 */
 	public $bizRule;
 	/**
-	 * @var mixed additional data for this assignment
+	 * @var mixed 此授权的附加数据
 	 */
 	public $data;
 	/**
-	 * @var mixed user ID (see [[\yii\web\User::id]]). Do not modify this property after it is populated.
-	 * To modify the user ID of an assignment, you must remove the assignment and create a new one.
+	 * @var mixed 用户ID (see [[\yii\web\User::id]]). 不要修改这个属性，他被自动填充.
+	 * 要修改授权指定的用户id，你必须先删除授权，然后创建一个新的.
 	 */
 	public $userId;
 	/**
-	 * @return string the authorization item name. Do not modify this property after it is populated.
-	 * To modify the item name of an assignment, you must remove the assignment and create a new one.
+	 * @return string 授权项目名称。不要修改这个属性，他被自动填充.
+	 * 要修改授权指定的授权项目，你必须先删除授权，然后创建一个新的.
 	 */
 	public $itemName;
 
 	/**
-	 * Saves the changes to an authorization assignment.
+	 * 保存更改的权限分配.
 	 */
 	public function save()
 	{

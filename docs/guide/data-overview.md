@@ -1,4 +1,4 @@
-Data Sources and Widgets
+数据源和小工具
 ========================
 
 One of the most powerful features of Yii is how it works with data. In Yii, you may easily output data directly in view files, which is a good approach

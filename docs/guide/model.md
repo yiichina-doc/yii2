@@ -1,4 +1,4 @@
-Model
+模型
 =====
 
 In keeping with the MVC approach, a model in Yii is intended for storing or temporarily representing application data.
@@ -16,7 +16,7 @@ of models from complex web forms by providing validation and error reporting.
 The Model class is also the base class for more advanced models with additional functionality, such
 as [Active Record](active-record.md).
 
-Attributes
+属性
 ----------
 
 The actual data represented by a model is stored in the model's *attributes*. Model attributes can
@@ -90,7 +90,7 @@ class LoginForm extends \yii\base\Model
 }
 ```
 
-Scenarios
+方案
 ---------
 
 A model may be used in different *scenarios*. For example, a `User` model may be used to collect user login inputs,
@@ -178,7 +178,7 @@ the default implementation of the `scenarios()` returns every property with acti
 available for mass assignment and validation.
 
 
-Validation
+验证
 ----------
 
 When a model is used to collect user input data via its attributes, it usually needs to validate the affected attributes
@@ -223,7 +223,7 @@ When `validate()` is called, the actual validation rules executed are determined
 - the rule must be active for the current scenario.
 
 
-### Creating your own validators (Inline validators)
+### 创建自己的验证器 (内嵌的验证)
 
 If none of the built in validators fit your needs, you can create your own validator by creating a method in you model class.
 This method will be wrapped by an [[InlineValidator|yii\validators\InlineValidator]] an be called upon validation.
@@ -259,7 +259,7 @@ for example the [[skipOnEmpty|yii\validators\InlineValidator::skipOnEmpty]] prop
 ```
 
 
-Massive Attribute Retrieval and Assignment
+大量属性的检索与分配
 ------------------------------------------
 
 Attributes can be massively retrieved via the `attributes` property.

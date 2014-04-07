@@ -12,17 +12,17 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 
 /**
- * CompareValidator compares the specified attribute value with another value and validates if they are equal.
+ * CompareValidator 指定的属性值与另一个值进行比较，并验证它们是否相等。
  *
- * The value being compared with can be another attribute value
- * (specified via [[compareAttribute]]) or a constant (specified via
- * [[compareValue]]. When both are specified, the latter takes
- * precedence. If neither is specified, the attribute will be compared
- * with another attribute whose name is by appending "_repeat" to the source
- * attribute name.
+ * 两个属性值进行比较
+ * (通过指定[[compareAttribute]])或一个常量(通过指定
+ * [[compareValue]]。当两个都被指定， 后者
+ * 优先。 如果不指定，此属性将与另一个以
+ * "_repeat"结尾的
+ * 源属性名进行比较。
  *
- * CompareValidator supports different comparison operators, specified
- * via the [[operator]] property.
+ * CompareValidator 支持不同的比较操作符， 通过
+ * 指定[[operator]]属性。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -30,41 +30,41 @@ use yii\helpers\Html;
 class CompareValidator extends Validator
 {
 	/**
-	 * @var string the name of the attribute to be compared with. When both this property
-	 * and [[compareValue]] are set, the latter takes precedence. If neither is set,
-	 * it assumes the comparison is against another attribute whose name is formed by
-	 * appending '_repeat' to the attribute being validated. For example, if 'password' is
-	 * being validated, then the attribute to be compared would be 'password_repeat'.
+	 * @var string 要比较的属性的名称。当已经设置此属性
+	 * 和[[compareValue]]，后者优先。 如果都未设置，
+	 * 假设要比较的两个属性字前半部分相同
+	 * 后半部分以'_repeat'结尾的属性。例如，如果'password'
+	 * 正在验证，然后要比较的属性将是'password_repeat'。
 	 * @see compareValue
 	 */
 	public $compareAttribute;
 	/**
-	 * @var mixed the constant value to be compared with. When both this property
-	 * and [[compareAttribute]] are set, this property takes precedence.
+	 * @var mixed 要比较的常数值. 当已经设置此属性和
+	 * [[compareAttribute]]， 此属性优先。
 	 * @see compareAttribute
 	 */
 	public $compareValue;
 	/**
-	 * @var string the operator for comparison. The following operators are supported:
+	 * @var string 比较操作。支持以下操作：
 	 *
-	 * - '==': validates to see if the two values are equal. The comparison is done is non-strict mode.
-	 * - '===': validates to see if the two values are equal. The comparison is done is strict mode.
-	 * - '!=': validates to see if the two values are NOT equal. The comparison is done is non-strict mode.
-	 * - '!==': validates to see if the two values are NOT equal. The comparison is done is strict mode.
-	 * - `>`: validates to see if the value being validated is greater than the value being compared with.
-	 * - `>=`: validates to see if the value being validated is greater than or equal to the value being compared with.
-	 * - `<`: validates to see if the value being validated is less than the value being compared with.
-	 * - `<=`: validates to see if the value being validated is less than or equal to the value being compared with.
+	 * - '==': 验证两个值相等。非严格的比较模式.
+	 * - '===': 验证两个值相等。比较严格的比较模式.
+	 * - '!=': 验证两个值不相等. 非严格的比较模式。
+	 * - '!==': 验证两个值不相等。 比较严格的比较模式。
+	 * - `>`: 被验证的值是否大于所比较的值。
+	 * - `>=`: 被验证的值是否大于或等于所比较的值。
+	 * - `<`: 被验证的值是否小于所比较的值。
+	 * - `<=`: 被验证的值是否小于或等于所比较的值。
 	 */
 	public $operator = '==';
 	/**
-	 * @var string the user-defined error message. It may contain the following placeholders which
-	 * will be replaced accordingly by the validator:
+	 * @var string 用户定义的错误消息。它可以包含下列的占位符
+	 * 验证器会替换这些占位符:
 	 *
-	 * - `{attribute}`: the label of the attribute being validated
-	 * - `{value}`: the value of the attribute being validated
-	 * - `{compareValue}`: the value or the attribute label to be compared with
-	 * - `{compareAttribute}`: the label of the attribute to be compared with
+	 * - `{attribute}`: 被验证的属性标签
+	 * - `{value}`: 该属性的值被验证
+	 * - `{compareValue}`: 要比较的值或属性标签
+	 * - `{compareAttribute}`: 被比较的属性标签
 	 */
 	public $message;
 
@@ -152,11 +152,11 @@ class CompareValidator extends Validator
 	}
 
 	/**
-	 * Compares two values with the specified operator.
-	 * @param string $operator the comparison operator
-	 * @param mixed $value the value being compared
-	 * @param mixed $compareValue another value being compared
-	 * @return boolean whether the comparison using the specified operator is true.
+	 * 通过指定的操作比较两个值。
+	 * @param string $operator 比较运算符
+	 * @param mixed $value 被比较的值
+	 * @param mixed $compareValue 被比较的另一个值
+	 * @return boolean 通过指定的操作比较是否为真。
 	 */
 	protected function compareValues($operator, $value, $compareValue)
 	{

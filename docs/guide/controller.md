@@ -1,4 +1,4 @@
-Controller
+控制器
 ==========
 
 Controller is one of the key parts of the application. It determines how to handle incoming request and creates a response.

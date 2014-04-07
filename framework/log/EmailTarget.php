@@ -12,10 +12,10 @@ use yii\base\InvalidConfigException;
 use yii\mail\MailerInterface;
 
 /**
- * EmailTarget sends selected log messages to the specified email addresses.
+ * EmailTarget将选定的日志消息发送到指定的电子邮箱.
  *
- * You may configure the email to be sent by setting the [[message]] property, through which
- * you can set the target email addresses, subject, etc.
+ * 你可以通过设置[[message]]属性配置发送电子邮件, 
+ * 你可以通过它设定目标电子邮件地址, 主题等.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -23,14 +23,14 @@ use yii\mail\MailerInterface;
 class EmailTarget extends Target
 {
 	/**
-	 * @var array the configuration array for creating a [[\yii\mail\MessageInterface|message]] object.
-	 * Note that the "to" option must be set, which specifies the destination email address(es).
+	 * @var array 创建[[\yii\mail\MessageInterface|message]]对象用的配置数组.
+	 * 需要注意的是，必须设置"to"选项, 即指定目标电子邮件地址.
 	 */
 	public $message = [];
 	/**
-	 * @var MailerInterface|string the mailer object or the application component ID of the mailer object.
-	 * After the EmailTarget object is created, if you want to change this property, you should only assign it
-	 * with a mailer object.
+	 * @var MailerInterface|string 邮寄者或对象的邮件收发器对象的应用程序组件ID.
+	 * 创建EmailTarget对象后, 如果想改变这个属性, 
+	 * 只能通过邮件对象分配.
 	 */
 	public $mail = 'mail';
 
@@ -52,7 +52,7 @@ class EmailTarget extends Target
 	}
 
 	/**
-	 * Sends log messages to specified email addresses.
+	 * 发送日志消息到指定的电子邮箱.
 	 */
 	public function export()
 	{
@@ -67,8 +67,8 @@ class EmailTarget extends Target
 	}
 
 	/**
-	 * Composes a mail message with the given body content.
-	 * @param string $body the body content
+	 * 通过给定的主体内容组成电子邮件.
+	 * @param string $body 主体内容
 	 * @return \yii\mail\MessageInterface $message
 	 */
 	protected function composeMessage($body)

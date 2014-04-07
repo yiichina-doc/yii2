@@ -13,10 +13,10 @@ use yii\web\JsExpression;
 use yii\helpers\Json;
 
 /**
- * UrlValidator validates that the attribute value is a valid http or https URL.
+ * UrlValidator 验证该属性值是一个有效的http 或 https URL。
  *
- * Note that this validator only checks if the URL scheme and host part are correct.
- * It does not check the rest part of a URL.
+ * 需要注意的是这个验证只检查URL方案和host part是否是正确的。
+ * 它不检查URL的其余部分。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -24,27 +24,27 @@ use yii\helpers\Json;
 class UrlValidator extends Validator
 {
 	/**
-	 * @var string the regular expression used to validate the attribute value.
-	 * The pattern may contain a `{schemes}` token that will be replaced
-	 * by a regular expression which represents the [[validSchemes]].
+	 * @var string 用于验证该属性值的正则表达式。
+	 * 此模式可以包含一个 `{schemes}` token 被表示
+	 * [[validSchemes]]的正则表达试替换。
 	 */
 	public $pattern = '/^{schemes}:\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i';
 	/**
-	 * @var array list of URI schemes which should be considered valid. By default, http and https
-	 * are considered to be valid schemes.
+	 * @var array URI方案列表被认为是有效。 默认, http and https
+	 * 被认为是有效的。
 	 **/
 	public $validSchemes = ['http', 'https'];
 	/**
-	 * @var string the default URI scheme. If the input doesn't contain the scheme part, the default
-	 * scheme will be prepended to it (thus changing the input). Defaults to null, meaning a URL must
-	 * contain the scheme part.
+	 * @var string 默认的URI方案。如果输入不包含该计划的一部分, 默认方案
+	 * 将被附加到它（从而改变了输入）。默认为null，意味着一个URL
+	 * 必须包含方案的一部分。
 	 **/
 	public $defaultScheme;
 	/**
-	 * @var boolean whether validation process should take into account IDN (internationalized
-	 * domain names). Defaults to false meaning that validation of URLs containing IDN will always
-	 * fail. Note that in order to use IDN validation you have to install and enable `intl` PHP
-	 * extension, otherwise an exception would be thrown.
+	 * @var boolean 验证过程是否应考虑到IDN （国际化
+	 * 域名）。 默认为false意味着URLs中包含IDN的验证总是
+	 * 失败。 请注意，为了使用国际化域名验证，你必须安装并启用`intl` PHP
+	 * 扩展，否则会抛出一个异常。
 	 */
 	public $enableIDN = false;
 

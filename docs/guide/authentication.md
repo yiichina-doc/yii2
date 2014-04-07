@@ -1,4 +1,4 @@
-Authentication
+认证
 ==============
 
 Authentication is the act of verifying who a user is, and is the basis of the login process. Typically, authentication uses the combination of an identifier--a username or email address--and a password. The user submits these values  through a form, and the application then compares the submitted information against that previously stored (e.g., upon registration).
@@ -62,7 +62,7 @@ class User extends ActiveRecord implements IdentityInterface
 }
 ```
 
-Two of the outlined methods are simple: `findIdentity` is provided with an  ID value and returns a model instance associated with that ID. The `getId` method returns the ID itself.
+两个方法概括为： `findIdentity` is provided with an  ID value and returns a model instance associated with that ID. The `getId` method returns the ID itself.
 Two of the other methods--`getAuthKey` and `validateAuthKey`--are used to provide extra security to the "remember me" cookie. The `getAuthKey` method should return a string that is unique for each user. You can create reliably create a unique string using `Security::generateRandomKey()`. It's a good idea to also save this as part of the user's record:
 
 ```php

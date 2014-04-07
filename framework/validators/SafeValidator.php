@@ -8,7 +8,7 @@
 namespace yii\validators;
 
 /**
- * SafeValidator serves as a dummy validator whose main purpose is to mark the attributes to be safe for massive assignment.
+ * SafeValidator 作为一个虚拟的验证器，它的主要目的是批量赋值时把属性标记为安全的。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0

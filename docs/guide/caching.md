@@ -1,11 +1,11 @@
-Caching
+缓存
 =======
 
 Caching is a cheap and effective way to improve the performance of a web application. By storing relatively
 static data in cache and serving it from cache when requested, the application saves the time required to generate the data from scratch. Caching is one of the best ways to improve the performance of your application, almost mandatory on any large-scale site.
 
 
-Base Concepts
+基础概念
 -------------
 
 Using cache in Yii involves configuring and accessing a cache application component. The following

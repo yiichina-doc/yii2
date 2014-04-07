@@ -12,19 +12,19 @@ use yii\base\Component;
 use yii\base\InvalidConfigException;
 
 /**
- * Target is the base class for all log target classes.
+ * Target是所有日志目标类的基类。
  *
- * A log target object will filter the messages logged by [[Logger]] according
- * to its [[levels]] and [[categories]] properties. It may also export the filtered
- * messages to specific destination defined by the target, such as emails, files.
+ * Log target对象将根据其[[levels]] and [[categories]] 属性筛选记录的[[Logger]]
+ * 消息。 它也可以导出过滤后的信息到
+ * target定义的指定目标， 例如 emails, files。
  *
- * Level filter and category filter are combinatorial, i.e., only messages
- * satisfying both filter conditions will be handled. Additionally, you
- * may specify [[except]] to exclude messages of certain categories.
+ * 级别过滤和类别过滤是组合起来的，即，消息满足
+ * 过滤条件将被处理。 此外， 你可以
+ * 指定[[except]]来排除某些类别的信息。
  *
- * @property integer $levels The message levels that this target is interested in. This is a bitmap of level
- * values. Defaults to 0, meaning  all available levels. Note that the type of this property differs in getter
- * and setter. See [[getLevels()]] and [[setLevels()]] for details.
+ * @property integer $levels 感兴趣的消息级别。这是级别值
+ * 位图。默认设置为0，所有可用级别。请注意此属性在getter
+ * 和setter中不同。详见[[getLevels()]] and [[setLevels()]]。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -32,63 +32,63 @@ use yii\base\InvalidConfigException;
 abstract class Target extends Component
 {
 	/**
-	 * @var boolean whether to enable this log target. Defaults to true.
+	 * @var boolean 是否启用此log target， 默认true。
 	 */
 	public $enabled = true;
 	/**
-	 * @var array list of message categories that this target is interested in. Defaults to empty, meaning all categories.
-	 * You can use an asterisk at the end of a category so that the category may be used to
-	 * match those categories sharing the same common prefix. For example, 'yii\db\*' will match
-	 * categories starting with 'yii\db\', such as 'yii\db\Connection'.
+	 * @var array 关心的消息类别列表。 默认空，这意味着所有类别。
+	 * 你可以在类别的结尾处用*作为通配符来
+	 * 匹配有相同的公共前缀的类别. 例如，'yii\db\*' 将匹配以
+	 * 'yii\db\'开头的分类，比如'yii\db\Connection'。
 	 */
 	public $categories = [];
 	/**
-	 * @var array list of message categories that this target is NOT interested in. Defaults to empty, meaning no uninteresting messages.
-	 * If this property is not empty, then any category listed here will be excluded from [[categories]].
-	 * You can use an asterisk at the end of a category so that the category can be used to
-	 * match those categories sharing the same common prefix. For example, 'yii\db\*' will match
-	 * categories starting with 'yii\db\', such as 'yii\db\Connection'.
+	 * @var array 不关心的消息类别列表。默认设置为空，意味着不关心此消息。
+	 * 若此属性不为空，在这里列出的任何类别将从[[categories]]中被排除。
+	 * 你可以在类别的结尾处用*作为通配符来
+	 * 匹配前缀匹配的所有类别。 例如，'yii\db\*'将匹配以
+	 * 'yii\db\'开头的分类，比如'yii\db\Connection'。
 	 * @see categories
 	 */
 	public $except = [];
 	/**
-	 * @var boolean whether to log a message containing the current user name and ID. Defaults to false.
+	 * @var boolean 是否记录包含当前用户名和ID的消息。 默认设置为false.
 	 * @see \yii\web\User
 	 */
 	public $logUser = false;
 	/**
-	 * @var array list of the PHP predefined variables that should be logged in a message.
-	 * Note that a variable must be accessible via `$GLOBALS`. Otherwise it won't be logged.
-	 * Defaults to `['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER']`.
+	 * @var array PHP的预定义变量应该记录在消息列表中。
+	 * 请注意变量必须通过`$GLOBALS`访问。 否则将不会被记录。
+	 * 默认设置为`['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER']`。
 	 */
 	public $logVars = ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'];
 	/**
-	 * @var integer how many messages should be accumulated before they are exported.
-	 * Defaults to 1000. Note that messages will always be exported when the application terminates.
-	 * Set this property to be 0 if you don't want to export messages until the application terminates.
+	 * @var integer 在导出之前应累积多少消息。
+	 * 默认设置为1000。请注意在应用程序终止时消息将被导出。
+	 * 如果直到应用程序终止你也不想输出消息，则将此属性设置为0。
 	 */
 	public $exportInterval = 1000;
 	/**
-	 * @var array the messages that are retrieved from the logger so far by this log target.
-	 * Please refer to [[Logger::messages]] for the details about the message structure.
+	 * @var array 到目前为止 这个log target从logger中接收到的消息。
+	 * 请参阅[[Logger::messages]]关于消息结构的详细信息。
 	 */
 	public $messages = [];
 
 	private $_levels = 0;
 
 	/**
-	 * Exports log [[messages]] to a specific destination.
-	 * Child classes must implement this method.
+	 * 输出日志[[messages]]到特定目的地.
+	 * 子类必须实现此方法.
 	 */
 	abstract public function export();
 
 	/**
-	 * Processes the given log messages.
-	 * This method will filter the given messages with [[levels]] and [[categories]].
-	 * And if requested, it will also export the filtering result to specific medium (e.g. email).
-	 * @param array $messages log messages to be processed. See [[Logger::messages]] for the structure
-	 * of each message.
-	 * @param boolean $final whether this method is called at the end of the current application
+	 * 处理给定的日志消息。
+	 * 此方法将使用[[levels]]和[[categories]]筛选给定的消息。
+	 * 如果要求, 它会将过滤结果导出到特定的介质(例如email)。
+	 * @param array $messages 处理日志消息。参见[[Logger::messages]]
+	 * 每个消息的结构。
+	 * @param boolean $final 前应用程序结束后这个方法是否被调用。
 	 */
 	public function collect($messages, $final)
 	{
@@ -104,9 +104,9 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Generates the context information to be logged.
-	 * The default implementation will dump user information, system variables, etc.
-	 * @return string the context information. If an empty string, it means no context information.
+	 * 记录生成上下文信息。
+	 * 这个默认的实现将转储用户信息， 系统变量等。
+	 * @return string 上下文信息. 如果是一个空字符串, 这意味着没有上下文信息。
 	 */
 	protected function getContextMessage()
 	{
@@ -126,8 +126,8 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * @return integer the message levels that this target is interested in. This is a bitmap of
-	 * level values. Defaults to 0, meaning  all available levels.
+	 * @return integer 你感兴趣的消息级别。 这是一个级别值
+	 * 的位图。 默认为0,意味着所有可用级别。
 	 */
 	public function getLevels()
 	{
@@ -135,15 +135,15 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Sets the message levels that this target is interested in.
+	 * 设置你感兴趣的消息级别。
 	 *
-	 * The parameter can be either an array of interested level names or an integer representing
-	 * the bitmap of the interested level values. Valid level names include: 'error',
-	 * 'warning', 'info', 'trace' and 'profile'; valid level values include:
+	 * 这个参数既可以是一个关心的日志级别的名称的数组也可以是一个 位映射
+	 * the bitmap of the interested level values。 有效级别值包括: 'error'，
+	 * 'warning', 'info', 'trace' and 'profile'; 有效级别值包括:
 	 * [[Logger::LEVEL_ERROR]], [[Logger::LEVEL_WARNING]], [[Logger::LEVEL_INFO]],
-	 * [[Logger::LEVEL_TRACE]] and [[Logger::LEVEL_PROFILE]].
+	 * [[Logger::LEVEL_TRACE]] and [[Logger::LEVEL_PROFILE]]。
 	 *
-	 * For example,
+	 * 例如，
 	 *
 	 * ~~~
 	 * ['error', 'warning']
@@ -151,8 +151,8 @@ abstract class Target extends Component
 	 * Logger::LEVEL_ERROR | Logger::LEVEL_WARNING
 	 * ~~~
 	 *
-	 * @param array|integer $levels message levels that this target is interested in.
-	 * @throws InvalidConfigException if an unknown level name is given
+	 * @param array|integer $levels 这个目标是感兴趣的消息级别。
+	 * @throws InvalidConfigException 如果给定一个未知的级别名称。
 	 */
 	public function setLevels($levels)
 	{
@@ -178,13 +178,13 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Filters the given messages according to their categories and levels.
-	 * @param array $messages messages to be filtered
-	 * @param integer $levels the message levels to filter by. This is a bitmap of
-	 * level values. Value 0 means allowing all levels.
-	 * @param array $categories the message categories to filter by. If empty, it means all categories are allowed.
-	 * @param array $except the message categories to exclude. If empty, it means all categories are allowed.
-	 * @return array the filtered messages.
+	 * 根据自己的类别和级别过滤给定的消息。
+	 * @param array $messages 消息将被过滤。
+	 * @param integer $levels 需要过滤的信息级别，这是一个级别值的位映射
+	 * 0表示允许各级。
+	 * @param array $categories 过滤消息类别，如果为空， 这意味着所有的类别都允许。
+	 * @param array $except 排除消息类别。 如果为空, 这意味着所有的类别都允许。
+	 * @return array 过滤后的消息。
 	 */
 	public static function filterMessages($messages, $levels = 0, $categories = [], $except = [])
 	{
@@ -220,10 +220,10 @@ abstract class Target extends Component
 	}
 
 	/**
-	 * Formats a log message.
-	 * The message structure follows that in [[Logger::messages]].
-	 * @param array $message the log message to be formatted.
-	 * @return string the formatted message
+	 * 格式化日志消息。
+	 * 该消息结构在[[Logger::messages]]中。
+	 * @param array $message 日志消息进行格式化。
+	 * @return string 格式化的消息
 	 */
 	public function formatMessage($message)
 	{

@@ -11,9 +11,9 @@ use Yii;
 use yii\web\UploadedFile;
 
 /**
- * FileValidator verifies if an attribute is receiving a valid uploaded file.
+ * FileValidator 验证属性是否接收一个有效的上传文件。
  *
- * @property integer $sizeLimit The size limit for uploaded files. This property is read-only.
+ * @property integer $sizeLimit 上传文件大小限制。属性是只读的。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -21,76 +21,76 @@ use yii\web\UploadedFile;
 class FileValidator extends Validator
 {
 	/**
-	 * @var array|string a list of file name extensions that are allowed to be uploaded.
-	 * This can be either an array or a string consisting of file extension names
-	 * separated by space or comma (e.g. "gif, jpg").
-	 * Extension names are case-insensitive. Defaults to null, meaning all file name
-	 * extensions are allowed.
+	 * @var array|string 被允许上传的文件扩展名列表。
+	 * 可以是一个数组或由文件扩展名组成的字符串
+	 * 由空格或逗号分隔 (例如 "gif, jpg")。
+	 * 扩展名不区分大小写。默认为null，意味着所有的文件扩展名
+	 * 是允许的。
 	 * @see wrongType
 	 */
 	public $types;
 	/**
-	 * @var integer the minimum number of bytes required for the uploaded file.
-	 * Defaults to null, meaning no limit.
+	 * @var integer 需要上载的文件的最小字节数。
+	 * 默认为null，意味着没有限制。
 	 * @see tooSmall
 	 */
 	public $minSize;
 	/**
-	 * @var integer the maximum number of bytes required for the uploaded file.
-	 * Defaults to null, meaning no limit.
-	 * Note, the size limit is also affected by 'upload_max_filesize' INI setting
-	 * and the 'MAX_FILE_SIZE' hidden field value.
+	 * @var integer 需要上传的文件的最大字节数。
+	 * 默认为null，意味着没有限制.
+	 * 请注意，这个大小限制 同时也受INI配置中'upload_max_filesize'
+	 * 这个参数 和'MAX_FILE_SIZE'这个隐藏域变量的影响。
 	 * @see tooBig
 	 */
 	public $maxSize;
 	/**
-	 * @var integer the maximum file count the given attribute can hold.
-	 * It defaults to 1, meaning single file upload. By defining a higher number,
-	 * multiple uploads become possible.
+	 * @var integer 给定的属性的最大文件数。
+	 * 默认设置为1，意味着单个文件上传。通过定义一个较大的数字，
+	 * 实现多上传。
 	 * @see tooMany
 	 */
 	public $maxFiles = 1;
 	/**
-	 * @var string the error message used when a file is not uploaded correctly.
+	 * @var string 当文件上传失败时的错误信息。
 	 */
 	public $message;
 	/**
-	 * @var string the error message used when no file is uploaded.
+	 * @var string 当没有文件被上传时的错误信息。
 	 */
 	public $uploadRequired;
 	/**
-	 * @var string the error message used when the uploaded file is too large.
-	 * You may use the following tokens in the message:
+	 * @var string 当上传文件太大时的错误信息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the maximum size allowed (see [[getSizeLimit()]])
+	 * - {attribute}: 属性名
+	 * - {file}: 上传的文件名
+	 * - {limit}: 允许的最大大小 (参见[[getSizeLimit()]])
 	 */
 	public $tooBig;
 	/**
-	 * @var string the error message used when the uploaded file is too small.
-	 * You may use the following tokens in the message:
+	 * @var string 当上传文件过小时的错误信息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {limit}: the value of [[minSize]]
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {limit}: [[minSize]]值
 	 */
 	public $tooSmall;
 	/**
-	 * @var string the error message used when the uploaded file has an extension name
-	 * that is not listed in [[types]]. You may use the following tokens in the message:
+	 * @var string 当上传的文件 其后缀不在[[types]]
+	 * 这个列表中时，使用这个错误信息。 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {file}: the uploaded file name
-	 * - {extensions}: the list of the allowed extensions.
+	 * - {attribute}: 属性名
+	 * - {file}: 上传文件名
+	 * - {extensions}: 允许扩展名列表。
 	 */
 	public $wrongType;
 	/**
-	 * @var string the error message used if the count of multiple uploads exceeds limit.
-	 * You may use the following tokens in the message:
+	 * @var string 如果有多个上传文件超过限制时的错误消息。
+	 * 您可以使用以下tokens消息:
 	 *
-	 * - {attribute}: the attribute name
-	 * - {limit}: the value of [[maxFiles]]
+	 * - {attribute}: 属性名
+	 * - {limit}: [[maxFiles]]值
 	 */
 	public $tooMany;
 
@@ -202,14 +202,14 @@ class FileValidator extends Validator
 	}
 
 	/**
-	 * Returns the maximum size allowed for uploaded files.
-	 * This is determined based on three factors:
+	 * 返回允许上传的最大文件大小。
+	 * 由三个因素决定:
 	 *
 	 * - 'upload_max_filesize' in php.ini
-	 * - 'MAX_FILE_SIZE' hidden field
+	 * - 'MAX_FILE_SIZE' 隐藏字段
 	 * - [[maxSize]]
 	 *
-	 * @return integer the size limit for uploaded files.
+	 * @return 上传文件限制的整数大小。
 	 */
 	public function getSizeLimit()
 	{

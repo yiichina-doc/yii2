@@ -18,7 +18,7 @@ class ContentDecorator extends Widget
 {
 	/**
 	 * @var string the view file that will be used to decorate the content enclosed by this widget.
-	 * This can be specified as either the view file path or path alias.
+	 * 这可以被指定为视图文件路径或路径别名。
 	 */
 	public $viewFile;
 	/**
@@ -27,7 +27,7 @@ class ContentDecorator extends Widget
 	public $params = [];
 
 	/**
-	 * Starts recording a clip.
+	 * 开始记录剪辑。
 	 */
 	public function init()
 	{
@@ -39,8 +39,8 @@ class ContentDecorator extends Widget
 	}
 
 	/**
-	 * Ends recording a clip.
-	 * This method stops output buffering and saves the rendering result as a named clip in the controller.
+	 * 结束记录剪辑。
+	 * 这个方法结束输出缓冲，保存渲染结果到（一个可在）控制器中（使用）的命名剪辑中。
 	 */
 	public function run()
 	{

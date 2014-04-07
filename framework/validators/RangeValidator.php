@@ -11,11 +11,11 @@ use Yii;
 use yii\base\InvalidConfigException;
 
 /**
- * RangeValidator validates that the attribute value is among a list of values.
+ * RangeValidator validates 该属性值是列表中的值。
  *
- * The range can be specified via the [[range]] property.
- * If the [[not]] property is set true, the validator will ensure the attribute value
- * is NOT among the specified range.
+ * range可以通过[[range]]属性来设置。
+ * 如果[[not]]属性设置为true，validator将确保属性值
+ * 不属于指定范围。
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -23,16 +23,16 @@ use yii\base\InvalidConfigException;
 class RangeValidator extends Validator
 {
 	/**
-	 * @var array list of valid values that the attribute value should be among
+	 * @var array 该属性值应该在其中的有效值列表中。
 	 */
 	public $range;
 	/**
-	 * @var boolean whether the comparison is strict (both type and value must be the same)
+	 * @var boolean 比较是否是严格的（类型和值必须相同）
 	 */
 	public $strict = false;
 	/**
-	 * @var boolean whether to invert the validation logic. Defaults to false. If set to true,
-	 * the attribute value should NOT be among the list of values defined via [[range]].
+	 * @var boolean 是否反转的验证逻辑。默认为false。如果设置为true，
+	 * 该属性值不应该定义在[[range]]列表中。
 	 **/
 	public $not = false;
 

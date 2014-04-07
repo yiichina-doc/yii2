@@ -1,4 +1,4 @@
-Using template engines
+使用模板引擎
 ======================
 
 By default, Yii uses PHP as its template language, but you can configure Yii to support other rendering engines, such as

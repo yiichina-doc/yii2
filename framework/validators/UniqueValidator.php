@@ -11,12 +11,12 @@ use Yii;
 use yii\db\ActiveRecordInterface;
 
 /**
- * UniqueValidator validates that the attribute value is unique in the specified database table.
+ * UniqueValidator 验证该属性值在指定的数据库表是唯一的。
  *
- * UniqueValidator checks if the value being validated is unique in the table column specified by
- * the ActiveRecord class [[targetClass]] and the attribute [[targetAttribute]].
+ * UniqueValidator 检查被校验的值在ActiveRecord类[[targetClass]]和[[targetAttribute]]
+ * 属性指定的表和字段中是唯一的。
  *
- * The followings are examples of validation rules using this validator:
+ * 以下是使用此验证程序的验证规则的例子：
  *
  * ```php
  * // a1 needs to be unique
@@ -37,25 +37,25 @@ use yii\db\ActiveRecordInterface;
 class UniqueValidator extends Validator
 {
 	/**
-	 * @var string the name of the ActiveRecord class that should be used to validate the uniqueness
-	 * of the current attribute value. It not set, it will use the ActiveRecord class of the attribute being validated.
+	 * @var string 该用于验证当前属性值的唯一性的
+	 * ActiveRecord类的名称。若未设置。将使用被验证的ActiveRecord类的属性。
 	 * @see targetAttribute
 	 */
 	public $targetClass;
 	/**
-	 * @var string|array the name of the ActiveRecord attribute that should be used to
-	 * validate the uniqueness of the current attribute value. If not set, it will use the name
-	 * of the attribute currently being validated. You may use an array to validate the uniqueness
-	 * of multiple columns at the same time. The array values are the attributes that will be
-	 * used to validate the uniqueness, while the array keys are the attributes whose values are to be validated.
-	 * If the key and the value are the same, you can just specify the value.
+	 * @var string|array 用于验证当前属性值的唯一性的
+	 * ActiveRecord的属性的名称。若未设置，将使用当前
+	 * 正在验证的属性名称。可以同时使用数组来验证
+	 * 多列的唯一性。数组的值是将被用于
+	 * 验证唯一性的属性，数组keys是被验证的属性值。
+	 * 如果key和value是相同的，你可以只指定value。
 	 */
 	public $targetAttribute;
 	/**
-	 * @var string|array|\Closure additional filter to be applied to the DB query used to check the uniqueness of the attribute value.
-	 * This can be a string or an array representing the additional query condition (refer to [[\yii\db\Query::where()]]
-	 * on the format of query condition), or an anonymous function with the signature `function ($query)`, where `$query`
-	 * is the [[\yii\db\Query|Query]] object that you can modify in the function.
+	 * @var string|array|\Closure 应用在数据库查询上的附加过滤器，这个过滤器用来检查特性值的唯一性。
+	 * 这可以是一个字符串或代表附加查询条件的数组 （参考[[\yii\db\Query::where()]]
+	 * 查询条件的格式），或以下结构的匿名函数 `function ($query)`, 其中 `$query`
+	 * 是可以在 [[\yii\db\Query|Query]] 中修改的函数。
 	 */
 	public $filter;
 

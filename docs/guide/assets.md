@@ -1,4 +1,4 @@
-Managing assets
+管理assets
 ===============
 
 An asset in Yii is a file that is included into the page. It could be CSS, JavaScript or
@@ -7,7 +7,7 @@ for a file which is covered by the [View section](view.md), to advanced usage su
 under the webservers document root, resolving JavaScript dependencies or minifying CSS, which we will cover in the following.
 
 
-Declaring asset bundles
+声时asset bundles
 -----------------------
 
 In order to define a set of assets the belong together and should be used on the website you declare a class called
@@ -158,7 +158,7 @@ Setting `sourcePath` to `null` tells asset manager not to copy anything while `j
 to CDN.
 
 
-Enabling symlinks
+启用符号链接
 -----------------
 
 Asset manager is able to use symlinks instead of copying files. It is turned off by default since symlinks are often
@@ -180,14 +180,14 @@ There are two main benefits in enabling it. First it is faster since no copying 
 will always be up to date with source files.
 
 
-Compressing and combining assets
+压缩和合并assets
 --------------------------------
 
 To improve application performance you can compress and then combine several CSS or JS files into lesser number of files
 therefore reducing number of HTTP requests and overall download size needed to load a web page.  Yii provides a console
 command that allows you to do both.
 
-### Preparing configuration
+### 准备配置
 
 In order to use `asset` command you should prepare a configuration first. A template for it can be generated using
 
@@ -195,7 +195,7 @@ In order to use `asset` command you should prepare a configuration first. A temp
 yii asset/template /path/to/myapp/config.php
 ```
 
-The template itself looks like the following:
+模板本身看起来像下面这样：
 
 ```php
 <?php
@@ -325,7 +325,7 @@ class AppAsset extends AssetBundle
 }
 ```
 
-In order to adjust conversion tool call parameters or add new ones you can use application config:
+为了调整转换工具调用的参数或添加新的可以使用应用程序配置：
 
 ```php
 // ...
