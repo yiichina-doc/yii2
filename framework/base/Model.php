@@ -475,12 +475,12 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the errors for all attribute or a single attribute.
-	 * @param string $attribute attribute name. Use null to retrieve errors for all attributes.
-	 * @property array An array of errors for all attributes. Empty array is returned if no error.
-	 * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
-	 * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
-	 * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+	 * 返回所有属性或一个属性的错误.
+	 * @param string $attribute 属性名称. 使用 null 来检索所有属性的错误.
+	 * @property array 一个数组所有属性的错误. 如果没有错误则返回空数组.
+	 * 结果是一个二维数组. 参见 [[getErrors()]] 的详细描述.
+	 * @return array 返回所有属性或指定的属性错误. 如果没有错误则返回空数组.
+	 * 注意,当所有属性返回错误, 结果是一个二维数组, 像下面的:
 	 *
 	 * ~~~
 	 * [
@@ -507,9 +507,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the first error of every attribute in the model.
-	 * @return array the first errors. The array keys are the attribute names, and the array
-	 * values are the corresponding error messages. An empty array will be returned if there is no error.
+	 * 返回第一个错误的每个属性模型.
+	 * @return array 第一个错误. 数组的键是属性名称, 和数组值相应的
+	 * 错误消息. 如果没有错误将返回一个空数组.
 	 * @see getErrors()
 	 * @see getFirstError()
 	 */
@@ -529,9 +529,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the first error of the specified attribute.
-	 * @param string $attribute attribute name.
-	 * @return string the error message. Null is returned if no error.
+	 * 返回指定属性的第一个错误.
+	 * @param string $attribute 属性名称.
+	 * @return string 错误信息. 如果没有错误则返回 Null.
 	 * @see getErrors()
 	 * @see getFirstErrors()
 	 */
@@ -541,9 +541,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Adds a new error to the specified attribute.
-	 * @param string $attribute attribute name
-	 * @param string $error new error message
+	 * 给指定的属性添加错误信息.
+	 * @param string $attribute 属性名称
+	 * @param string $error 新的错误信息
 	 */
 	public function addError($attribute, $error = '')
 	{
@@ -551,8 +551,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Removes errors for all attributes or a single attribute.
-	 * @param string $attribute attribute name. Use null to remove errors for all attribute.
+	 * 为所有属性或一个属性删除错误.
+	 * @param string $attribute 属性名称. 使用 null 来删除所有属性的错误.
 	 */
 	public function clearErrors($attribute = null)
 	{
@@ -564,12 +564,12 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Generates a user friendly attribute label based on the give attribute name.
-	 * This is done by replacing underscores, dashes and dots with blanks and
-	 * changing the first letter of each word to upper case.
-	 * For example, 'department_name' or 'DepartmentName' will generate 'Department Name'.
-	 * @param string $name the column name
-	 * @return string the attribute label
+	 * 生成一个用户友好的属性标签,基于给予属性名称.
+	 * 这是通过替换下划线, 破折号,点,空白和改变每个单词的
+	 * 第一个字母大写.
+	 * 例如, 'department_name' 或 'DepartmentName' 将生成 'Department Name'.
+	 * @param string $name 列名
+	 * @return string the 属性标签
 	 */
 	public function generateAttributeLabel($name)
 	{
@@ -577,12 +577,12 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns attribute values.
-	 * @param array $names list of attributes whose value needs to be returned.
-	 * Defaults to null, meaning all attributes listed in [[attributes()]] will be returned.
-	 * If it is an array, only the attributes in the array will be returned.
-	 * @param array $except list of attributes whose value should NOT be returned.
-	 * @return array attribute values (name => value).
+	 * 返回属性值.
+	 * @param array $names 需要返回的属性值列表.
+	 * 默认为空, 列出的所有属性 [[attributes()]] 将被归回.
+	 * 如果它是一个数组, 只返回数组中的属性.
+	 * @param array $except 不返回属性的值的列表.
+	 * @return array 属性值 (名称 => 值).
 	 */
 	public function getAttributes($names = null, $except = [])
 	{
@@ -601,10 +601,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Sets the attribute values in a massive way.
-	 * @param array $values attribute values (name => value) to be assigned to the model.
-	 * @param boolean $safeOnly whether the assignments should only be done to the safe attributes.
-	 * A safe attribute is one that is associated with a validation rule in the current [[scenario]].
+	 * 用一个巨大的方式设置属性值.
+	 * @param array $values 属性值 (名称 => 值) 分配到模型中.
+	 * @param boolean $safeOnly 是否只应在安全属性分配.
+	 * 在当前 [[scenario]] 安全属性是与一个验证规则.
 	 * @see safeAttributes()
 	 * @see attributes()
 	 */
@@ -623,11 +623,11 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * This method is invoked when an unsafe attribute is being massively assigned.
-	 * The default implementation will log a warning message if YII_DEBUG is on.
-	 * It does nothing otherwise.
-	 * @param string $name the unsafe attribute name
-	 * @param mixed $value the attribute value
+	 * 调用该方法时,一个不安全的属性被分配.
+	 * 如果 YII_DEBUG 是一条警告消息,默认记录此消息.
+	 * 否则什么也不做.
+	 * @param string $name 不安全的属性名称
+	 * @param mixed $value 属性值
 	 */
 	public function onUnsafeAttribute($name, $value)
 	{
@@ -637,12 +637,11 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the scenario that this model is used in.
+	 * 返回用于该场景的模型.
 	 *
-	 * Scenario affects how validation is performed and which attributes can
-	 * be massively assigned.
+	 * 场景会影响执行验证和哪些属性可以被大量分配.
 	 *
-	 * @return string the scenario that this model is in. Defaults to [[SCENARIO_DEFAULT]].
+	 * @return string 该模型所处默认为 [[SCENARIO_DEFAULT]].
 	 */
 	public function getScenario()
 	{
@@ -650,10 +649,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Sets the scenario for the model.
-	 * Note that this method does not check if the scenario exists or not.
-	 * The method [[validate()]] will perform this check.
-	 * @param string $value the scenario that this model is in.
+	 * 设置场景模式.
+	 * 请注意,此方法不检查的情况存在与否.
+	 * 方法 [[validate()]] 将执行此检查.
+	 * @param string $value 这个模型的场景.
 	 */
 	public function setScenario($value)
 	{
@@ -661,8 +660,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the attribute names that are safe to be massively assigned in the current scenario.
-	 * @return string[] safe attribute names
+	 * 返回属性名称,在当前场景安全的大规模分配.
+	 * @return string[] 安全属性名称
 	 */
 	public function safeAttributes()
 	{
@@ -681,8 +680,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the attribute names that are subject to validation in the current scenario.
-	 * @return string[] safe attribute names
+	 * 返回属性名称,来验证在当前场景.
+	 * @return string[] 安全属性名称
 	 */
 	public function activeAttributes()
 	{
@@ -701,15 +700,15 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Populates the model with the data from end user.
-	 * The data to be loaded is `$data[formName]`, where `formName` refers to the value of [[formName()]].
-	 * If [[formName()]] is empty, the whole `$data` array will be used to populate the model.
-	 * The data being populated is subject to the safety check by [[setAttributes()]].
-	 * @param array $data the data array. This is usually `$_POST` or `$_GET`, but can also be any valid array
-	 * supplied by end user.
-	 * @param string $formName the form name to be used for loading the data into the model.
-	 * If not set, [[formName()]] will be used.
-	 * @return boolean whether the model is successfully populated with some data.
+	 * 从最终用户的数据填充模型.
+	 * 要加载的数据是 `$data[formName]`, 其中 `formName` 指的值是 [[formName()]].
+	 * 如果 [[formName()]] 是空的, 整个的 `$data` 数组将被用于填充模型.
+	 * 填充的数据由 [[setAttributes()]] 安全检查.
+	 * @param array $data 数据数组. 通常是 `$_POST` or `$_GET`, 但也可以是任何有效的数组提
+	 * 供的最终用户.
+	 * @param string $formName 表单名称用于加载数据到模型中.
+	 * 如果没有设置, [[formName()]] 将使用.
+	 * @return boolean 模型是否成功地填充了一些数据.
 	 */
 	public function load($data, $formName = null)
 	{
@@ -726,16 +725,16 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Populates a set of models with the data from end user.
-	 * This method is mainly used to collect tabular data input.
-	 * The data to be loaded for each model is `$data[formName][index]`, where `formName`
-	 * refers to the value of [[formName()]], and `index` the index of the model in the `$models` array.
-	 * If [[formName()]] is empty, `$data[index]` will be used to populate each model.
-	 * The data being populated to each model is subject to the safety check by [[setAttributes()]].
-	 * @param array $models the models to be populated. Note that all models should have the same class.
-	 * @param array $data the data array. This is usually `$_POST` or `$_GET`, but can also be any valid array
-	 * supplied by end user.
-	 * @return boolean whether the model is successfully populated with some data.
+	 * 填充一组模型与最终用户的数据.
+	 * 这种方法主要用于收集表格数据输入.
+	 * 要为每个模型加载的数据是 `$data[formName][index]`, `formName`
+	 * 指的值是 [[formName()]], 和 `index` 模型指数数组 `$models`.
+	 * 如果 [[formName()]] 是空的, `$data[index]` 将用于填充每个模型.
+	 * 每个模型的数据填充由 [[setAttributes()]] 安全检查.
+	 * @param array $models 填充模型. 请注意,所有的模型都应该有相同的类.
+	 * @param array $data 数据数组. 数据来自 `$_POST` 或者 `$_GET`, 但也可以是任何有效的数组提
+	 * 供的最终用户.
+	 * @return boolean 模型是否成功地填充了一些数据.
 	 */
 	public static function loadMultiple($models, $data)
 	{
@@ -761,15 +760,15 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Validates multiple models.
-	 * This method will validate every model. The models being validated may
-	 * be of the same or different types.
-	 * @param array $models the models to be validated
-	 * @param array $attributes list of attributes that should be validated.
-	 * If this parameter is empty, it means any attribute listed in the applicable
-	 * validation rules should be validated.
-	 * @return boolean whether all models are valid. False will be returned if one
-	 * or multiple models have validation error.
+	 * 验证多个模型.
+	 * 该方法将验证每一个模型. 正在验证的模型可能是相同的或
+	 * 不同的类型.
+	 * @param array $models 模型进行验证
+	 * @param array $attributes 应验证的属性列表.
+	 * 如果这个参数是空的, 这意味着应该验证任何属
+	 * 性中列出适用的验证规则.
+	 * @return boolean 所有的模型是否是有效的. 如果一个或多个模型验证错误
+	 * 错误将被返回.
 	 */
 	public static function validateMultiple($models, $attributes = null)
 	{
@@ -782,15 +781,14 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the list of fields that should be returned by default by [[toArray()]] when no specific fields are specified.
+	 * 当没有指定特定的字段,返回的字段列表应该是默认的 [[toArray()]].
 	 *
-	 * A field is a named element in the returned array by [[toArray()]].
+	 * 一个字段是一个属性名称,在返回的数组元素 [[toArray()]].
 	 *
-	 * This method should return an array of field names or field definitions.
-	 * If the former, the field name will be treated as an object property name whose value will be used
-	 * as the field value. If the latter, the array key should be the field name while the array value should be
-	 * the corresponding field definition which can be either an object property name or a PHP callable
-	 * returning the corresponding field value. The signature of the callable should be:
+	 * 此方法应该返回一个数组字段名和字段定义.
+	 * 如果是前者, 字段名称将被视为一个对象属性名称的值
+	 * 被用作字段值. 如果是后者, 数组的键应该是字段名,而数组的值应该是对应的字段定义,可以是一
+	 * 个对象属性名或一个PHP调用返回相应的字段值. 可调用的签名:
 	 *
 	 * ```php
 	 * function ($field, $model) {
@@ -798,13 +796,13 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	 * }
 	 * ```
 	 *
-	 * For example, the following code declares four fields:
+	 * 例如, 下面的代码声明四个字段:
 	 *
-	 * - `email`: the field name is the same as the property name `email`;
-	 * - `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
-	 *   values are obtained from the `first_name` and `last_name` properties;
-	 * - `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
-	 *   and `last_name`.
+	 * - `email`: 字段名相同的属性名 `email`;
+	 * - `firstName` and `lastName`: 字段名称是 `firstName` 和 `lastName`, 它们的值
+	 *   是从 `first_name` 和 `last_name` 性能得到;
+	 * - `fullName`: 字段名是 `fullName`. 它的值是通过连接 `first_name`
+	 *   和 `last_name`.
 	 *
 	 * ```php
 	 * return [
@@ -817,13 +815,13 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	 * ];
 	 * ```
 	 *
-	 * In this method, you may also want to return different lists of fields based on some context
-	 * information. For example, depending on [[scenario]] or the privilege of the current application user,
-	 * you may return different sets of visible fields or filter out some fields.
+	 * 在这个方法中, 您可能还想基于一些上下文信息返回不同的字 
+	 * 段列表.例如, 根据 [[scenario]] 或当前应用程序用户的特权,
+	 * 你可以返回不同的字段或过滤掉一些字段可见.
 	 *
-	 * The default implementation of this method returns [[attributes()]] indexed by the same attribute names.
+	 * 此方法默认实现返回 [[attributes()]] 由相同的属性名索引.
 	 *
-	 * @return array the list of field names or field definitions.
+	 * @return array 字段名称的列表或字段定义.
 	 * @see toArray()
 	 */
 	public function fields()
@@ -833,13 +831,13 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Determines which fields can be returned by [[toArray()]].
-	 * This method will check the requested fields against those declared in [[fields()]] and [[extraFields()]]
-	 * to determine which fields can be returned.
-	 * @param array $fields the fields being requested for exporting
-	 * @param array $expand the additional fields being requested for exporting
-	 * @return array the list of fields to be exported. The array keys are the field names, and the array values
-	 * are the corresponding object property names or PHP callables returning the field values.
+	 * [[toArray()]] 决定哪些字段可以返回.
+	 * 该方法将检查那些声明的请求字段 [[fields()]] 和 [[extraFields()]]
+	 * 来决定哪些字段是可以恢复的.
+	 * @param array $fields 被请求的字段导出
+	 * @param array $expand 被请求出口的附加字段
+	 * @return array 导出字段的列表. 数组的键是字段名称, 数组值是对应的对象属性名
+	 * 称或PHP callables返回的字段值.
 	 */
 	protected function resolveFields(array $fields, array $expand)
 	{
@@ -871,9 +869,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns an iterator for traversing the attributes in the model.
-	 * This method is required by the interface IteratorAggregate.
-	 * @return ArrayIterator an iterator for traversing the items in the list.
+	 * 返回一个迭代器遍历属性的模型.
+	 * 这种方法是 IteratorAggregate 所需的接口.
+	 * @return ArrayIterator 一个迭代器遍历列表中的项目.
 	 */
 	public function getIterator()
 	{
@@ -882,10 +880,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns whether there is an element at the specified offset.
-	 * This method is required by the SPL interface `ArrayAccess`.
-	 * It is implicitly called when you use something like `isset($model[$offset])`.
-	 * @param mixed $offset the offset to check on
+	 * 返回是否有指定偏移位置的一个元素.
+	 * 此方法要求 SPL 接口 `ArrayAccess`.
+	 * 当你使用类似 `isset($model[$offset])` 这是隐式调用.
+	 * @param mixed $offset 检查的抵消
 	 * @return boolean
 	 */
 	public function offsetExists($offset)
@@ -894,11 +892,11 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Returns the element at the specified offset.
-	 * This method is required by the SPL interface `ArrayAccess`.
-	 * It is implicitly called when you use something like `$value = $model[$offset];`.
-	 * @param mixed $offset the offset to retrieve element.
-	 * @return mixed the element at the offset, null if no element is found at the offset
+	 * 返回指定偏移位置的元素.
+	 * 此方法要求 SPL 接口 `ArrayAccess`.
+	 * 当你使用类似 `$value = $model[$offset];` 是隐式调用.
+	 * @param mixed $offset 抵消检索元素.
+	 * @return mixed 元素的偏移量, null 如果没有找到元素的偏移量
 	 */
 	public function offsetGet($offset)
 	{
@@ -906,11 +904,11 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Sets the element at the specified offset.
-	 * This method is required by the SPL interface `ArrayAccess`.
-	 * It is implicitly called when you use something like `$model[$offset] = $item;`.
-	 * @param integer $offset the offset to set element
-	 * @param mixed $item the element value
+	 * 设置指定偏移位置的元素.
+	 * 此方法要求 SPL 接口 `ArrayAccess`.
+	 * 当你使用类似 `$model[$offset] = $item;` 是隐式调用.
+	 * @param integer $offset 抵消设置元素
+	 * @param mixed $item 元素的值
 	 */
 	public function offsetSet($offset, $item)
 	{
@@ -918,10 +916,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 	}
 
 	/**
-	 * Sets the element value at the specified offset to null.
-	 * This method is required by the SPL interface `ArrayAccess`.
-	 * It is implicitly called when you use something like `unset($model[$offset])`.
-	 * @param mixed $offset the offset to unset element
+	 * 设置指定偏移位置的元素值为 null.
+	 * 该方法需要 SPL 的接口 `ArrayAccess`.
+	 * 当你使用类似 `unset($model[$offset])` 是隐式调用.
+	 * @param mixed $offset 设置元素的偏移量
 	 */
 	public function offsetUnset($offset)
 	{
