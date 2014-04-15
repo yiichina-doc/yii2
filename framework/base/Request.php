@@ -10,10 +10,10 @@ namespace yii\base;
 use Yii;
 
 /**
- * Request represents a request that is handled by an [[Application]].
+ * Request 代表一个来自 [[Application]] 的请求处理.
  *
- * @property boolean $isConsoleRequest The value indicating whether the current request is made via console.
- * @property string $scriptFile Entry script file path (processed w/ realpath()).
+ * @property boolean $isConsoleRequest 该值指示当前请求是否通过控制台.
+ * @property string $scriptFile 输入脚本文件路径 (processed w/ realpath()).
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -24,14 +24,14 @@ abstract class Request extends Component
 	private $_isConsoleRequest;
 
 	/**
-	 * Resolves the current request into a route and the associated parameters.
-	 * @return array the first element is the route, and the second is the associated parameters.
+	 * 解决当前请求到一个路线和相关的参数.
+	 * @return array 第一个元素是路线, 第二个是相关的参数.
 	 */
 	abstract public function resolve();
 
 	/**
-	 * Returns a value indicating whether the current request is made via command line
-	 * @return boolean the value indicating whether the current request is made via console
+	 * 返回一个值,该值指示当前请求是否通过命令行
+	 * @return boolean 该值指示当前请求是否通过控制台
 	 */
 	public function getIsConsoleRequest()
 	{
@@ -39,8 +39,8 @@ abstract class Request extends Component
 	}
 
 	/**
-	 * Sets the value indicating whether the current request is made via command line
-	 * @param boolean $value the value indicating whether the current request is made via command line
+	 * 设置值,该值指示当前请求是否通过命令行
+	 * @param boolean $value 该值指示当前请求是否通过命令行
 	 */
 	public function setIsConsoleRequest($value)
 	{
@@ -48,9 +48,9 @@ abstract class Request extends Component
 	}
 
 	/**
-	 * Returns entry script file path.
-	 * @return string entry script file path (processed w/ realpath())
-	 * @throws InvalidConfigException if the entry script file path cannot be determined automatically.
+	 * 返回输入脚本文件路径.
+	 * @return string 输入脚本文件路径 (processed w/ realpath())
+	 * @throws InvalidConfigException 如果入口文件路径不能自动确定.
 	 */
 	public function getScriptFile()
 	{
@@ -65,12 +65,12 @@ abstract class Request extends Component
 	}
 
 	/**
-	 * Sets the entry script file path.
-	 * The entry script file path can normally be determined based on the `SCRIPT_FILENAME` SERVER variable.
-	 * However, for some server configurations, this may not be correct or feasible.
-	 * This setter is provided so that the entry script file path can be manually specified.
-	 * @param string $value the entry script file path. This can be either a file path or a path alias.
-	 * @throws InvalidConfigException if the provided entry script file path is invalid.
+	 * 设置输入脚本文件路径.
+	 * 输入脚本文件路径通常可以基于 `SCRIPT_FILENAME` 服务器变量决定的.
+	 * 然而, 对于某些服务器配置, 这可能不是正确的或可行的.
+	 * 这样的入口脚本文件的路径，可以手动指定.
+	 * @param string $value 输入脚本文件路径. 这可以是一个文件路径或路径别名.
+	 * @throws InvalidConfigException 如果提供的输入脚本文件路径无效.
 	 */
 	public function setScriptFile($value)
 	{
